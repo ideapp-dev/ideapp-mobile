@@ -1,0 +1,6 @@
+framework module Pods_ideapp_mobile_ideapp_mobileUITests {
+  umbrella header "Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
