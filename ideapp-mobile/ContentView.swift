@@ -11,7 +11,20 @@ import BCrypt
 import Foundation
 import Combine
 
+//MARK: - Objects
 
+var name:String = ""
+var sirname:String = ""
+var email:String = ""
+var studentId:String = ""
+var password:String = ""
+
+var type = 0
+
+
+
+
+//MARK: - Home Screen Lesson
 struct HomeScreen: View {
     
     @Binding var showHomeScreen: Bool
@@ -864,6 +877,7 @@ struct Login: View {
                 
                 if isAuthorized {
                     self.showHomeScreen = true
+                    defaults.set(true, forKey: "Token")
                 }
                 
             }, label: {
@@ -965,8 +979,12 @@ struct Register: View {
                     if type == 0 { // if student
                         //var entityToInsert: NSDictionary = ["name":name, "sirname": sirname, "email": email, "password": password, "student-id": studentId]
                         //manager.registerInstructor(instructor: entityToInsert)
-                        var entityToInsert: NSDictionary = ["name":name, "sirname": sirname, "student-id": studentId ,"email": email, "password": hashed]
+                        var entityToInsert: NSDictionary = ["name":name, "sirname": sirname, "student_id": studentId ,"email": email, "password": hashed]
+                        
+                        print("Signup with entityToInsert \(entityToInsert)")
+                        
                         manager.signup(user: entityToInsert, collection: "students")
+                        
                         
                         self.showHomeScreen = true
                     } else {
@@ -1012,6 +1030,7 @@ struct Register: View {
     }
 }
 
+let defaults = UserDefaults.standard
 struct ContentView: View {
     
     @State var showLogin = true
@@ -1019,26 +1038,42 @@ struct ContentView: View {
     
     @State var manager = DataPost()
     
+    
+    
     init() {
+        var isAuthorized: Bool = defaults.bool(forKey: "Token")
+        
+        if isAuthorized == true{
+            _showLogin = State(initialValue: false)
+            _showHomeScreen = State(initialValue: true)
+        }
+        
+        
+        
+        print("Init")
+        print("isAuthorized: \(isAuthorized)")
+        
+        print("showLogin: \(showLogin)")
+        print("showHomeScreen: \(showHomeScreen)")
     }
     
     
     var body: some View {
         
-        CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-        /*
+        //CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+        
          return Group {
          
-         if showLogin == true && showHomeScreen == false {
-         Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+             if showLogin == true && showHomeScreen == false {
+             Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+             }
+             else if showLogin == false && showHomeScreen == false{
+             Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+             }else{
+             HomeScreen(showHomeScreen: $showHomeScreen)
+             }
          }
-         else if showLogin == false && showHomeScreen == false{
-         Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-         }else{
-         HomeScreen(showHomeScreen: $showHomeScreen)
-         }
-         }
-         */
+         
     }
 }
 
@@ -1056,7 +1091,7 @@ class DataPost: ObservableObject {
     var isAuthorized: Bool = false
     
     var loginDone = false
-    var receivedHASHDone = ""
+    
     
     func createLesson(lesson: NSDictionary){
         
@@ -1103,6 +1138,8 @@ class DataPost: ObservableObject {
     
     func signup(user: NSDictionary, collection: String){
         
+        print("Sending collection \(collection) ")
+        
         let body: [String: Any] = ["collection": collection,
                                    "database": "ideapp",
                                    "dataSource": "ProjectCluster",
@@ -1146,12 +1183,17 @@ class DataPost: ObservableObject {
     
     func login(user: NSDictionary, collection: String) -> Bool{
         
+        
+        
+        
         let body: [String: Any] = ["collection": collection,
                                    "database": "ideapp",
                                    "dataSource": "ProjectCluster",
                                    "filter": ["email": user["email"] ] ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        var receivedHASHDone = ""
         
         print("-----> user: \(user)")
         print("-----> body: \(body)")
@@ -1188,7 +1230,7 @@ class DataPost: ObservableObject {
                 var receivedJSON = responseJSON["document"] as! [String:Any]
                 var receivedHASH: String = receivedJSON["password"] as! String
                 
-                self.receivedHASHDone = receivedHASH
+                receivedHASHDone = receivedHASH
                 
                 var givenPassword: String = user["password"] as! String
                 
@@ -1206,12 +1248,13 @@ class DataPost: ObservableObject {
         repeat {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
         } while !loginDone
-        
-        while receivedHASHDone == "" {
-            
-        }
+
         
         print("return isAuthorized function \(self.isAuthorized)")
+        
+        repeat{
+            
+        } while receivedHASHDone == ""
         
         return isAuthorized
     }
