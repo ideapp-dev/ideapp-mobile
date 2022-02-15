@@ -39,34 +39,43 @@ struct HomeScreen: View {
         
     
         
-        if (defaults.integer(forKey: "Type") == 1){
-            Text("Student")
+        VStack (alignment: .leading){
+            Text("Your events")
+                .font(.system(size: 30))
+                .bold()
+                .padding()
+        
         }
         
-        List(studentEvents) { event in
-            Text("\(event.name)")
+        List {
+            Section(header: Text("Today"))
+            {
+                ForEach(studentEvents) {
+                    item in if item.time[dayNumber] != nil{Text(item.name)}
+                    
                 }
-        
-        HStack{
-            VStack (alignment: .leading){
-                Text("Today")
-                    .font(.system(size: 30))
-                    .bold()
-                    .padding()
-                
-                Button(action: {
-                        }, label: {
-                    HStack {
-                        Spacer()
-                        Text("Create Event")
-                            .foregroundColor(.white)
-                        Spacer()
-                    }.padding()
-                        .background(Color.blue)
-                        .cornerRadius(5.0)
-                        }).padding()
+            }
+            Section(header: Text("Tomorrow"))
+            {
+                ForEach(studentEvents) {
+                    item in if item.time[dayNumber+1] != nil{Text(item.name)}
+                }
             }
         }
+        
+
+        
+        Button(action: {
+                }, label: {
+            HStack {
+                Spacer()
+                Text("Create Event")
+                    .foregroundColor(.white)
+                Spacer()
+            }.padding()
+                .background(Color.blue)
+                .cornerRadius(5.0)
+                }).padding()
         
         
         
