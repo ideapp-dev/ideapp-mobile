@@ -25,8 +25,6 @@ var dayNumber: Int = 1
 var type = 0
 
 
-
-
 //MARK: - Home Screen Lesson
 struct HomeScreen: View {
     
@@ -1081,19 +1079,105 @@ struct Register: View {
     }
 }
 
+//MARK: - ContentView
 let defaults = UserDefaults.standard
+
+struct NewPage: View {
+    
+    var exampleString: String = "This is an example string"
+    var exampleList: [String] = []
+    
+    @State var howManyTimesClicked: Int = 0
+    
+    init(){
+        exampleString = "Change its value"
+        
+        exampleList.append("First")
+        exampleList.append("Second")
+    }
+    
+    var body: some View{
+        
+        // Divides the region into vertical stacks. So output will be like
+        // 1
+        // 2
+        // 3
+        VStack{
+            Text("VStack example")
+            VStack {
+                Text("1")
+                Text("2")
+                Text("3")
+            }
+        }
+        
+        Divider()
+        
+        // Divides the region into horizontal stacks. so output will be
+        // 1 2 3
+        VStack{
+            Text("HStack example")
+            HStack {
+                Text("1")
+                Text("2")
+                Text("3")
+            }
+        }
+        
+        Divider()
+        
+        // Showing a list of items are complicated
+        // If your array includes basic types like integers or strings, you can do
+        VStack{
+            Text("Showing List example")
+            ForEach(0 ..< exampleList.count, id: \.self) {value in
+                        Text("\(value)")
+                    }
+            
+            
+        }
+
+        Divider()
+        
+        VStack{
+            Text("Button example")
+            
+            Button(action: {
+                self.howManyTimesClicked += 1
+            }, label: {
+                HStack {
+                    Spacer()
+                    Text("Increase the following number")
+                        .foregroundColor(.white)
+                    Spacer()
+                }.padding()
+                    .background(Color.blue)
+                    .cornerRadius(5.0)
+            })
+            
+            Text("Clicked \(howManyTimesClicked) times")
+        }
+        
+
+    }
+    
+}
+
 struct ContentView: View {
     
+    // Variables
     @State var showLogin = true
     @State var showHomeScreen = false
-    
     @State var manager = DataPost()
     
-    
+    // Write the variables here
+    // Do not include @State if you are not going to pass it to a view (page)
     
     init() {
+        // Check if the user is already authorized
         var isAuthorized: Bool = defaults.bool(forKey: "Token")
         
+        // if so, change the states of login and home screen pages
         if isAuthorized == true{
             _showLogin = State(initialValue: false)
             _showHomeScreen = State(initialValue: true)
@@ -1101,39 +1185,35 @@ struct ContentView: View {
             manager.retrieveEvents()
         }
         
-        
-        
-        print("Init")
-        print("isAuthorized: \(isAuthorized)")
-        
-        print("showLogin: \(showLogin)")
-        print("showHomeScreen: \(showHomeScreen)")
-        
-        
-        
+        // Dates necessary for events
         let date = Date()
         let format = DateFormatter()
         format.locale = Locale(identifier: "us")
         format.dateFormat = "E"
         
         var dateNumbers: [String:Int] = ["Mon":1, "Tue":2, "Wed":3, "Thu":4, "Fri":5, "Sat":6, "Sun":7]
-        
         let formattedDate = format.string(from: date)
-        
-        print("formattedDate: \(formattedDate)")
-        
+
         if let val = dateNumbers[formattedDate] {
             dayNumber = dateNumbers[formattedDate]!
         }
         
-        print("dayNumber: \(dayNumber)")
+        // Write anything that requires an operation before the UI is present
+        // This includes all the variable assingments, function calls or so on
+        // ...
     }
     
-    
+    // You can only do operations that will effect the UI under body. For example, you can't assign a variable a value or call a function
     var body: some View {
         
-        //CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+        // Comment the following and add your page in here
+        NewPage()
         
+        
+        /*
+         
+         CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+         
          return Group {
          
              if showLogin == true && showHomeScreen == false {
@@ -1145,10 +1225,12 @@ struct ContentView: View {
              HomeScreen(showHomeScreen: $showHomeScreen)
              }
          }
+        */
          
     }
 }
 
+//MARK: - DB Operations
 class DataPost: ObservableObject {
     var didChange = PassthroughSubject<DataPost, Never>()
     var formCompleted = false {
@@ -1159,13 +1241,14 @@ class DataPost: ObservableObject {
     
     @Published var receivedResponse: [String: Any] = [:]
     
+    // Boolean values to show if the db operation (such as reading or writing) is finished
     var done = false
     var isAuthorized: Bool = false
     
     var loginDone = false
     var retrieveEventDone: Bool = false
     
-    
+    // Write the given dictionary to the db
     func createLesson(lesson: NSDictionary){
         
         let body: [String: Any] = ["collection": "Lesson",
@@ -1184,8 +1267,6 @@ class DataPost: ObservableObject {
         request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
         request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
         request.httpBody = jsonData
-        
-        
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             print("-----> data: \(data)")
@@ -1209,6 +1290,7 @@ class DataPost: ObservableObject {
         task.resume()
     }
     
+    // Add the user to the db
     func signup(user: NSDictionary, collection: String){
         
         print("Sending collection \(collection) ")
@@ -1254,10 +1336,8 @@ class DataPost: ObservableObject {
         task.resume()
     }
     
+    // Login the user depending on the inputs given
     func login(user: NSDictionary, collection: String) -> Bool{
-        
-        
-        
         
         let body: [String: Any] = ["collection": collection,
                                    "database": "ideapp",
@@ -1318,6 +1398,7 @@ class DataPost: ObservableObject {
         
         task.resume()
         
+        // Necessary for the program to wait until the whole request is received
         repeat {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
         } while !loginDone
@@ -1332,6 +1413,7 @@ class DataPost: ObservableObject {
         return isAuthorized
     }
     
+    // Retrieve the list of events
     func retrieveEvents(){
         
         let body: [String: Any] = ["collection": "Event",
@@ -1402,7 +1484,6 @@ class DataPost: ObservableObject {
                     studentEvents.append(SingleEvent(id: eventId,name: eventName, time: [day:time]))
                 }
                 
-    
                 print("retrieveEvents \(receivedJSON)")
                 print("studentEvents \(studentEvents)")
                 
@@ -1411,6 +1492,7 @@ class DataPost: ObservableObject {
         }
         
         task.resume()
+        
         
         repeat {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
