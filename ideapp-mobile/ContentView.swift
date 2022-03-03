@@ -25,13 +25,8 @@ var dayNumber: Int = 1
 var type = 0
 
 
-//MARK: - Home Screen Lesson
-struct HomeScreen: View {
-    
-    @Binding var showHomeScreen: Bool
-    
-    var type: Int = 0
-     
+//MARK: - Create Events
+struct Events: View {
     
     var body: some View {
         
@@ -49,14 +44,20 @@ struct HomeScreen: View {
             Section(header: Text("Today"))
             {
                 ForEach(studentEvents) {
-                    item in if item.time[dayNumber] != nil{Text(item.name)}
+                    item in if item.time[dayNumber] != nil{
+                        Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
+                            
+                    }
                     
                 }
             }
             Section(header: Text("Tomorrow"))
             {
                 ForEach(studentEvents) {
-                    item in if item.time[dayNumber+1] != nil{Text(item.name)}
+                    item in if item.time[dayNumber+1] != nil{
+                        Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
+                        
+                    }
                 }
             }
         }
@@ -64,6 +65,8 @@ struct HomeScreen: View {
 
         
         Button(action: {
+            UserDefaults.standard.set(false, forKey: "Token")
+            UserDefaults.standard.set("", forKey: "Email")
                 }, label: {
             HStack {
                 Spacer()
@@ -78,6 +81,22 @@ struct HomeScreen: View {
         
         
 
+        
+    }
+}
+
+
+//MARK: - Home Screen Lesson
+struct HomeScreen: View {
+    
+    @Binding var showHomeScreen: Bool
+    
+    var type: Int = 0
+     
+    
+    var body: some View {
+        
+        Events()
         
     }
 }
@@ -925,8 +944,11 @@ struct Login: View {
                 
                 if isAuthorized {
                     self.showHomeScreen = true
-                    defaults.set(true, forKey: "Token")
-                    defaults.set(type, forKey: "Type")
+                    UserDefaults.standard.set(true, forKey: "Token")
+                    UserDefaults.standard.set(type, forKey: "Type")
+                    
+                    print("Setting \(email) to the UserDefaults.standard")
+                    UserDefaults.standard.set(email, forKey: "Email")
                 }
                 
             }, label: {
@@ -1036,11 +1058,19 @@ struct Register: View {
                         
                         
                         self.showHomeScreen = true
+                        
+                        UserDefaults.standard.set(true, forKey: "Token")
+                        UserDefaults.standard.set(type, forKey: "Type")
+                        UserDefaults.standard.set(email, forKey: "Email")
                     } else {
                         var entityToInsert: NSDictionary = ["name":name, "sirname": sirname, "email": email, "password": hashed]
                         manager.signup(user: entityToInsert, collection: "Instructor")
                         
                         self.showHomeScreen = true
+                        
+                        UserDefaults.standard.set(true, forKey: "Token")
+                        UserDefaults.standard.set(type, forKey: "Type")
+                        UserDefaults.standard.set(email, forKey: "Email")
                     }
                 }
                 catch {
@@ -1080,7 +1110,7 @@ struct Register: View {
 }
 
 //MARK: - ContentView
-let defaults = UserDefaults.standard
+
 
 struct NewPage: View {
     
@@ -1174,13 +1204,17 @@ struct ContentView: View {
     // Do not include @State if you are not going to pass it to a view (page)
     
     init() {
+        
+        
+        
         // Check if the user is already authorized
-        var isAuthorized: Bool = defaults.bool(forKey: "Token")
+        var isAuthorized: Bool = UserDefaults.standard.bool(forKey: "Token")
+        var userMail: String = UserDefaults.standard.string(forKey: "Email")!
         
         // if so, change the states of login and home screen pages
         if isAuthorized == true{
-            _showLogin = State(initialValue: false)
-            _showHomeScreen = State(initialValue: true)
+            _showLogin = State(initialValue: true) // normalle false
+            _showHomeScreen = State(initialValue: false)
             
             manager.retrieveEvents()
         }
@@ -1198,19 +1232,14 @@ struct ContentView: View {
             dayNumber = dateNumbers[formattedDate]!
         }
         
-        // Write anything that requires an operation before the UI is present
-        // This includes all the variable assingments, function calls or so on
-        // ...
+        print("move the user to login page \(showLogin)")
+        print("isAuthorized boolean value \(isAuthorized)")
+        print("users mail address \(userMail)")
     }
     
     // You can only do operations that will effect the UI under body. For example, you can't assign a variable a value or call a function
     var body: some View {
         
-        // Comment the following and add your page in here
-        NewPage()
-        
-        
-        /*
          
          CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
          
@@ -1225,7 +1254,7 @@ struct ContentView: View {
              HomeScreen(showHomeScreen: $showHomeScreen)
              }
          }
-        */
+        
          
     }
 }
@@ -1294,13 +1323,14 @@ class DataPost: ObservableObject {
     func signup(user: NSDictionary, collection: String){
         
         print("Sending collection \(collection) ")
+        print("Sending user \(user) ")
         
-        let body: [String: Any] = ["collection": collection,
+        let dict_send: [String: Any] = ["collection": collection,
                                    "database": "ideapp",
                                    "dataSource": "ProjectCluster",
                                    "document": user ]
         
-        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        let jsonData = try? JSONSerialization.data(withJSONObject: dict_send)
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/insertOne")!
         var request = URLRequest(url: url)
