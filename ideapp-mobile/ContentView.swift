@@ -20,9 +20,93 @@ var studentId:String = ""
 var password:String = ""
 
 var studentEvents: [SingleEvent] = []
+
+var studentLessons: [SingleLesson] = []
+var studentLessonNames: [String] = []
 var dayNumber: Int = 1
 
 var type = 0
+
+
+var timeEnum = [1:"08:30-10:20",
+                2:"10:30-12:20",
+                3:"12:30-14:20",
+                4:"14:30-16:20",
+                5:"16:30-18:20",
+                6:"18:30-20:20"]
+
+
+
+//MARK: - Show student lessons
+struct Lessons: View {
+    
+    var body: some View {
+        VStack (alignment: .leading){
+            Text("Your lessons")
+                .font(.system(size: 30))
+                .bold()
+                .padding()
+        
+        }
+        
+        
+        List {
+            
+            Section(header: Text("Monday"))
+            {
+                
+                ForEach(studentLessons) {
+                    item in if item.time[1] != nil{
+                        Text("\(item.name) at \(timeEnum[item.time[1]!]!)")
+                    }
+                }
+            }
+            
+            Section(header: Text("Tuesday"))
+            {
+                
+                ForEach(studentLessons) {
+                    item in if item.time[2] != nil{
+                        Text("\(item.name) at \(timeEnum[item.time[2]!]!)")
+                    }
+                }
+            }
+
+            
+            Section(header: Text("Wednesday"))
+            {
+                
+                ForEach(studentLessons) {
+                    item in if item.time[3] != nil{
+                        Text("\(item.name) at \(timeEnum[item.time[3]!]!)")
+                    }
+                }
+            }
+
+
+            Section(header: Text("Thursday"))
+            {
+                ForEach(studentLessons) {
+                    item in if item.time[4] != nil{
+                        Text("\(item.name) at \(timeEnum[item.time[4]!]!)")
+                            
+                    }
+                }
+            }
+            Section(header: Text("Friday"))
+            {
+                ForEach(studentLessons) {
+                    item in if item.time[5] != nil{
+                        Text("\(item.name) at \(timeEnum[item.time[5]!]!)")
+                            
+                    }
+                }
+            }
+
+        }
+    }
+    
+}
 
 
 //MARK: - Create Events
@@ -30,8 +114,7 @@ struct Events: View {
     
     var body: some View {
         
-    
-        
+
         VStack (alignment: .leading){
             Text("Your events")
                 .font(.system(size: 30))
@@ -65,8 +148,7 @@ struct Events: View {
 
         
         Button(action: {
-            UserDefaults.standard.set(false, forKey: "Token")
-            UserDefaults.standard.set("", forKey: "Email")
+            
                 }, label: {
             HStack {
                 Spacer()
@@ -90,13 +172,10 @@ struct Events: View {
 struct HomeScreen: View {
     
     @Binding var showHomeScreen: Bool
-    
-    var type: Int = 0
-     
-    
+
     var body: some View {
         
-        Events()
+        Lessons()
         
     }
 }
@@ -1110,8 +1189,6 @@ struct Register: View {
 }
 
 //MARK: - ContentView
-
-
 struct NewPage: View {
     
     var exampleString: String = "This is an example string"
@@ -1213,10 +1290,28 @@ struct ContentView: View {
         
         // if so, change the states of login and home screen pages
         if isAuthorized == true{
-            _showLogin = State(initialValue: true) // normalle false
-            _showHomeScreen = State(initialValue: false)
+            _showLogin = State(initialValue: false) // normalle false
+            _showHomeScreen = State(initialValue: true)
             
             manager.retrieveEvents()
+            manager.retrieveStudentLessons(mail: userMail)
+            
+            if manager.retrieveStudentLessonName {
+                for lesson in studentLessonNames{
+                    print("Lesson \(lesson)")
+                    var lessonName: String = lesson as! String
+                    print("Adding lesson \(lessonName)")
+                    manager.retrieveStudentLessons = false
+                    manager.retrieveLessonDetails(name: lessonName)
+                }
+            }
+            
+            if manager.retrieveStudentLessons {
+                for lesson in studentLessons{
+                    print("Full Lesson Details \(lesson)")
+                }
+                
+            }
         }
         
         // Dates necessary for events
@@ -1235,6 +1330,8 @@ struct ContentView: View {
         print("move the user to login page \(showLogin)")
         print("isAuthorized boolean value \(isAuthorized)")
         print("users mail address \(userMail)")
+        
+        
     }
     
     // You can only do operations that will effect the UI under body. For example, you can't assign a variable a value or call a function
@@ -1276,6 +1373,9 @@ class DataPost: ObservableObject {
     
     var loginDone = false
     var retrieveEventDone: Bool = false
+    
+    var retrieveStudentLessonName: Bool = false
+    var retrieveStudentLessons: Bool = false
     
     // Write the given dictionary to the db
     func createLesson(lesson: NSDictionary){
@@ -1527,6 +1627,160 @@ class DataPost: ObservableObject {
         repeat {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
         } while !retrieveEventDone
+
+    }
+    
+    func retrieveStudentLessons(mail:String){
+        
+        let body: [String: Any] = ["collection": "students",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                   "filter": ["email": mail ]
+                                ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        
+        
+        print("-----> body: \(body)")
+        print("-----> jsonData: \(jsonData)")
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("-----> data: \(data)")
+            print("-----> error: \(error)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("-----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("-----2> responseJSON: \(responseJSON)")
+                self.receivedResponse = responseJSON
+                self.retrieveStudentLessonName = true
+                
+                print("receivedResponse \(self.receivedResponse)")
+                
+                var receivedJSON = responseJSON["document"] as! [String:Any]
+                var takenLessons: [String] = receivedJSON["taken_lessons"] as! [String]
+                
+                for lesson in takenLessons{
+                    studentLessonNames.append(lesson)
+                
+                }
+                
+            }
+            
+        }
+        
+        task.resume()
+        
+        
+        repeat {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        } while !retrieveStudentLessonName
+
+    }
+    
+    func retrieveLessonDetails(name:String){
+        
+        let body: [String: Any] = ["collection": "Lesson",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                   "filter": ["name": name ]
+                                ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        
+        
+        print("-----> body: \(body)")
+        print("-----> jsonData: \(jsonData)")
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("-----> data: \(data)")
+            print("-----> error: \(error)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("-----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("-----2> responseJSON: \(responseJSON)")
+                self.receivedResponse = responseJSON
+                
+                
+                print("receivedResponse \(self.receivedResponse)")
+                
+                var receivedJSON = responseJSON["document"] as! [String:Any]
+                
+                var lessonId = receivedJSON["_id"] as! String
+                var lessonName = receivedJSON["name"] as! String
+                var lessonCredit = receivedJSON["credit"] as! Int
+                var lessonFaculty = receivedJSON["faculty"] as! String
+                var lessonSemester = receivedJSON["semester"] as! String
+                var lessonInstructor = receivedJSON["instructor"] as! String
+                var eventTime: [String:NSNumber] = receivedJSON["time"] as! [String:NSNumber]
+                
+                var day:Int = 0
+                var time:Int = 0
+                
+                var dayTime: [Int: Int] = [:]
+                
+                print("Adding lesson with name \(lessonName)")
+                
+                for (key, value) in eventTime {
+                    print("key: \(key) & value: \(value)")
+                    
+                    day = (key as NSString).integerValue
+                    time = value.intValue
+                    dayTime[day] = time
+                }
+                
+                studentLessons.append(SingleLesson(id: lessonId, name: lessonName, credit: lessonCredit, faculty: lessonFaculty, semester: lessonSemester, instructor: lessonInstructor, time: dayTime))
+                
+                self.retrieveStudentLessons = true
+                
+                
+            }
+            
+        }
+        
+        task.resume()
+        
+        
+        repeat {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        } while !retrieveStudentLessons
 
     }
 }
