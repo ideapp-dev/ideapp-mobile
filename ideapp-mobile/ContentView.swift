@@ -40,70 +40,113 @@ var timeEnum = [1:"08:30-10:20",
 //MARK: - Show student lessons
 struct Lessons: View {
     
+    @Binding var showLessons: Bool
+    @Binding var showEvents: Bool
+    
     var body: some View {
-        VStack (alignment: .leading){
-            Text("Your lessons")
-                .font(.system(size: 30))
-                .bold()
-                .padding()
-        
+        VStack{
+            VStack (alignment: .leading){
+                Text("Your lessons")
+                    .font(.system(size: 30))
+                    .bold()
+                    .padding()
+            
+            }
+            
+            
+            List {
+                
+                Section(header: Text("Monday"))
+                {
+                    
+                    ForEach(studentLessons) {
+                        item in if item.time[1] != nil{
+                            Text("\(item.name) at \(timeEnum[item.time[1]!]!)")
+                        }
+                    }
+                }
+                
+                Section(header: Text("Tuesday"))
+                {
+                    
+                    ForEach(studentLessons) {
+                        item in if item.time[2] != nil{
+                            Text("\(item.name) at \(timeEnum[item.time[2]!]!)")
+                        }
+                    }
+                }
+
+                
+                Section(header: Text("Wednesday"))
+                {
+                    
+                    ForEach(studentLessons) {
+                        item in if item.time[3] != nil{
+                            Text("\(item.name) at \(timeEnum[item.time[3]!]!)")
+                        }
+                    }
+                }
+
+
+                Section(header: Text("Thursday"))
+                {
+                    ForEach(studentLessons) {
+                        item in if item.time[4] != nil{
+                            Text("\(item.name) at \(timeEnum[item.time[4]!]!)")
+                                
+                        }
+                    }
+                }
+                Section(header: Text("Friday"))
+                {
+                    ForEach(studentLessons) {
+                        item in if item.time[5] != nil{
+                            Text("\(item.name) at \(timeEnum[item.time[5]!]!)")
+                                
+                        }
+                    }
+                }
+
+            }
+        }.toolbar {
+            // 2.
+            ToolbarItem(placement: .bottomBar) {
+                // 3.
+                HStack() {
+                    
+                    Button(action: {
+                        self.showEvents = false
+                        self.showLessons = true
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "text.book.closed")
+                            Text("Lessons")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.padding()
+                            .cornerRadius(5.0)
+                    })
+                    Button(action: {
+                        self.showEvents = true
+                        self.showLessons = false
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "calendar")
+                            Text("Events")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.padding()
+                            .cornerRadius(5.0)
+                    })
+                    
+                    
+                }
+            }
         }
         
         
-        List {
-            
-            Section(header: Text("Monday"))
-            {
-                
-                ForEach(studentLessons) {
-                    item in if item.time[1] != nil{
-                        Text("\(item.name) at \(timeEnum[item.time[1]!]!)")
-                    }
-                }
-            }
-            
-            Section(header: Text("Tuesday"))
-            {
-                
-                ForEach(studentLessons) {
-                    item in if item.time[2] != nil{
-                        Text("\(item.name) at \(timeEnum[item.time[2]!]!)")
-                    }
-                }
-            }
-
-            
-            Section(header: Text("Wednesday"))
-            {
-                
-                ForEach(studentLessons) {
-                    item in if item.time[3] != nil{
-                        Text("\(item.name) at \(timeEnum[item.time[3]!]!)")
-                    }
-                }
-            }
-
-
-            Section(header: Text("Thursday"))
-            {
-                ForEach(studentLessons) {
-                    item in if item.time[4] != nil{
-                        Text("\(item.name) at \(timeEnum[item.time[4]!]!)")
-                            
-                    }
-                }
-            }
-            Section(header: Text("Friday"))
-            {
-                ForEach(studentLessons) {
-                    item in if item.time[5] != nil{
-                        Text("\(item.name) at \(timeEnum[item.time[5]!]!)")
-                            
-                    }
-                }
-            }
-
-        }
     }
     
 }
@@ -112,58 +155,98 @@ struct Lessons: View {
 //MARK: - Create Events
 struct Events: View {
     
+    @Binding var showLessons: Bool
+    @Binding var showEvents: Bool
+    
     var body: some View {
         
-
-        VStack (alignment: .leading){
-            Text("Your events")
-                .font(.system(size: 30))
-                .bold()
-                .padding()
-        
-        }
-        
-        List {
-            Section(header: Text("Today"))
-            {
-                ForEach(studentEvents) {
-                    item in if item.time[dayNumber] != nil{
-                        Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
-                            
-                    }
-                    
-                }
+        VStack{
+            VStack (alignment: .leading){
+                Text("Your events")
+                    .font(.system(size: 30))
+                    .bold()
+                    .padding()
+            
             }
-            Section(header: Text("Tomorrow"))
-            {
-                ForEach(studentEvents) {
-                    item in if item.time[dayNumber+1] != nil{
-                        Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
+            
+            List {
+                Section(header: Text("Today"))
+                {
+                    ForEach(studentEvents) {
+                        item in if item.time[dayNumber] != nil{
+                            Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
+                                
+                        }
                         
                     }
                 }
+                Section(header: Text("Tomorrow"))
+                {
+                    ForEach(studentEvents) {
+                        item in if item.time[dayNumber+1] != nil{
+                            Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
+                            
+                        }
+                    }
+                }
+            }
+            
+
+            
+            Button(action: {
+                
+                    }, label: {
+                HStack {
+                    Spacer()
+                    Text("Create Event")
+                        .foregroundColor(.white)
+                    Spacer()
+                }.padding()
+                    .background(Color.blue)
+                    .cornerRadius(5.0)
+                    }).padding()
+            
+            
+            
+
+        }.toolbar {
+            // 2.
+            ToolbarItem(placement: .bottomBar) {
+                // 3.
+                HStack() {
+                    
+                    Button(action: {
+                        self.showEvents = false
+                        self.showLessons = true
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "text.book.closed")
+                            Text("Lessons")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.padding()
+                            .cornerRadius(5.0)
+                    })
+                    Button(action: {
+                        self.showEvents = true
+                        self.showLessons = false
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "calendar")
+                            Text("Events")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.padding()
+                            .cornerRadius(5.0)
+                    })
+                    
+                    
+                }
             }
         }
-        
-
-        
-        Button(action: {
-            
-                }, label: {
-            HStack {
-                Spacer()
-                Text("Create Event")
-                    .foregroundColor(.white)
-                Spacer()
-            }.padding()
-                .background(Color.blue)
-                .cornerRadius(5.0)
-                }).padding()
-        
-        
-        
-
-        
+ 
     }
 }
 
@@ -172,11 +255,23 @@ struct Events: View {
 struct HomeScreen: View {
     
     @Binding var showHomeScreen: Bool
+    
+    @State var showLessons = true
+    @State var showEvents = false
+    
+    @State private var selectedTab: Int = 0
 
     var body: some View {
         
-        Lessons()
+        return Group {
         
+            if showLessons == true {
+                Lessons(showLessons: $showLessons, showEvents: $showEvents)
+            }
+            else{
+                Events(showLessons: $showLessons, showEvents: $showEvents)
+            }
+        }
     }
 }
 
