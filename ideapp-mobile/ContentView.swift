@@ -23,6 +23,7 @@ var studentEvents: [SingleEvent] = []
 
 var studentLessons: [SingleLesson] = []
 var studentLessonNames: [String] = []
+var activeLessonNames: [String] = []
 var dayNumber: Int = 1
 
 var type = 0
@@ -36,12 +37,14 @@ var timeEnum = [1:"08:30-10:20",
                 6:"18:30-20:20"]
 
 
-
 //MARK: - Show student lessons
 struct Lessons: View {
     
     @Binding var showLessons: Bool
     @Binding var showEvents: Bool
+    
+    @State var showEnroll: Bool = false
+    @State var updated = false
     
     var body: some View {
         VStack{
@@ -108,6 +111,28 @@ struct Lessons: View {
                 }
 
             }
+            
+            //TODO: Create lesson button
+            Button(action: {
+                self.showEnroll = true
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Enroll in a lesson")
+                                .foregroundColor(.white)
+                            Spacer()
+                        }.padding()
+                            .background(Color.blue)
+                            .cornerRadius(5.0)
+                    }
+            .sheet(isPresented: $showEnroll, content: {
+                        Enroll(showEnroll: $showEnroll, updated: $updated)
+            })
+            
+            Spacer()
+            
+            
+            
         }.toolbar {
             // 2.
             ToolbarItem(placement: .bottomBar) {
@@ -151,6 +176,39 @@ struct Lessons: View {
     
 }
 
+//MARK: - Enroll in a lesson
+struct Enroll: View {
+    
+    @Binding var showEnroll: Bool
+    @Binding var updated: Bool
+    
+    @State var lesson:String = ""
+    
+    @State var manager = DataPost()
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            
+            Spacer()
+            
+            Text("Enroll In A Lesson")
+                .bold()
+                .font(.title)
+            
+            
+            
+            VStack{
+                TextField("Lesson Name",text: $lesson)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(5.0)
+            }
+            
+            Spacer()
+    }
+}
+
+}
 
 //MARK: - Create Event
 struct CreateEvent: View {
@@ -2208,7 +2266,8 @@ struct ContentView: View {
                     var lessonName: String = lesson as! String
                     print("Adding lesson \(lessonName)")
                     manager.retrieveStudentLessons = false
-                    manager.retrieveLessonDetails(name: lessonName)
+                    manager.
+                    Details(name: lessonName)
                 }
             }
             
@@ -2238,12 +2297,12 @@ struct ContentView: View {
     
     // You can only do operations that will effect the UI under body. For example, you can't assign a variable a value or call a function
     var body: some View {
-        
-         
+
+
          CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-         
+
          return Group {
-         
+
              if showLogin == true && showHomeScreen == false {
              Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
              }
@@ -2253,8 +2312,8 @@ struct ContentView: View {
              HomeScreen(showHomeScreen: $showHomeScreen)
              }
          }
-        
-         
+
+
     }
 }
 
@@ -2281,6 +2340,7 @@ class DataPost: ObservableObject {
     
     var retrieveStudentLessonName: Bool = false
     var retrieveStudentLessons: Bool = false
+    var retrieveActiveLessons: Bool = false
     
     // Write the given dictionary to the db
     func createLesson(lesson: NSDictionary){
@@ -2648,6 +2708,20 @@ class DataPost: ObservableObject {
 
     }
     
+    // TODO: Update student lessons based on input taken
+//    func updateStudentLessons(mail:String, lesson:String) {
+//        retrieveActiveLessonNames()
+//        if !activeLessonNames.contains(lesson) {
+//            if { // check whether the lesson is not taken by the student
+//                // add lesson to lessonsTaken
+//            } else {
+//                // ERROR : The lesson is already taken by the student
+//            }
+//        } else {
+//            // ERROR: No such lesson is active
+//        }
+//    }
+    
     func retrieveLessonDetails(name:String){
         
         let body: [String: Any] = ["collection": "Lesson",
@@ -2733,6 +2807,66 @@ class DataPost: ObservableObject {
         repeat {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
         } while !retrieveStudentLessons
+
+    }
+    
+    func retrieveActiveLessonNames(){
+        
+        let body: [String: Any] = ["collection": "Lesson",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                   "project": [ "name": 1, "_id": 0 ]
+                                ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        
+        
+        print("-----> body: \(body)")
+        print("-----> jsonData: \(jsonData)")
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/find")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("-----> data: \(data)")
+            print("-----> error: \(error)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("-----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("-----2> responseJSON: \(responseJSON)")
+                self.receivedResponse = responseJSON
+                
+                print("receivedResponse \(self.receivedResponse)")
+                
+                var receivedJSON = responseJSON["document"] as! [String:Any]
+                activeLessonNames = receivedJSON["name"] as! [String]
+                self.retrieveActiveLessons = true
+            }
+            
+        }
+        
+        task.resume()
+        
+        
+        repeat {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        } while !retrieveActiveLessons
 
     }
 }
