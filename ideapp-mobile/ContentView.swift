@@ -2189,10 +2189,13 @@ struct ContentView: View {
         
         // Check if the user is already authorized
         var isAuthorized: Bool = UserDefaults.standard.bool(forKey: "Token")
-        var userMail: String = UserDefaults.standard.string(forKey: "Email")!
         
         // if so, change the states of login and home screen pages
         if isAuthorized == true{
+            
+            var userMail: String = UserDefaults.standard.string(forKey: "Email")!
+
+            
             _showLogin = State(initialValue: false) // normalle false
             _showHomeScreen = State(initialValue: true)
             
@@ -2230,11 +2233,7 @@ struct ContentView: View {
             dayNumber = dateNumbers[formattedDate]!
         }
         
-        print("move the user to login page \(showLogin)")
-        print("isAuthorized boolean value \(isAuthorized)")
-        print("users mail address \(userMail)")
-        
-        
+        print("move the user to login page \(showLogin)")  
     }
     
     // You can only do operations that will effect the UI under body. For example, you can't assign a variable a value or call a function
