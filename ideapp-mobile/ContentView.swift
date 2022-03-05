@@ -930,6 +930,7 @@ struct CreateEvent: View {
 }
 
 //MARK: - Show Event
+
 struct Events: View {
     
     @Binding var showLessons: Bool
@@ -978,13 +979,24 @@ struct Events: View {
                 Text("")
             }
             
-
-            Button("Create Event") {
-                        self.showCreateEvent = true
+            
+            Button(action: {
+                self.showCreateEvent = true
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Create")
+                                .foregroundColor(.white)
+                            Spacer()
+                        }.padding()
+                            .background(Color.blue)
+                            .cornerRadius(5.0)
                     }
             .sheet(isPresented: $showCreateEvent, content: {
                         CreateEvent(showCreateEvent: $showCreateEvent, updated: $updated)
-                    })
+            })
+            
+            Spacer()
 
             
             /*
