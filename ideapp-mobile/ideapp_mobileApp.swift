@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@main
+ @main
 struct ideapp_mobileApp: App {
     var body: some Scene {
         WindowGroup {

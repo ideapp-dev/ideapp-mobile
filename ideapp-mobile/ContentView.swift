@@ -152,11 +152,791 @@ struct Lessons: View {
 }
 
 
-//MARK: - Create Events
+//MARK: - Create Event
+struct CreateEvent: View {
+    
+    @Binding var showCreateEvent: Bool
+    @Binding var updated: Bool
+
+    @State var name:String = ""
+    @State var owner:String = ""
+    @State var isCompleted:Bool = false
+    @State var time: [String:Int] = [:]
+
+    
+    @State var timeSelected: [[Bool]] = [[false, false, false, false, false, false, false],
+                                         [false, false, false, false, false, false, false],
+                                         [false, false, false, false, false, false, false],
+                                         [false, false, false, false, false, false, false],
+                                         [false, false, false, false, false, false, false],
+                                         [false, false, false, false, false, false, false],
+                                         [false, false, false, false, false, false, false]
+    ]
+    
+    @State var manager = DataPost()
+    
+    var body: some View {
+        
+        VStack(spacing: 10) {
+            
+            Spacer()
+            
+            Text("Create Lesson")
+                .bold()
+                .font(.title)
+            
+            
+            
+            VStack{
+                TextField("Name",text: $name)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(5.0)
+            }
+            
+            VStack{
+                
+                
+                HStack{
+                    VStack(spacing: 17){
+                        Text(" ")
+                        Text("08:30-10:20")
+                        Text("10:30-12:20")
+                        Text("12:30-14:20")
+                        Text("14:30-16:20")
+                        Text("16:30-18:20")
+                        Text("18:30-20:20")
+                    }
+                    
+                    VStack{
+                        Text("Mon")
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            //self.time11 = !self.time11
+                            self.timeSelected[1][1] = !self.timeSelected[1][1]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[1][1] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[1][2] = !self.self.timeSelected[1][2]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[1][2] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[1][3] = !self.self.timeSelected[1][3]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[1][3] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[1][4] = !self.self.timeSelected[1][4]
+                            
+                            
+                        }) {
+
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[1][4] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[1][5] = !self.self.timeSelected[1][5]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[1][5] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                                
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[1][6] = !self.self.timeSelected[1][6]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[1][6] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                    }
+                    
+                    VStack{
+                        Text("Tue")
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            //self.time11 = !self.time11
+                            self.timeSelected[2][1] = !self.timeSelected[2][1]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[2][1] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[2][2] = !self.self.timeSelected[2][2]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[2][2] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[2][3] = !self.self.timeSelected[2][3]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[2][3] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[2][4] = !self.self.timeSelected[2][4]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[2][4] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[2][5] = !self.self.timeSelected[2][5]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[2][5] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[2][6] = !self.self.timeSelected[2][6]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[2][6] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                    }
+                    
+                    VStack{
+                        Text("Wed")
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            //self.time11 = !self.time11
+                            self.timeSelected[3][1] = !self.timeSelected[3][1]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[3][1] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[3][2] = !self.self.timeSelected[3][2]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[3][2] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[3][3] = !self.self.timeSelected[3][3]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[3][3] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[3][4] = !self.self.timeSelected[3][4]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[3][4] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[3][5] = !self.self.timeSelected[3][5]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[3][5] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[3][6] = !self.self.timeSelected[3][6]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[3][6] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                    }
+                    
+                    VStack{
+                        Text("Thu")
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            //self.time11 = !self.time11
+                            self.timeSelected[4][1] = !self.timeSelected[4][1]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[4][1] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[4][2] = !self.self.timeSelected[4][2]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[4][2] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[4][3] = !self.self.timeSelected[4][3]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[4][3] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[4][4] = !self.self.timeSelected[4][4]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[4][4] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[4][5] = !self.self.timeSelected[4][5]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[4][5] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[4][6] = !self.self.timeSelected[4][6]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[4][6] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                    }
+                    
+                    VStack{
+                        Text("Fri")
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            //self.time11 = !self.time11
+                            self.timeSelected[5][1] = !self.timeSelected[5][1]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[5][1] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[5][2] = !self.self.timeSelected[5][2]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[5][2] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[5][3] = !self.self.timeSelected[5][3]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[5][3] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[5][4] = !self.self.timeSelected[5][4]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[5][4] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[5][5] = !self.self.timeSelected[5][5]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[5][5] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[5][6] = !self.self.timeSelected[5][6]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[5][6] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                    }
+                    
+                    VStack{
+                        Text("Sat")
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            //self.time11 = !self.time11
+                            self.timeSelected[6][1] = !self.timeSelected[6][1]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[6][1] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[6][2] = !self.self.timeSelected[6][2]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[6][2] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[6][3] = !self.self.timeSelected[6][3]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[6][3] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[6][4] = !self.self.timeSelected[6][4]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[6][4] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[6][5] = !self.self.timeSelected[6][5]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[6][5] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[6][6] = !self.self.timeSelected[6][6]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[6][6] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                    }
+                }
+                
+                
+            }
+            
+            
+            Button(action: {
+                
+                for row in 1..<7 {
+                  for column in 1..<7 {
+                    print("column: \(column) row: \(row) value:\(timeSelected[column][row])")
+                      if timeSelected[column][row] {
+                          time["\(column)"] = row
+                      }
+                  }
+                }
+                
+                var entityToInsert: NSDictionary = ["owner":UserDefaults.standard.string(forKey: "Email")!, "isCompleted":false, "name": name , "time":time]
+                
+                print("entityToInsert :\(entityToInsert)")
+                manager.createEvent(event: entityToInsert)
+                
+                studentEvents.append(SingleEvent(id: manager.newId, name: name, time: time))
+                self.updated = true
+                
+                self.showCreateEvent = false
+            }, label: {
+                HStack {
+                    Spacer()
+                    Text("Create")
+                        .foregroundColor(.white)
+                    Spacer()
+                }.padding()
+                    .background(Color.blue)
+                    .cornerRadius(5.0)
+            })
+            
+            Spacer()
+        }.padding()
+    }
+}
+
+//MARK: - Show Event
 struct Events: View {
     
     @Binding var showLessons: Bool
     @Binding var showEvents: Bool
+    
+    @State var showCreateEvent: Bool = false
+    @State var updated = false
     
     var body: some View {
         
@@ -168,13 +948,15 @@ struct Events: View {
                     .padding()
             
             }
+        
             
             List {
+                
                 Section(header: Text("Today"))
                 {
                     ForEach(studentEvents) {
-                        item in if item.time[dayNumber] != nil{
-                            Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
+                        item in if item.time["\(dayNumber)"] != nil{
+                            Text("\(item.name) at \(timeEnum[item.time["\(dayNumber)"]!]!)")
                                 
                         }
                         
@@ -183,16 +965,29 @@ struct Events: View {
                 Section(header: Text("Tomorrow"))
                 {
                     ForEach(studentEvents) {
-                        item in if item.time[dayNumber+1] != nil{
-                            Text("\(item.name) at \(item.time[dayNumber] ?? 0)")
+                        item in if item.time["\(dayNumber+1)"] != nil{
+                            Text("\(item.name) at \(timeEnum[item.time["\(dayNumber+1)"]!]!)")
                             
                         }
                     }
                 }
+                
+            }
+            
+            if updated {
+                Text("")
             }
             
 
+            Button("Create Event") {
+                        self.showCreateEvent = true
+                    }
+            .sheet(isPresented: $showCreateEvent, content: {
+                        CreateEvent(showCreateEvent: $showCreateEvent, updated: $updated)
+                    })
+
             
+            /*
             Button(action: {
                 
                     }, label: {
@@ -205,7 +1000,7 @@ struct Events: View {
                     .background(Color.blue)
                     .cornerRadius(5.0)
                     }).padding()
-            
+            */
             
             
 
@@ -228,6 +1023,7 @@ struct Events: View {
                         }.padding()
                             .cornerRadius(5.0)
                     })
+                    
                     Button(action: {
                         self.showEvents = true
                         self.showLessons = false
@@ -1466,6 +2262,9 @@ class DataPost: ObservableObject {
     var done = false
     var isAuthorized: Bool = false
     
+    var createEventDone: Bool = false
+    var newId: String = ""
+    
     var loginDone = false
     var retrieveEventDone: Bool = false
     
@@ -1507,6 +2306,50 @@ class DataPost: ObservableObject {
                 print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 self.done = true
+            }
+            
+        }
+        
+        task.resume()
+    }
+    
+    func createEvent(event: NSDictionary){
+        
+        let body: [String: Any] = ["collection": "Event",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                   "document": event ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/insertOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("-----> data: \(data)")
+            print("-----> error: \(error)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("-----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("-----2> responseJSON: \(responseJSON)")
+                
+                self.newId = responseJSON["insertedId"] as! String
+                
+                self.receivedResponse = responseJSON
+                self.createEventDone = true
             }
             
         }
@@ -1644,7 +2487,7 @@ class DataPost: ObservableObject {
         let body: [String: Any] = ["collection": "Event",
                                    "database": "ideapp",
                                    "dataSource": "ProjectCluster",
-                                   "filter": ["owner": "ctest@etu.edu.tr" ]
+                                   "filter": ["owner": UserDefaults.standard.string(forKey: "Email")! ]
                                 ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
@@ -1676,9 +2519,9 @@ class DataPost: ObservableObject {
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
+            print("-----1> retrieveEVents responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                print("-----2> retrieveEVents responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 self.retrieveEventDone = true
                 
@@ -1686,7 +2529,7 @@ class DataPost: ObservableObject {
                 
                 for item in receivedJSON{
                     
-                    print(" -> item \(item)")
+                    print(" -> event \(item)")
                     
                     var eventName: String = item["name"] as! String
                     var eventId: String = item["_id"] as! String
@@ -1696,17 +2539,20 @@ class DataPost: ObservableObject {
                     var eventTime: [String:NSNumber] = item["time"] as! [String:NSNumber]
                     
                     var day:Int = 0
-                    var time:Int = 0
+                    var hour:Int = 0
+                    
+                    var time: [String:Int] = [:]
                     
                     for (key, value) in eventTime {
                         print("key: \(key) & value: \(value)")
                         
                         day = (key as NSString).integerValue
-                        time = value.intValue
+                        hour = value.intValue
 
+                        time["\(day)"] = hour
                     }
                     
-                    studentEvents.append(SingleEvent(id: eventId,name: eventName, time: [day:time]))
+                    studentEvents.append(SingleEvent(id: eventId,name: eventName, time: time))
                 }
                 
                 print("retrieveEvents \(receivedJSON)")

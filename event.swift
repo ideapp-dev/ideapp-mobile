@@ -10,6 +10,6 @@ import Foundation
 struct SingleEvent: Encodable, Identifiable {
     let id: String
     let name: String
-    let time: [Int:Int]
+    let time: [String:Int]
     
 }
