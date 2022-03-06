@@ -24,11 +24,12 @@ var studentEvents: [SingleEvent] = []
 var studentLessons: [SingleLesson] = []
 var studentLessonNames: [String] = []
 var dayNumber: Int = 1
+var hourNumber: Int = 1
 
 var type = 0
 
 
-var timeEnum = [1:"08:30-10:20",
+var timeEnum2 = [1:"08:30-10:20",
                 2:"10:30-12:20",
                 3:"12:30-14:20",
                 4:"14:30-16:20",
@@ -36,12 +37,22 @@ var timeEnum = [1:"08:30-10:20",
                 6:"18:30-20:20"]
 
 
+var timeEnum = [1:"08:00-10:00",
+                2:"10:00-12:00",
+                3:"12:00-14:00",
+                4:"14:00-16:00",
+                5:"16:00-18:00",
+                6:"18:00-20:00"]
+
 
 //MARK: - Show student lessons
 struct Lessons: View {
     
     @Binding var showLessons: Bool
     @Binding var showEvents: Bool
+    @Binding var showProfile: Bool
+    
+    @Binding var showHomeScreen: Bool
     
     var body: some View {
         VStack{
@@ -117,6 +128,7 @@ struct Lessons: View {
                     Button(action: {
                         self.showEvents = false
                         self.showLessons = true
+                        self.showProfile = false
                     }, label: {
                         HStack {
                             Spacer()
@@ -124,12 +136,12 @@ struct Lessons: View {
                             Text("Lessons")
                                 .foregroundColor(.blue)
                             Spacer()
-                        }.padding()
-                            .cornerRadius(5.0)
+                        }.cornerRadius(5.0)
                     })
                     Button(action: {
                         self.showEvents = true
                         self.showLessons = false
+                        self.showProfile = false
                     }, label: {
                         HStack {
                             Spacer()
@@ -137,8 +149,20 @@ struct Lessons: View {
                             Text("Events")
                                 .foregroundColor(.blue)
                             Spacer()
-                        }.padding()
-                            .cornerRadius(5.0)
+                        }.cornerRadius(5.0)
+                    })
+                    Button(action: {
+                        self.showEvents = false
+                        self.showLessons = false
+                        self.showProfile = true
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "person.crop.circle")
+                            Text("Profile")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.cornerRadius(5.0)
                     })
                     
                     
@@ -157,6 +181,7 @@ struct CreateEvent: View {
     
     @Binding var showCreateEvent: Bool
     @Binding var updated: Bool
+    
 
     @State var name:String = ""
     @State var owner:String = ""
@@ -165,6 +190,7 @@ struct CreateEvent: View {
 
     
     @State var timeSelected: [[Bool]] = [[false, false, false, false, false, false, false],
+                                         [false, false, false, false, false, false, false],
                                          [false, false, false, false, false, false, false],
                                          [false, false, false, false, false, false, false],
                                          [false, false, false, false, false, false, false],
@@ -200,12 +226,12 @@ struct CreateEvent: View {
                 HStack{
                     VStack(spacing: 17){
                         Text(" ")
-                        Text("08:30-10:20")
-                        Text("10:30-12:20")
-                        Text("12:30-14:20")
-                        Text("14:30-16:20")
-                        Text("16:30-18:20")
-                        Text("18:30-20:20")
+                        Text("08-10")
+                        Text("10-12")
+                        Text("12-14")
+                        Text("14-16")
+                        Text("16-18")
+                        Text("18-20")
                     }
                     
                     VStack{
@@ -887,6 +913,119 @@ struct CreateEvent: View {
                         }
                         .foregroundColor(Color.white)
                     }
+                    
+                    VStack{
+                        Text("Sun")
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            //self.time11 = !self.time11
+                            self.timeSelected[7][1] = !self.timeSelected[7][1]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[7][1] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[7][2] = !self.self.timeSelected[7][2]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[7][2] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[7][3] = !self.self.timeSelected[7][3]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[7][3] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[7][4] = !self.self.timeSelected[7][4]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[7][4] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[7][5] = !self.self.timeSelected[7][5]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[7][5] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                        
+                        Button(action:
+                                {
+                            //1. Save state
+                            self.self.timeSelected[7][6] = !self.self.timeSelected[7][6]
+                            
+                            
+                        }) {
+                            Rectangle()
+                                .strokeBorder(Color.blue,lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                .fill(self.timeSelected[7][6] ? Color.blue : Color.white)
+                                                .frame(width: 30, height: 30)
+                                                )
+                                .frame(width:30, height:30, alignment: .center)
+                                .cornerRadius(5)
+                        }
+                        .foregroundColor(Color.white)
+                    }
                 }
                 
                 
@@ -896,7 +1035,7 @@ struct CreateEvent: View {
             Button(action: {
                 
                 for row in 1..<7 {
-                  for column in 1..<7 {
+                  for column in 1..<8 {
                     print("column: \(column) row: \(row) value:\(timeSelected[column][row])")
                       if timeSelected[column][row] {
                           time["\(column)"] = row
@@ -935,6 +1074,9 @@ struct Events: View {
     
     @Binding var showLessons: Bool
     @Binding var showEvents: Bool
+    @Binding var showProfile: Bool
+    
+    @Binding var showHomeScreen: Bool
     
     @State var showCreateEvent: Bool = false
     @State var updated = false
@@ -957,8 +1099,15 @@ struct Events: View {
                 {
                     ForEach(studentEvents) {
                         item in if item.time["\(dayNumber)"] != nil{
-                            Text("\(item.name) at \(timeEnum[item.time["\(dayNumber)"]!]!)")
+                            Button {
+                                print("Button pressed")
+                                studentEvents = studentEvents.filter { $0.name != item.name }
+                                self.updated = true
                                 
+                            } label: {
+                                Text("\(item.name) at \(timeEnum[item.time["\(dayNumber)"]!]!)")
+                            }
+                            .contentShape(Rectangle())
                         }
                         
                     }
@@ -967,8 +1116,15 @@ struct Events: View {
                 {
                     ForEach(studentEvents) {
                         item in if item.time["\(dayNumber+1)"] != nil{
-                            Text("\(item.name) at \(timeEnum[item.time["\(dayNumber+1)"]!]!)")
-                            
+                            Button {
+                                print("Button pressed")
+                                studentEvents = studentEvents.filter { $0.name != item.name }
+                                self.updated = true
+                                
+                            } label: {
+                                Text("\(item.name) at \(timeEnum[item.time["\(dayNumber+1)"]!]!)")
+                            }
+                            .contentShape(Rectangle())
                         }
                     }
                 }
@@ -1025,6 +1181,7 @@ struct Events: View {
                     Button(action: {
                         self.showEvents = false
                         self.showLessons = true
+                        self.showProfile = false
                     }, label: {
                         HStack {
                             Spacer()
@@ -1032,13 +1189,13 @@ struct Events: View {
                             Text("Lessons")
                                 .foregroundColor(.blue)
                             Spacer()
-                        }.padding()
-                            .cornerRadius(5.0)
+                        }.cornerRadius(5.0)
                     })
                     
                     Button(action: {
                         self.showEvents = true
                         self.showLessons = false
+                        self.showProfile = false
                     }, label: {
                         HStack {
                             Spacer()
@@ -1046,8 +1203,20 @@ struct Events: View {
                             Text("Events")
                                 .foregroundColor(.blue)
                             Spacer()
-                        }.padding()
-                            .cornerRadius(5.0)
+                        }.cornerRadius(5.0)
+                    })
+                    Button(action: {
+                        self.showEvents = false
+                        self.showLessons = false
+                        self.showProfile = true
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "person.crop.circle")
+                            Text("Profile")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.cornerRadius(5.0)
                     })
                     
                     
@@ -1058,6 +1227,96 @@ struct Events: View {
     }
 }
 
+//MARK: - Profile
+struct Profile: View{
+    
+    @Binding var showLessons: Bool
+    @Binding var showEvents: Bool
+    @Binding var showProfile: Bool
+    
+    @Binding var showHomeScreen: Bool
+    
+    @State var updated: Bool = false
+    
+    var body: some View {
+        VStack {
+        
+            Text("Email").bold()
+            Text("\(UserDefaults.standard.string(forKey: "Email")!)")
+            
+            Button(action: {
+                    UserDefaults.standard.set(false, forKey: "Token")
+                    UserDefaults.standard.set("", forKey: "Email")
+                
+                    showHomeScreen = false
+                
+                    updated = false
+                            
+                    }, label: {
+                HStack {
+                    Spacer()
+                    Text("Logout")
+                        .foregroundColor(.white)
+                    Spacer()
+                }.padding()
+                    .background(Color.blue)
+                    .cornerRadius(5.0)
+                    }).padding()
+
+        }.toolbar {
+            // 2.
+            ToolbarItem(placement: .bottomBar) {
+                // 3.
+                HStack() {
+                    
+                    Button(action: {
+                        self.showEvents = false
+                        self.showLessons = true
+                        self.showProfile = false
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "text.book.closed")
+                            Text("Lessons")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.cornerRadius(5.0)
+                    })
+                    
+                    Button(action: {
+                        self.showEvents = true
+                        self.showLessons = false
+                        self.showProfile = false
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "calendar")
+                            Text("Events")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.cornerRadius(5.0)
+                    })
+                    Button(action: {
+                        self.showEvents = false
+                        self.showLessons = false
+                        self.showProfile = true
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "person.crop.circle")
+                            Text("Profile")
+                                .foregroundColor(.blue)
+                            Spacer()
+                        }.cornerRadius(5.0)
+                    })
+                    
+                    
+                }
+            }
+        }
+
+    }
+}
 
 //MARK: - Home Screen Lesson
 struct HomeScreen: View {
@@ -1066,6 +1325,7 @@ struct HomeScreen: View {
     
     @State var showLessons = true
     @State var showEvents = false
+    @State var showProfile = false
     
     @State private var selectedTab: Int = 0
 
@@ -1074,10 +1334,11 @@ struct HomeScreen: View {
         return Group {
         
             if showLessons == true {
-                Lessons(showLessons: $showLessons, showEvents: $showEvents)
-            }
-            else{
-                Events(showLessons: $showLessons, showEvents: $showEvents)
+                Lessons(showLessons: $showLessons, showEvents: $showEvents, showProfile: $showProfile, showHomeScreen: $showHomeScreen)
+            } else if showEvents == true{
+                Events(showLessons: $showLessons, showEvents: $showEvents, showProfile: $showProfile, showHomeScreen: $showHomeScreen)
+            }else{
+                Profile(showLessons: $showLessons, showEvents: $showEvents, showProfile: $showProfile, showHomeScreen: $showHomeScreen)
             }
         }
     }
@@ -2185,6 +2446,38 @@ struct ContentView: View {
     
     init() {
         
+        // Dates necessary for events
+        let date = Date()
+        let format = DateFormatter()
+        format.locale = Locale(identifier: "us")
+        format.dateFormat = "E"
+        
+        var dateNumbers: [String:Int] = ["Mon":1, "Tue":2, "Wed":3, "Thu":4, "Fri":5, "Sat":6, "Sun":7]
+        let formattedDate = format.string(from: date)
+
+        if let val = dateNumbers[formattedDate] {
+            dayNumber = dateNumbers[formattedDate]!
+        }
+        
+        format.dateFormat = "HH"
+        let hourString = format.string(from: Date())
+        
+        if hourString == "08" || hourString == "09"{
+            hourNumber = 1
+        }else if hourString == "10" || hourString == "11"{
+            hourNumber = 2
+        }else if hourString == "12" || hourString == "13"{
+            hourNumber = 3
+        }else if hourString == "14" || hourString == "15"{
+            hourNumber = 4
+        }else if hourString == "16" || hourString == "17"{
+            hourNumber = 5
+        }else if hourString == "18" || hourString == "19"{
+            hourNumber = 6
+        }
+        
+        print("Current hour is \(hourString) and hourNumber is \(hourNumber)")
+        
         
         
         // Check if the user is already authorized
@@ -2203,35 +2496,50 @@ struct ContentView: View {
             manager.retrieveStudentLessons(mail: userMail)
             
             if manager.retrieveStudentLessonName {
+                var takenLessonsCount: Int = studentLessonNames.count
+                var currentIndex: Int = 1
+                
                 for lesson in studentLessonNames{
                     print("Lesson \(lesson)")
                     var lessonName: String = lesson as! String
                     print("Adding lesson \(lessonName)")
-                    manager.retrieveStudentLessons = false
+                    manager.retrieveStudentLessonDone = false
                     manager.retrieveLessonDetails(name: lessonName)
                 }
             }
             
-            if manager.retrieveStudentLessons {
+            
+            if manager.retrieveStudentLessonDetails{
                 for lesson in studentLessons{
                     print("Full Lesson Details \(lesson)")
                 }
-                
+            }
+            
+            if manager.retrieveEventDone {
+                for item in studentEvents {
+                    print("1. \(item.time) | current time \(dayNumber):\(hourNumber)")
+                    
+                    for i in 1...dayNumber {
+                        if item.time["\(i)"] != nil {
+                            if item.time["\(i)"]! < hourNumber {
+
+                                var itemHour: Int = item.time["\(i)"]!
+                                var itemDay: Int = i+1
+                                var newTime: [String:Int] = ["\(itemDay)":itemHour]
+                                
+                                studentEvents = studentEvents.filter { $0.id != item.id }
+                            
+                                studentEvents.append(SingleEvent(id: item.id, name: item.name, time: newTime))
+                                
+                                
+                            }
+                        }
+                    }
+                }
             }
         }
         
-        // Dates necessary for events
-        let date = Date()
-        let format = DateFormatter()
-        format.locale = Locale(identifier: "us")
-        format.dateFormat = "E"
-        
-        var dateNumbers: [String:Int] = ["Mon":1, "Tue":2, "Wed":3, "Thu":4, "Fri":5, "Sat":6, "Sun":7]
-        let formattedDate = format.string(from: date)
 
-        if let val = dateNumbers[formattedDate] {
-            dayNumber = dateNumbers[formattedDate]!
-        }
         
         print("move the user to login page \(showLogin)")  
     }
@@ -2280,7 +2588,8 @@ class DataPost: ObservableObject {
     var retrieveEventDone: Bool = false
     
     var retrieveStudentLessonName: Bool = false
-    var retrieveStudentLessons: Bool = false
+    var retrieveStudentLessonDone: Bool = false
+    var retrieveStudentLessonDetails: Bool = false
     
     // Write the given dictionary to the db
     func createLesson(lesson: NSDictionary){
@@ -2623,16 +2932,24 @@ class DataPost: ObservableObject {
             if let responseJSON = responseJSON as? [String: Any] {
                 print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
-                self.retrieveStudentLessonName = true
+                
                 
                 print("receivedResponse \(self.receivedResponse)")
                 
                 var receivedJSON = responseJSON["document"] as! [String:Any]
                 var takenLessons: [String] = receivedJSON["taken_lessons"] as! [String]
                 
-                for lesson in takenLessons{
-                    studentLessonNames.append(lesson)
+                var takenLessonsCount: Int = takenLessons.count
+                var currentlyAdded: Int = 1
                 
+                for lesson in takenLessons{
+                    print("Adding lesson name \(lesson) to studentLessonNames")
+                    studentLessonNames.append(lesson)
+                    currentlyAdded += 1
+                }
+                
+                if currentlyAdded >= takenLessonsCount {
+                    self.retrieveStudentLessonName = true
                 }
                 
             }
@@ -2720,7 +3037,7 @@ class DataPost: ObservableObject {
                 
                 studentLessons.append(SingleLesson(id: lessonId, name: lessonName, credit: lessonCredit, faculty: lessonFaculty, semester: lessonSemester, instructor: lessonInstructor, time: dayTime))
                 
-                self.retrieveStudentLessons = true
+                self.retrieveStudentLessonDetails = true
                 
                 
             }
@@ -2732,7 +3049,7 @@ class DataPost: ObservableObject {
         
         repeat {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
-        } while !retrieveStudentLessons
+        } while !retrieveStudentLessonDetails
 
     }
 }
