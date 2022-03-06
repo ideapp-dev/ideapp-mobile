@@ -2266,8 +2266,7 @@ struct ContentView: View {
                     var lessonName: String = lesson as! String
                     print("Adding lesson \(lessonName)")
                     manager.retrieveStudentLessons = false
-                    manager.
-                    Details(name: lessonName)
+                    manager.retrieveLessonDetails(name: lessonName)
                 }
             }
             
