@@ -204,6 +204,8 @@ struct Enroll: View {
                     .cornerRadius(5.0)
             }
             
+            // updateStudentLessons($mail, $lesson)
+            
             Spacer()
     }
 }
@@ -2238,6 +2240,9 @@ struct ContentView: View {
     @State var showHomeScreen = false
     @State var manager = DataPost()
     
+    @State var showEnroll = false
+    @State var updated = false
+    
     // Write the variables here
     // Do not include @State if you are not going to pass it to a view (page)
     
@@ -2259,6 +2264,7 @@ struct ContentView: View {
             
             manager.retrieveEvents()
             manager.retrieveStudentLessons(mail: userMail)
+            manager.retrieveActiveLessonNames()
             
             if manager.retrieveStudentLessonName {
                 for lesson in studentLessonNames{
@@ -2291,26 +2297,27 @@ struct ContentView: View {
             dayNumber = dateNumbers[formattedDate]!
         }
         
-        print("move the user to login page \(showLogin)")  
+        print("move the user to login page \(showLogin)")
     }
     
     // You can only do operations that will effect the UI under body. For example, you can't assign a variable a value or call a function
     var body: some View {
 
 
-         CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-
-         return Group {
-
-             if showLogin == true && showHomeScreen == false {
-             Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-             }
-             else if showLogin == false && showHomeScreen == false{
-             Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-             }else{
-             HomeScreen(showHomeScreen: $showHomeScreen)
-             }
-         }
+//         CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+//
+//         return Group {
+//
+//             if showLogin == true && showHomeScreen == false {
+//             Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+//             }
+//             else if showLogin == false && showHomeScreen == false{
+//             Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+//             }else{
+//             HomeScreen(showHomeScreen: $showHomeScreen)
+//             }
+//         }
+        Enroll(showEnroll: $showEnroll, updated: $updated)
 
 
     }
@@ -2707,19 +2714,57 @@ class DataPost: ObservableObject {
 
     }
     
-    // TODO: Update student lessons based on input taken
-//    func updateStudentLessons(mail:String, lesson:String) {
-//        retrieveActiveLessonNames()
-//        if !activeLessonNames.contains(lesson) {
-//            if { // check whether the lesson is not taken by the student
-//                // add lesson to lessonsTaken
-//            } else {
-//                // ERROR : The lesson is already taken by the student
-//            }
-//        } else {
-//            // ERROR: No such lesson is active
-//        }
-//    }
+    func updateStudentLessons(mail:String, lesson:String) {
+        if activeLessonNames.contains(lesson) {
+            if studentLessonNames.contains(lesson) {
+                studentLessonNames.append(lesson)
+                
+                let body: [String: Any] = ["collection": "students",
+                                           "database": "ideapp",
+                                           "dataSource": "ProjectCluster",
+                                           "filter": ["email": mail ],
+                                           "$push": ["lessonsTaken": lesson]
+                                        ]
+                
+                let jsonData = try? JSONSerialization.data(withJSONObject: body)
+                
+                let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/insertOne")!
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("application/json", forHTTPHeaderField: "Accept")
+                request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+                request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+                request.httpBody = jsonData
+                
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    print("-----> data: \(data)")
+                    print("-----> error: \(error)")
+                    
+                    guard let data = data, error == nil else {
+                        print(error?.localizedDescription ?? "No data")
+                        return
+                    }
+                    
+                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                    print("-----1> responseJSON: \(responseJSON)")
+                    if let responseJSON = responseJSON as? [String: Any] {
+                        print("-----2> responseJSON: \(responseJSON)")
+                        
+                        self.receivedResponse = responseJSON
+                    }
+                    
+                }
+                
+                task.resume()
+            } else {
+//                print("ERROR: \(lesson) is already taken")
+            }
+        } else {
+//            print("ERROR: No such lesson is active")
+        }
+    }
     
     func retrieveLessonDetails(name:String){
         
