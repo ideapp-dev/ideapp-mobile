@@ -176,10 +176,10 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/BCrypt/BCrypt.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BCryptSwift/BCryptSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/BCrypt/BCrypt.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BCryptSwift/BCryptSwift.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -6,7 +6,7 @@ target 'ideapp-mobile' do
   use_frameworks!
 
   # Pods for ideapp-mobile
-  pod 'BCrypt'
+  pod "BCryptSwift"
 
   target 'ideapp-mobileTests' do
     inherit! :search_paths

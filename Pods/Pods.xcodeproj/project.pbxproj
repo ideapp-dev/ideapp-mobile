@@ -7,130 +7,104 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08404A0579FA2AE6917ACB56EEFDB48C /* pycabcrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = F3443B3D1247BFCD7EBBD0D6143088BE /* pycabcrypt.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0AA03BC0791ADF6F3A949A6624B5BDFC /* sha2.h in Headers */ = {isa = PBXBuildFile; fileRef = 0187A830690253625BE26A24C5511476 /* sha2.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1ED468390DF82292F48F39755F92F712 /* timingsafe_bcmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 4051BBD7DA38C4097C5012CB0D283012 /* timingsafe_bcmp.c */; };
-		20313E253E88EDCC2F1416490004001A /* Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2298603EBB76A899771DDF9AD9CF61CD /* Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m */; };
-		32A96D05406F317723E186B619EEE280 /* Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E98181B577247CD6DFB41DA57414EAC3 /* Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		39B935DCFA255DB59369D0DE507B4F8E /* PerfectBCrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03E7867614F10EAC8F27811DF143745 /* PerfectBCrypt.swift */; };
-		54FCA5FA98168B66D0EA5017071281E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		557B38243D4285D190570F6CD56E19B7 /* bcrypt_pbkdf.c in Sources */ = {isa = PBXBuildFile; fileRef = 27F3BA8A70BAF9FFA311C44083A4E643 /* bcrypt_pbkdf.c */; };
-		698FEB6ACBFFB9E733D3663C6764B094 /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 6B0F1F7BF931274159ECC506635A19E2 /* sha2.c */; };
+		05CEF57AA53A5043A91ECCD89C093283 /* BCryptSwiftRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A51DCB33941079872F0A2D863A22BA /* BCryptSwiftRandom.swift */; };
+		0718BBED168433048320734BA4F63647 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		0A6ED075EC05DBD48532BF0C1B9E6C8E /* Pods-ideapp-mobile-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B5A1B1DAD4FF45E7A829C6F7FF15BF6 /* Pods-ideapp-mobile-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48969AB69DAD730DD07872E7F0127CDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		4C79CA6D9082B488F79314C227323939 /* Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E98181B577247CD6DFB41DA57414EAC3 /* Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6398E78C722A11B1B92F21DD647AD9B3 /* Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2298603EBB76A899771DDF9AD9CF61CD /* Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m */; };
 		6B6F5820B68EAEE2A97BCAACDA7A1AD9 /* Pods-ideapp-mobileTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1353420E411E1276D28FA6D49C054131 /* Pods-ideapp-mobileTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F974F0E9E9F222D43F8BC8ACF19EE3D /* Pods-ideapp-mobileTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BA6B057C02AEB8EBC95F94F4C625D3 /* Pods-ideapp-mobileTests-dummy.m */; };
-		71F9EAB60647CE7D61CC2D885C6B4875 /* module.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = B2C1C4796D33833BFAAB68BE3E4B2DEC /* module.modulemap */; };
+		720D5A26EBF494A71D1A6C2F4314758A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		7312BE0435477E925D34F98D8E52A0E9 /* BCryptSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3296C7980A9CD4121DB6C25527D05E /* BCryptSwift.swift */; };
 		78F38BCC84E2F00058444CFC8412C0EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		7EFB34F422CE2DBE359956B1A783E9D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		8C4AEBC6063104BC71FF7679DB10E327 /* BCrypt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7323B341719D6274A077EA0A6BF1 /* BCrypt-dummy.m */; };
-		951CBD1A2F58C25921D99D9CA962E6AD /* Pods-ideapp-mobile-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B5A1B1DAD4FF45E7A829C6F7FF15BF6 /* Pods-ideapp-mobile-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BD9F230713AB547F25378D2E555BDB9 /* blf.h in Headers */ = {isa = PBXBuildFile; fileRef = 10B047A37C71FCEF66E986F0DE86D14F /* blf.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AB9757441FE0B25254BD9B238743C0AD /* portable_endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D209D7DC15C0CA5F9AEE980D87CE244 /* portable_endian.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B9DD5BAEA8CCF8D3C87F80B0828B26C8 /* Pods-ideapp-mobile-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9ADB8B5DE5C20E522390FB4F5467B /* Pods-ideapp-mobile-dummy.m */; };
-		C78C462A54AD079E0D6E7DA03CD62A97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		CA6F666F3D0E633C36B40F2F027899C2 /* blf.c in Sources */ = {isa = PBXBuildFile; fileRef = 43C526CF1FD8E3E51AB85A248BABEC76 /* blf.c */; };
-		E0A9332569145DB79487A860BBD5D419 /* BCrypt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B6472DAD38258709911BE4C26572E5 /* BCrypt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EF23E1F33CBF6464F0F47AED29203D02 /* bcrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = B6BD8B4B69742D0FC465EE592023495C /* bcrypt.c */; };
+		960E13D53AF27FEA80A580D9E81A0B17 /* BCryptSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F3B98E06B1B1E22BA2950F645DBFCD /* BCryptSwift-dummy.m */; };
+		A7ED1465B5062C607FED96DA5E2C47B3 /* BCryptSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 191A68C8064860CE3E8643176D27E17E /* BCryptSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0DE674CD8C78C7EB3438955091366DF /* Pods-ideapp-mobile-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9ADB8B5DE5C20E522390FB4F5467B /* Pods-ideapp-mobile-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		329ABFCCC8956AC9797ECBB71D6E1E03 /* PBXContainerItemProxy */ = {
+		381C0E0A5DC1829E7778A1C1858805C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2D34CEB96B2618A6EC90E1A7D12D6F2;
+			remoteInfo = BCryptSwift;
+		};
+		53648EF3BE0B2CC4B9FD46267016F239 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1B6C366309718207AD2149F8DCB96DA4;
 			remoteInfo = "Pods-ideapp-mobile";
 		};
-		46C3BFD191CDEA0B22575E2412F1D299 /* PBXContainerItemProxy */ = {
+		A66C710DDB13321141F6C3A92E7ED2E6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C03340631D53B1119803C2F8E3506D4A;
-			remoteInfo = BCrypt;
-		};
-		7E1CFDFBF9854BBB134BED6409AFDCE0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C03340631D53B1119803C2F8E3506D4A;
-			remoteInfo = BCrypt;
+			remoteGlobalIDString = C2D34CEB96B2618A6EC90E1A7D12D6F2;
+			remoteInfo = BCryptSwift;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0187A830690253625BE26A24C5511476 /* sha2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sha2.h; path = BCrypt/Classes/bcryptc/include/sha2.h; sourceTree = "<group>"; };
 		026ED840AAF0BB96E1404804F8982CA7 /* Pods-ideapp-mobileTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ideapp-mobileTests-Info.plist"; sourceTree = "<group>"; };
-		07B6472DAD38258709911BE4C26572E5 /* BCrypt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BCrypt-umbrella.h"; sourceTree = "<group>"; };
 		07E300620D47CD6351E17B059E773CAD /* Pods-ideapp-mobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ideapp-mobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		0DD9ADB8B5DE5C20E522390FB4F5467B /* Pods-ideapp-mobile-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ideapp-mobile-dummy.m"; sourceTree = "<group>"; };
-		10B047A37C71FCEF66E986F0DE86D14F /* blf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = blf.h; path = BCrypt/Classes/bcryptc/include/blf.h; sourceTree = "<group>"; };
 		115BDE88B2FA99BE7A79140F369B773E /* Pods-ideapp-mobile-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ideapp-mobile-Info.plist"; sourceTree = "<group>"; };
 		131854DF27BCD88A851FB8CC8897B16D /* Pods-ideapp-mobileTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ideapp-mobileTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1353420E411E1276D28FA6D49C054131 /* Pods-ideapp-mobileTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ideapp-mobileTests-umbrella.h"; sourceTree = "<group>"; };
-		14BCAA9D064FD9371AD5D3EB65C4AE98 /* BCrypt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BCrypt.release.xcconfig; sourceTree = "<group>"; };
+		191A68C8064860CE3E8643176D27E17E /* BCryptSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BCryptSwift-umbrella.h"; sourceTree = "<group>"; };
 		1FCA1BB5199E32A3864F541B6B6CE59F /* Pods-ideapp-mobile.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ideapp-mobile.modulemap"; sourceTree = "<group>"; };
 		2298603EBB76A899771DDF9AD9CF61CD /* Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m"; sourceTree = "<group>"; };
-		27F3BA8A70BAF9FFA311C44083A4E643 /* bcrypt_pbkdf.c */ = {isa = PBXFileReference; includeInIndex = 1; name = bcrypt_pbkdf.c; path = BCrypt/Classes/bcryptc/bcrypt_pbkdf.c; sourceTree = "<group>"; };
 		375D7388D626A48EC5B4F474040BE3B0 /* Pods-ideapp-mobile-ideapp-mobileUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ideapp-mobile-ideapp-mobileUITests-Info.plist"; sourceTree = "<group>"; };
-		4051BBD7DA38C4097C5012CB0D283012 /* timingsafe_bcmp.c */ = {isa = PBXFileReference; includeInIndex = 1; name = timingsafe_bcmp.c; path = BCrypt/Classes/bcryptc/timingsafe_bcmp.c; sourceTree = "<group>"; };
-		43C526CF1FD8E3E51AB85A248BABEC76 /* blf.c */ = {isa = PBXFileReference; includeInIndex = 1; name = blf.c; path = BCrypt/Classes/bcryptc/blf.c; sourceTree = "<group>"; };
+		381DB1682186248196E637C749F1679F /* BCryptSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BCryptSwift.debug.xcconfig; sourceTree = "<group>"; };
 		4683D792900DFE2210399DEA82CF5BCF /* Pods-ideapp-mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ideapp-mobile.release.xcconfig"; sourceTree = "<group>"; };
-		4D209D7DC15C0CA5F9AEE980D87CE244 /* portable_endian.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = portable_endian.h; path = BCrypt/Classes/bcryptc/include/portable_endian.h; sourceTree = "<group>"; };
 		54FDB28F1FD59FFA3F0FCCA6D9097CEF /* Pods-ideapp-mobile-ideapp-mobileUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ideapp-mobile-ideapp-mobileUITests.modulemap"; sourceTree = "<group>"; };
 		56538A41D151EF83F12F68D134973CE0 /* Pods-ideapp-mobile-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ideapp-mobile-frameworks.sh"; sourceTree = "<group>"; };
 		5B70E2DD96C966F2E34CA4D25E740DB4 /* Pods-ideapp-mobile */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-ideapp-mobile"; path = Pods_ideapp_mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B0F1F7BF931274159ECC506635A19E2 /* sha2.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sha2.c; path = BCrypt/Classes/bcryptc/sha2.c; sourceTree = "<group>"; };
+		70893DB42097E38AE27B4B20794502AA /* BCryptSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BCryptSwift.modulemap; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		82BA6B057C02AEB8EBC95F94F4C625D3 /* Pods-ideapp-mobileTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ideapp-mobileTests-dummy.m"; sourceTree = "<group>"; };
+		8E360CE1A5D6B0C8C35750A8436EBA2B /* BCryptSwift */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BCryptSwift; path = BCryptSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F3296C7980A9CD4121DB6C25527D05E /* BCryptSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BCryptSwift.swift; path = BCryptSwift/Classes/BCryptSwift.swift; sourceTree = "<group>"; };
 		8FDEEC38D97E115BA5C82A2E45FC60A5 /* Pods-ideapp-mobile-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ideapp-mobile-acknowledgements.plist"; sourceTree = "<group>"; };
+		90F8966FEF67502B32BC9347799FE23B /* BCryptSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BCryptSwift.release.xcconfig; sourceTree = "<group>"; };
 		92ED8E21735A74EA3D0E34BAB7F2A3C9 /* Pods-ideapp-mobile-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ideapp-mobile-acknowledgements.markdown"; sourceTree = "<group>"; };
 		93B422CFBDE460E81806EF20F9DEB10A /* Pods-ideapp-mobile-ideapp-mobileUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ideapp-mobile-ideapp-mobileUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		961505D56EE9CF346AE6E479982F8AE5 /* Pods-ideapp-mobile-ideapp-mobileUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ideapp-mobile-ideapp-mobileUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		9B5A1B1DAD4FF45E7A829C6F7FF15BF6 /* Pods-ideapp-mobile-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ideapp-mobile-umbrella.h"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9FCE7323B341719D6274A077EA0A6BF1 /* BCrypt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BCrypt-dummy.m"; sourceTree = "<group>"; };
-		A413B98892949D83A9F564A71F1EB958 /* BCrypt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BCrypt.debug.xcconfig; sourceTree = "<group>"; };
 		A524551A3ACC28EF1BBEE8312CF1B07B /* Pods-ideapp-mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ideapp-mobile.debug.xcconfig"; sourceTree = "<group>"; };
-		B2C1C4796D33833BFAAB68BE3E4B2DEC /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = module.modulemap; path = BCrypt/Classes/bcryptc/include/module.modulemap; sourceTree = "<group>"; };
-		B4AF40AD4EC6E3C1218EC6E33C9685E5 /* BCrypt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BCrypt.modulemap; sourceTree = "<group>"; };
-		B6BD8B4B69742D0FC465EE592023495C /* bcrypt.c */ = {isa = PBXFileReference; includeInIndex = 1; name = bcrypt.c; path = BCrypt/Classes/bcryptc/bcrypt.c; sourceTree = "<group>"; };
-		B78EDC706AF73297C3D2CC8FE153D96F /* BCrypt-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BCrypt-Info.plist"; sourceTree = "<group>"; };
+		A8A51DCB33941079872F0A2D863A22BA /* BCryptSwiftRandom.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BCryptSwiftRandom.swift; path = BCryptSwift/Classes/BCryptSwiftRandom.swift; sourceTree = "<group>"; };
+		A8F3B98E06B1B1E22BA2950F645DBFCD /* BCryptSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BCryptSwift-dummy.m"; sourceTree = "<group>"; };
 		BC98D21F4D0A0A60FB14554568726397 /* Pods-ideapp-mobile-ideapp-mobileUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-ideapp-mobile-ideapp-mobileUITests"; path = Pods_ideapp_mobile_ideapp_mobileUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD63D935BB3EBEA73856BBE74E8D5459 /* BCrypt */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BCrypt; path = BCrypt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C03E7867614F10EAC8F27811DF143745 /* PerfectBCrypt.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PerfectBCrypt.swift; path = BCrypt/Classes/PerfectBCrypt/PerfectBCrypt.swift; sourceTree = "<group>"; };
 		CD930B2BB3628FE377842D467612F9C8 /* Pods-ideapp-mobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ideapp-mobileTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E04C1AF5236CF26FCF97CD0AA977E11A /* BCryptSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BCryptSwift-Info.plist"; sourceTree = "<group>"; };
 		E42C8CEFCFFFAE7FDF6D3CCBD07046D2 /* Pods-ideapp-mobileTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-ideapp-mobileTests"; path = Pods_ideapp_mobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4EF813420E6CD90A2BBEAA3DD8A08A1 /* BCryptSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BCryptSwift-prefix.pch"; sourceTree = "<group>"; };
 		E98181B577247CD6DFB41DA57414EAC3 /* Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h"; sourceTree = "<group>"; };
 		EE9E71C14FDFF11F7B3C450262385636 /* Pods-ideapp-mobile-ideapp-mobileUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ideapp-mobile-ideapp-mobileUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EFA372D0C81F58767A212472E4ADB044 /* Pods-ideapp-mobile-ideapp-mobileUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ideapp-mobile-ideapp-mobileUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		F3443B3D1247BFCD7EBBD0D6143088BE /* pycabcrypt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pycabcrypt.h; path = BCrypt/Classes/bcryptc/include/pycabcrypt.h; sourceTree = "<group>"; };
 		F6BE87ED1CF65633E730E39201744D63 /* Pods-ideapp-mobileTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ideapp-mobileTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		F873C860FF35095C402265F3F728E013 /* Pods-ideapp-mobile-ideapp-mobileUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ideapp-mobile-ideapp-mobileUITests-frameworks.sh"; sourceTree = "<group>"; };
 		FB7F49FEA3AA77A7695D646E5190B71F /* Pods-ideapp-mobileTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ideapp-mobileTests.modulemap"; sourceTree = "<group>"; };
-		FC3C5D4B96D4B682E64A86F5B869D19C /* BCrypt-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BCrypt-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		034608DC765582DD9D12E92A93A80E3F /* Frameworks */ = {
+		31E33D83AD4456955BED04D9EBF4E400 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C78C462A54AD079E0D6E7DA03CD62A97 /* Foundation.framework in Frameworks */,
+				0718BBED168433048320734BA4F63647 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B80B161EA4EADD62DE4ACDB13AC1F17F /* Frameworks */ = {
+		9420D5DCA2C84BF1FFABC133B7F90336 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFB34F422CE2DBE359956B1A783E9D5 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6A34A6590AEB2791F65C491FC389D0E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				54FCA5FA98168B66D0EA5017071281E3 /* Foundation.framework in Frameworks */,
+				48969AB69DAD730DD07872E7F0127CDE /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +113,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F38BCC84E2F00058444CFC8412C0EC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDCD00B24249A8840CEFBF37189D94D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				720D5A26EBF494A71D1A6C2F4314758A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,10 +137,10 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		1173D292125DDC786F03D38E6ADE64AE /* Pods */ = {
+		1AA3C0A91465FA90DE5AEF3153C2A812 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7C1400366F49A7F157D3056C080D15B7 /* BCrypt */,
+				A86684058258FA6E1272C48CDE09BFDF /* BCryptSwift */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -204,24 +186,19 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		7C1400366F49A7F157D3056C080D15B7 /* BCrypt */ = {
+		65A3874FACED685D654450ADBC809CA0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B6BD8B4B69742D0FC465EE592023495C /* bcrypt.c */,
-				27F3BA8A70BAF9FFA311C44083A4E643 /* bcrypt_pbkdf.c */,
-				43C526CF1FD8E3E51AB85A248BABEC76 /* blf.c */,
-				10B047A37C71FCEF66E986F0DE86D14F /* blf.h */,
-				B2C1C4796D33833BFAAB68BE3E4B2DEC /* module.modulemap */,
-				C03E7867614F10EAC8F27811DF143745 /* PerfectBCrypt.swift */,
-				4D209D7DC15C0CA5F9AEE980D87CE244 /* portable_endian.h */,
-				F3443B3D1247BFCD7EBBD0D6143088BE /* pycabcrypt.h */,
-				6B0F1F7BF931274159ECC506635A19E2 /* sha2.c */,
-				0187A830690253625BE26A24C5511476 /* sha2.h */,
-				4051BBD7DA38C4097C5012CB0D283012 /* timingsafe_bcmp.c */,
-				CC8F996242D980914F3BE566182EAB29 /* Support Files */,
+				70893DB42097E38AE27B4B20794502AA /* BCryptSwift.modulemap */,
+				A8F3B98E06B1B1E22BA2950F645DBFCD /* BCryptSwift-dummy.m */,
+				E04C1AF5236CF26FCF97CD0AA977E11A /* BCryptSwift-Info.plist */,
+				E4EF813420E6CD90A2BBEAA3DD8A08A1 /* BCryptSwift-prefix.pch */,
+				191A68C8064860CE3E8643176D27E17E /* BCryptSwift-umbrella.h */,
+				381DB1682186248196E637C749F1679F /* BCryptSwift.debug.xcconfig */,
+				90F8966FEF67502B32BC9347799FE23B /* BCryptSwift.release.xcconfig */,
 			);
-			name = BCrypt;
-			path = BCrypt;
+			name = "Support Files";
+			path = "../Target Support Files/BCryptSwift";
 			sourceTree = "<group>";
 		};
 		A4FB0195980C46FE08C109B08EF61503 /* Pods-ideapp-mobile-ideapp-mobileUITests */ = {
@@ -241,19 +218,26 @@
 			path = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests";
 			sourceTree = "<group>";
 		};
-		CC8F996242D980914F3BE566182EAB29 /* Support Files */ = {
+		A86684058258FA6E1272C48CDE09BFDF /* BCryptSwift */ = {
 			isa = PBXGroup;
 			children = (
-				B4AF40AD4EC6E3C1218EC6E33C9685E5 /* BCrypt.modulemap */,
-				9FCE7323B341719D6274A077EA0A6BF1 /* BCrypt-dummy.m */,
-				B78EDC706AF73297C3D2CC8FE153D96F /* BCrypt-Info.plist */,
-				FC3C5D4B96D4B682E64A86F5B869D19C /* BCrypt-prefix.pch */,
-				07B6472DAD38258709911BE4C26572E5 /* BCrypt-umbrella.h */,
-				A413B98892949D83A9F564A71F1EB958 /* BCrypt.debug.xcconfig */,
-				14BCAA9D064FD9371AD5D3EB65C4AE98 /* BCrypt.release.xcconfig */,
+				8F3296C7980A9CD4121DB6C25527D05E /* BCryptSwift.swift */,
+				A8A51DCB33941079872F0A2D863A22BA /* BCryptSwiftRandom.swift */,
+				65A3874FACED685D654450ADBC809CA0 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/BCrypt";
+			name = BCryptSwift;
+			path = BCryptSwift;
+			sourceTree = "<group>";
+		};
+		B0C22DAA6FB9B455F3C492BC0C4ACFAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E360CE1A5D6B0C8C35750A8436EBA2B /* BCryptSwift */,
+				5B70E2DD96C966F2E34CA4D25E740DB4 /* Pods-ideapp-mobile */,
+				BC98D21F4D0A0A60FB14554568726397 /* Pods-ideapp-mobile-ideapp-mobileUITests */,
+				E42C8CEFCFFFAE7FDF6D3CCBD07046D2 /* Pods-ideapp-mobileTests */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -261,8 +245,8 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				1173D292125DDC786F03D38E6ADE64AE /* Pods */,
-				E334BE9AA4B3C834223ACA0452C85784 /* Products */,
+				1AA3C0A91465FA90DE5AEF3153C2A812 /* Pods */,
+				B0C22DAA6FB9B455F3C492BC0C4ACFAC /* Products */,
 				0FB56F182C33630A2CE537676F5D514D /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -273,17 +257,6 @@
 				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E334BE9AA4B3C834223ACA0452C85784 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BD63D935BB3EBEA73856BBE74E8D5459 /* BCrypt */,
-				5B70E2DD96C966F2E34CA4D25E740DB4 /* Pods-ideapp-mobile */,
-				BC98D21F4D0A0A60FB14554568726397 /* Pods-ideapp-mobile-ideapp-mobileUITests */,
-				E42C8CEFCFFFAE7FDF6D3CCBD07046D2 /* Pods-ideapp-mobileTests */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,31 +270,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5B8F19476A952E551E8674C3A868A91E /* Headers */ = {
+		77C8E1929D0758552A9BB71973967262 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				951CBD1A2F58C25921D99D9CA962E6AD /* Pods-ideapp-mobile-umbrella.h in Headers */,
+				0A6ED075EC05DBD48532BF0C1B9E6C8E /* Pods-ideapp-mobile-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7499BE2B6DAE7CF3E18D4B7A4CF2E72A /* Headers */ = {
+		A5C8535C16C633F7B50EB20BDE8F284D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32A96D05406F317723E186B619EEE280 /* Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h in Headers */,
+				4C79CA6D9082B488F79314C227323939 /* Pods-ideapp-mobile-ideapp-mobileUITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EAE5A400348482F6BB9F56EFF386141E /* Headers */ = {
+		C15B4846088B9BBDC458DD8FCD2097CD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0A9332569145DB79487A860BBD5D419 /* BCrypt-umbrella.h in Headers */,
-				9BD9F230713AB547F25378D2E555BDB9 /* blf.h in Headers */,
-				AB9757441FE0B25254BD9B238743C0AD /* portable_endian.h in Headers */,
-				08404A0579FA2AE6917ACB56EEFDB48C /* pycabcrypt.h in Headers */,
-				0AA03BC0791ADF6F3A949A6624B5BDFC /* sha2.h in Headers */,
+				A7ED1465B5062C607FED96DA5E2C47B3 /* BCryptSwift-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,17 +299,17 @@
 /* Begin PBXNativeTarget section */
 		1B6C366309718207AD2149F8DCB96DA4 /* Pods-ideapp-mobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A0C7CDDD6697762E5BA1A1654867FC6E /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile" */;
+			buildConfigurationList = 5520CCC01468BAF248427E3A6E75181F /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile" */;
 			buildPhases = (
-				5B8F19476A952E551E8674C3A868A91E /* Headers */,
-				E8534E2E05386F785BA9BDDB63A2F910 /* Sources */,
-				034608DC765582DD9D12E92A93A80E3F /* Frameworks */,
-				058346A46A816521EBC85B912FE3815F /* Resources */,
+				77C8E1929D0758552A9BB71973967262 /* Headers */,
+				3DBF1B9F57935AB3A168A1117A72D701 /* Sources */,
+				31E33D83AD4456955BED04D9EBF4E400 /* Frameworks */,
+				9F37A21553EB1789DD4FF5E99E8A3C64 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C8FCA1A6DCD2804E86D0089E43073E97 /* PBXTargetDependency */,
+				5EBDFDE497FE749169DDB3CC86328BEB /* PBXTargetDependency */,
 			);
 			name = "Pods-ideapp-mobile";
 			productName = Pods_ideapp_mobile;
@@ -349,39 +318,39 @@
 		};
 		2551A389CB92DF2A4146F63F44126868 /* Pods-ideapp-mobile-ideapp-mobileUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F0CE500DFE22FC7C92469B08DA65BE8B /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile-ideapp-mobileUITests" */;
+			buildConfigurationList = D0B225051F04B6B020DC8ED44E764D0E /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile-ideapp-mobileUITests" */;
 			buildPhases = (
-				7499BE2B6DAE7CF3E18D4B7A4CF2E72A /* Headers */,
-				B516137023667572A1EE6A6FEB42F57B /* Sources */,
-				B80B161EA4EADD62DE4ACDB13AC1F17F /* Frameworks */,
-				7869BAB8F4C250E5F24B5944163F638C /* Resources */,
+				A5C8535C16C633F7B50EB20BDE8F284D /* Headers */,
+				3966ED2C617664A85E666AD45CD48D27 /* Sources */,
+				EDCD00B24249A8840CEFBF37189D94D5 /* Frameworks */,
+				299D159ED0968DA31663F0EB69CB8AAE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D95FF3BCD989869DF7B78C610F1B720E /* PBXTargetDependency */,
+				61F35178B2F56CC4681FC9C250F9907E /* PBXTargetDependency */,
 			);
 			name = "Pods-ideapp-mobile-ideapp-mobileUITests";
 			productName = Pods_ideapp_mobile_ideapp_mobileUITests;
 			productReference = BC98D21F4D0A0A60FB14554568726397 /* Pods-ideapp-mobile-ideapp-mobileUITests */;
 			productType = "com.apple.product-type.framework";
 		};
-		C03340631D53B1119803C2F8E3506D4A /* BCrypt */ = {
+		C2D34CEB96B2618A6EC90E1A7D12D6F2 /* BCryptSwift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC0692AB0A8C5444BED2B8342857DDBD /* Build configuration list for PBXNativeTarget "BCrypt" */;
+			buildConfigurationList = 5583B79D2D2EA3664B56A9597573EBDC /* Build configuration list for PBXNativeTarget "BCryptSwift" */;
 			buildPhases = (
-				EAE5A400348482F6BB9F56EFF386141E /* Headers */,
-				5BAB6B6F77B5B5E0E124C43064E51370 /* Sources */,
-				D6A34A6590AEB2791F65C491FC389D0E /* Frameworks */,
-				961A471BC80F17C796B2786E1B211014 /* Resources */,
+				C15B4846088B9BBDC458DD8FCD2097CD /* Headers */,
+				9C516AED9EFD8DCF2EA7120B646CBF25 /* Sources */,
+				9420D5DCA2C84BF1FFABC133B7F90336 /* Frameworks */,
+				51CD7ADD4DDF93928C71BB333A1C8E1F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BCrypt;
-			productName = BCrypt;
-			productReference = BD63D935BB3EBEA73856BBE74E8D5459 /* BCrypt */;
+			name = BCryptSwift;
+			productName = BCryptSwift;
+			productReference = 8E360CE1A5D6B0C8C35750A8436EBA2B /* BCryptSwift */;
 			productType = "com.apple.product-type.framework";
 		};
 		C6475E6A3488D7986264563CD878EB08 /* Pods-ideapp-mobileTests */ = {
@@ -396,7 +365,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				17D45C0CA86B675D084A0F15D38D1469 /* PBXTargetDependency */,
+				D8666EBBD86CA30546796E0430BDF61C /* PBXTargetDependency */,
 			);
 			name = "Pods-ideapp-mobileTests";
 			productName = Pods_ideapp_mobileTests;
@@ -421,11 +390,11 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = E334BE9AA4B3C834223ACA0452C85784 /* Products */;
+			productRefGroup = B0C22DAA6FB9B455F3C492BC0C4ACFAC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C03340631D53B1119803C2F8E3506D4A /* BCrypt */,
+				C2D34CEB96B2618A6EC90E1A7D12D6F2 /* BCryptSwift */,
 				1B6C366309718207AD2149F8DCB96DA4 /* Pods-ideapp-mobile */,
 				2551A389CB92DF2A4146F63F44126868 /* Pods-ideapp-mobile-ideapp-mobileUITests */,
 				C6475E6A3488D7986264563CD878EB08 /* Pods-ideapp-mobileTests */,
@@ -434,21 +403,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		058346A46A816521EBC85B912FE3815F /* Resources */ = {
+		299D159ED0968DA31663F0EB69CB8AAE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7869BAB8F4C250E5F24B5944163F638C /* Resources */ = {
+		51CD7ADD4DDF93928C71BB333A1C8E1F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		961A471BC80F17C796B2786E1B211014 /* Resources */ = {
+		9F37A21553EB1789DD4FF5E99E8A3C64 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -465,18 +434,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5BAB6B6F77B5B5E0E124C43064E51370 /* Sources */ = {
+		3966ED2C617664A85E666AD45CD48D27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF23E1F33CBF6464F0F47AED29203D02 /* bcrypt.c in Sources */,
-				8C4AEBC6063104BC71FF7679DB10E327 /* BCrypt-dummy.m in Sources */,
-				557B38243D4285D190570F6CD56E19B7 /* bcrypt_pbkdf.c in Sources */,
-				CA6F666F3D0E633C36B40F2F027899C2 /* blf.c in Sources */,
-				71F9EAB60647CE7D61CC2D885C6B4875 /* module.modulemap in Sources */,
-				39B935DCFA255DB59369D0DE507B4F8E /* PerfectBCrypt.swift in Sources */,
-				698FEB6ACBFFB9E733D3663C6764B094 /* sha2.c in Sources */,
-				1ED468390DF82292F48F39755F92F712 /* timingsafe_bcmp.c in Sources */,
+				6398E78C722A11B1B92F21DD647AD9B3 /* Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DBF1B9F57935AB3A168A1117A72D701 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0DE674CD8C78C7EB3438955091366DF /* Pods-ideapp-mobile-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,52 +458,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B516137023667572A1EE6A6FEB42F57B /* Sources */ = {
+		9C516AED9EFD8DCF2EA7120B646CBF25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20313E253E88EDCC2F1416490004001A /* Pods-ideapp-mobile-ideapp-mobileUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E8534E2E05386F785BA9BDDB63A2F910 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B9DD5BAEA8CCF8D3C87F80B0828B26C8 /* Pods-ideapp-mobile-dummy.m in Sources */,
+				7312BE0435477E925D34F98D8E52A0E9 /* BCryptSwift.swift in Sources */,
+				960E13D53AF27FEA80A580D9E81A0B17 /* BCryptSwift-dummy.m in Sources */,
+				05CEF57AA53A5043A91ECCD89C093283 /* BCryptSwiftRandom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		17D45C0CA86B675D084A0F15D38D1469 /* PBXTargetDependency */ = {
+		5EBDFDE497FE749169DDB3CC86328BEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BCryptSwift;
+			target = C2D34CEB96B2618A6EC90E1A7D12D6F2 /* BCryptSwift */;
+			targetProxy = 381C0E0A5DC1829E7778A1C1858805C2 /* PBXContainerItemProxy */;
+		};
+		61F35178B2F56CC4681FC9C250F9907E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BCryptSwift;
+			target = C2D34CEB96B2618A6EC90E1A7D12D6F2 /* BCryptSwift */;
+			targetProxy = A66C710DDB13321141F6C3A92E7ED2E6 /* PBXContainerItemProxy */;
+		};
+		D8666EBBD86CA30546796E0430BDF61C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-ideapp-mobile";
 			target = 1B6C366309718207AD2149F8DCB96DA4 /* Pods-ideapp-mobile */;
-			targetProxy = 329ABFCCC8956AC9797ECBB71D6E1E03 /* PBXContainerItemProxy */;
-		};
-		C8FCA1A6DCD2804E86D0089E43073E97 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BCrypt;
-			target = C03340631D53B1119803C2F8E3506D4A /* BCrypt */;
-			targetProxy = 46C3BFD191CDEA0B22575E2412F1D299 /* PBXContainerItemProxy */;
-		};
-		D95FF3BCD989869DF7B78C610F1B720E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BCrypt;
-			target = C03340631D53B1119803C2F8E3506D4A /* BCrypt */;
-			targetProxy = 7E1CFDFBF9854BBB134BED6409AFDCE0 /* PBXContainerItemProxy */;
+			targetProxy = 53648EF3BE0B2CC4B9FD46267016F239 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4203A8FA226D05E90EAAD664CB1E94A9 /* Debug */ = {
+		3A087B0586C0A7F08DCD68DADABAF695 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A524551A3ACC28EF1BBEE8312CF1B07B /* Pods-ideapp-mobile.debug.xcconfig */;
+			baseConfigurationReference = 90F8966FEF67502B32BC9347799FE23B /* BCryptSwift.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -542,28 +504,28 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ideapp-mobile/Pods-ideapp-mobile-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/BCryptSwift/BCryptSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BCryptSwift/BCryptSwift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ideapp-mobile/Pods-ideapp-mobile.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/BCryptSwift/BCryptSwift.modulemap";
+				PRODUCT_MODULE_NAME = BCryptSwift;
+				PRODUCT_NAME = BCryptSwift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		4214E6946993DF02ED98D89047C64016 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -631,6 +593,43 @@
 			};
 			name = Debug;
 		};
+		4591932BE9D2D8CDCD9ECBC6B26F8AA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFA372D0C81F58767A212472E4ADB044 /* Pods-ideapp-mobile-ideapp-mobileUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		6B4C5B5E160ED71BD666EEABD330181C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 07E300620D47CD6351E17B059E773CAD /* Pods-ideapp-mobileTests.release.xcconfig */;
@@ -669,9 +668,43 @@
 			};
 			name = Release;
 		};
-		6FDEB090E52B973BC8AD3877CBCEDDAF /* Release */ = {
+		6E906BC0F127AAD11030BE5E71B985F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE9E71C14FDFF11F7B3C450262385636 /* Pods-ideapp-mobile-ideapp-mobileUITests.release.xcconfig */;
+			baseConfigurationReference = 381DB1682186248196E637C749F1679F /* BCryptSwift.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BCryptSwift/BCryptSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BCryptSwift/BCryptSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/BCryptSwift/BCryptSwift.modulemap";
+				PRODUCT_MODULE_NAME = BCryptSwift;
+				PRODUCT_NAME = BCryptSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9E90AC2FEC24CBC5238EDF4BED76135A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4683D792900DFE2210399DEA82CF5BCF /* Pods-ideapp-mobile.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -683,7 +716,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-ideapp-mobile/Pods-ideapp-mobile-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -692,7 +725,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-ideapp-mobile/Pods-ideapp-mobile.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -700,114 +733,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		740688B08A56163F47F93FA6EF6739E2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A413B98892949D83A9F564A71F1EB958 /* BCrypt.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BCrypt/BCrypt-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BCrypt/BCrypt-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/BCrypt/BCrypt.modulemap";
-				PRODUCT_MODULE_NAME = BCrypt;
-				PRODUCT_NAME = BCrypt;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		83FB75ED610919AC5538D79C6932E133 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFA372D0C81F58767A212472E4ADB044 /* Pods-ideapp-mobile-ideapp-mobileUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		9755D3D4348110393AB053F202256C80 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14BCAA9D064FD9371AD5D3EB65C4AE98 /* BCrypt.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BCrypt/BCrypt-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BCrypt/BCrypt-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/BCrypt/BCrypt.modulemap";
-				PRODUCT_MODULE_NAME = BCrypt;
-				PRODUCT_NAME = BCrypt;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -914,9 +839,9 @@
 			};
 			name = Release;
 		};
-		E9216DCC3AF07F123726538F89059BB8 /* Release */ = {
+		E70D4580F7EDC4E1145F9A47D00C2939 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4683D792900DFE2210399DEA82CF5BCF /* Pods-ideapp-mobile.release.xcconfig */;
+			baseConfigurationReference = A524551A3ACC28EF1BBEE8312CF1B07B /* Pods-ideapp-mobile.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -938,6 +863,43 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-ideapp-mobile/Pods-ideapp-mobile.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F2C16E4912A57421BCB6344B7B63467C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE9E71C14FDFF11F7B3C450262385636 /* Pods-ideapp-mobile-ideapp-mobileUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ideapp-mobile-ideapp-mobileUITests/Pods-ideapp-mobile-ideapp-mobileUITests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -973,29 +935,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A0C7CDDD6697762E5BA1A1654867FC6E /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile" */ = {
+		5520CCC01468BAF248427E3A6E75181F /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4203A8FA226D05E90EAAD664CB1E94A9 /* Debug */,
-				E9216DCC3AF07F123726538F89059BB8 /* Release */,
+				E70D4580F7EDC4E1145F9A47D00C2939 /* Debug */,
+				9E90AC2FEC24CBC5238EDF4BED76135A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC0692AB0A8C5444BED2B8342857DDBD /* Build configuration list for PBXNativeTarget "BCrypt" */ = {
+		5583B79D2D2EA3664B56A9597573EBDC /* Build configuration list for PBXNativeTarget "BCryptSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				740688B08A56163F47F93FA6EF6739E2 /* Debug */,
-				9755D3D4348110393AB053F202256C80 /* Release */,
+				6E906BC0F127AAD11030BE5E71B985F3 /* Debug */,
+				3A087B0586C0A7F08DCD68DADABAF695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F0CE500DFE22FC7C92469B08DA65BE8B /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile-ideapp-mobileUITests" */ = {
+		D0B225051F04B6B020DC8ED44E764D0E /* Build configuration list for PBXNativeTarget "Pods-ideapp-mobile-ideapp-mobileUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				83FB75ED610919AC5538D79C6932E133 /* Debug */,
-				6FDEB090E52B973BC8AD3877CBCEDDAF /* Release */,
+				4591932BE9D2D8CDCD9ECBC6B26F8AA4 /* Debug */,
+				F2C16E4912A57421BCB6344B7B63467C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

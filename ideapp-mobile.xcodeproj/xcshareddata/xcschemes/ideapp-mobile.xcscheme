@@ -20,6 +20,34 @@
                ReferencedContainer = "container:ideapp-mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CBEA29F227ABDCA300B87CF0"
+               BuildableName = "ideapp-mobileTests.xctest"
+               BlueprintName = "ideapp-mobileTests"
+               ReferencedContainer = "container:ideapp-mobile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CBEA29FC27ABDCA300B87CF0"
+               BuildableName = "ideapp-mobileUITests.xctest"
+               BlueprintName = "ideapp-mobileUITests"
+               ReferencedContainer = "container:ideapp-mobile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,26 +56,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CBEA29F227ABDCA300B87CF0"
-               BuildableName = "ideapp-mobileTests.xctest"
-               BlueprintName = "ideapp-mobileTests"
-               ReferencedContainer = "container:ideapp-mobile.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CBEA29FC27ABDCA300B87CF0"
-               BuildableName = "ideapp-mobileUITests.xctest"
-               BlueprintName = "ideapp-mobileUITests"
-               ReferencedContainer = "container:ideapp-mobile.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

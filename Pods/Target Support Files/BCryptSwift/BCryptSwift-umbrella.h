@@ -10,11 +10,7 @@
 #endif
 #endif
 
-#import "blf.h"
-#import "portable_endian.h"
-#import "pycabcrypt.h"
-#import "sha2.h"
 
-FOUNDATION_EXPORT double BCryptVersionNumber;
-FOUNDATION_EXPORT const unsigned char BCryptVersionString[];
+FOUNDATION_EXPORT double BCryptSwiftVersionNumber;
+FOUNDATION_EXPORT const unsigned char BCryptSwiftVersionString[];
 

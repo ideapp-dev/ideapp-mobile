@@ -8,10 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		36BBE7EC8FABDFE2A908025E /* Pods_ideapp_mobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EAE358C9BC802416CAB280 /* Pods_ideapp_mobileTests.framework */; };
-		5DDF293219B4ED0718AFA66D /* Pods_ideapp_mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F036DB3688476CDC880686 /* Pods_ideapp_mobile.framework */; };
 		6D32F3C7A0FA40AFB9AAB79C /* Pods_ideapp_mobile_ideapp_mobileUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E7E0A32F7DED2F4F2D4BD3 /* Pods_ideapp_mobile_ideapp_mobileUITests.framework */; };
 		CB2B81B927D244C600994C83 /* lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2B81B827D244C600994C83 /* lesson.swift */; };
 		CB32B54627BC13FE00B6181E /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32B54527BC13FE00B6181E /* event.swift */; };
+		CB50495127E4DABC000F1518 /* Pods_ideapp_mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F036DB3688476CDC880686 /* Pods_ideapp_mobile.framework */; };
+		CBE295BC27E4DCAA004AED57 /* CreateLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */; };
+		CBE295C027E4DE4D004AED57 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295BF27E4DE4D004AED57 /* HomeScreen.swift */; };
+		CBE295C227E4DE6D004AED57 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295C127E4DE6D004AED57 /* Login.swift */; };
+		CBE295C427E4DE8C004AED57 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295C327E4DE8C004AED57 /* Register.swift */; };
+		CBE295C627E4DEC4004AED57 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295C527E4DEC4004AED57 /* Profile.swift */; };
+		CBE295C827E4DEE3004AED57 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295C727E4DEE3004AED57 /* Events.swift */; };
+		CBE295CA27E4DF17004AED57 /* CreateEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295C927E4DF17004AED57 /* CreateEvent.swift */; };
+		CBE295CC27E4DF2F004AED57 /* Lessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE295CB27E4DF2F004AED57 /* Lessons.swift */; };
 		CBEA29E727ABDCA200B87CF0 /* ideapp_mobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEA29E627ABDCA200B87CF0 /* ideapp_mobileApp.swift */; };
 		CBEA29E927ABDCA200B87CF0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEA29E827ABDCA200B87CF0 /* ContentView.swift */; };
 		CBEA29EB27ABDCA300B87CF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBEA29EA27ABDCA300B87CF0 /* Assets.xcassets */; };
@@ -46,6 +54,14 @@
 		98F036DB3688476CDC880686 /* Pods_ideapp_mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ideapp_mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB2B81B827D244C600994C83 /* lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lesson.swift; sourceTree = "<group>"; };
 		CB32B54527BC13FE00B6181E /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
+		CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLesson.swift; sourceTree = "<group>"; };
+		CBE295BF27E4DE4D004AED57 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		CBE295C127E4DE6D004AED57 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		CBE295C327E4DE8C004AED57 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		CBE295C527E4DEC4004AED57 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		CBE295C727E4DEE3004AED57 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		CBE295C927E4DF17004AED57 /* CreateEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEvent.swift; sourceTree = "<group>"; };
+		CBE295CB27E4DF2F004AED57 /* Lessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lessons.swift; sourceTree = "<group>"; };
 		CBEA29E327ABDCA200B87CF0 /* ideapp-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ideapp-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBEA29E627ABDCA200B87CF0 /* ideapp_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ideapp_mobileApp.swift; sourceTree = "<group>"; };
 		CBEA29E827ABDCA200B87CF0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DDF293219B4ED0718AFA66D /* Pods_ideapp_mobile.framework in Frameworks */,
+				CB50495127E4DABC000F1518 /* Pods_ideapp_mobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +119,14 @@
 		CBEA29DA27ABDCA200B87CF0 = {
 			isa = PBXGroup;
 			children = (
+				CBE295CB27E4DF2F004AED57 /* Lessons.swift */,
+				CBE295C927E4DF17004AED57 /* CreateEvent.swift */,
+				CBE295C727E4DEE3004AED57 /* Events.swift */,
+				CBE295C527E4DEC4004AED57 /* Profile.swift */,
+				CBE295C327E4DE8C004AED57 /* Register.swift */,
+				CBE295C127E4DE6D004AED57 /* Login.swift */,
+				CBE295BF27E4DE4D004AED57 /* HomeScreen.swift */,
+				CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */,
 				CB2B81B827D244C600994C83 /* lesson.swift */,
 				CB32B54527BC13FE00B6181E /* event.swift */,
 				CBEA29E527ABDCA200B87CF0 /* ideapp-mobile */,
@@ -411,10 +435,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE295C227E4DE6D004AED57 /* Login.swift in Sources */,
 				CBEA29E927ABDCA200B87CF0 /* ContentView.swift in Sources */,
 				CBEA29E727ABDCA200B87CF0 /* ideapp_mobileApp.swift in Sources */,
+				CBE295CC27E4DF2F004AED57 /* Lessons.swift in Sources */,
+				CBE295C027E4DE4D004AED57 /* HomeScreen.swift in Sources */,
+				CBE295C827E4DEE3004AED57 /* Events.swift in Sources */,
 				CB32B54627BC13FE00B6181E /* event.swift in Sources */,
+				CBE295BC27E4DCAA004AED57 /* CreateLesson.swift in Sources */,
+				CBE295C427E4DE8C004AED57 /* Register.swift in Sources */,
+				CBE295C627E4DEC4004AED57 /* Profile.swift in Sources */,
 				CB2B81B927D244C600994C83 /* lesson.swift in Sources */,
+				CBE295CA27E4DF17004AED57 /* CreateEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
