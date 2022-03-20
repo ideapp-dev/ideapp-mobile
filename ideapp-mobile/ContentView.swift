@@ -138,7 +138,16 @@ struct ContentView: View {
             _showHomeScreen = State(initialValue: true)
             
             
-            manager.retrieveStudentLessons(mail: userMail)
+            var userType: Int = UserDefaults.standard.integer(forKey: "Type")
+            
+            if (userType == 1){
+                print("Instructor")
+                manager.retrieveStudentLessons(mail: userMail, type: "Instructor")
+                
+            }else{
+                print("Student")
+                manager.retrieveStudentLessons(mail: userMail, type: "students")
+            }
             
             checkLessons()
             checkEvents()
@@ -506,7 +515,7 @@ class DataPost: ObservableObject {
 
     }
     
-    func retrieveStudentLessons(mail:String){
+    func retrieveStudentLessons(mail:String, type:String){
         
         let body: [String: Any] = ["collection": "students",
                                    "database": "ideapp",
@@ -552,7 +561,13 @@ class DataPost: ObservableObject {
                 print("receivedResponse \(self.receivedResponse)")
                 
                 var receivedJSON = responseJSON["document"] as! [String:Any]
-                var takenLessons: [String] = receivedJSON["taken_lessons"] as! [String]
+                
+                var jsonColumn = "taken_lessons"
+                if type == "Instructor" {
+                    jsonColumn = "lessons_given"
+                }
+                
+                var takenLessons: [String] = receivedJSON[jsonColumn] as! [String]
                 
                 var takenLessonsCount: Int = takenLessons.count
                 var currentlyAdded: Int = 1
@@ -585,7 +600,7 @@ class DataPost: ObservableObject {
         let body: [String: Any] = ["collection": "Lesson",
                                    "database": "ideapp",
                                    "dataSource": "ProjectCluster",
-                                   "filter": ["name": name ]
+                                   "filter": ["code": name ]
                                 ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
