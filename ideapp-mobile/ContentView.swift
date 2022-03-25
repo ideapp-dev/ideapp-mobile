@@ -11,6 +11,14 @@ import BCryptSwift
 import Foundation
 import Combine
 
+//MARK: - Empty page
+
+struct EmptyView: View {
+    var body: some View {
+        Text("Empty")
+    }
+}
+
 //MARK: - Objects
 
 var name:String = ""
@@ -129,6 +137,18 @@ struct ContentView: View {
     }
     
     init() {
+        
+        // Delete the following after testing
+        // test1@etu.edu.tr
+        
+        UserDefaults.standard.set(true, forKey: "Token")
+        UserDefaults.standard.set(0, forKey: "Type")
+        
+        print("Setting test1@etu.edu.tr to the UserDefaults.standard")
+        UserDefaults.standard.set("test1@etu.edu.tr", forKey: "Email")
+        
+        // Until here
+        
         var isAuthorized: Bool = UserDefaults.standard.bool(forKey: "Token")
     
         if isAuthorized == true{
@@ -155,8 +175,9 @@ struct ContentView: View {
     }
     
     var body: some View {
-         CreateLesson(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-         
+         EmptyView()
+
+        
          return Group {
          
              if showLogin == true && showHomeScreen == false {
@@ -169,6 +190,7 @@ struct ContentView: View {
              }
          }
         
+
          
     }
 }
@@ -517,18 +539,18 @@ class DataPost: ObservableObject {
     
     func retrieveStudentLessons(mail:String, type:String){
         
-        let body: [String: Any] = ["collection": "students",
+        print("retrieveStudentLessons - \(mail) \(type)")
+        
+        let body: [String: Any] = ["collection": type,
                                    "database": "ideapp",
                                    "dataSource": "ProjectCluster",
                                    "filter": ["email": mail ]
                                 ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
-        
-        
-        
-        print("-----> body: \(body)")
-        print("-----> jsonData: \(jsonData)")
+    
+        print("retrieveStudentLessons -----> body: \(body)")
+        print("retrieveStudentLessons -----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -543,8 +565,8 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            print("retrieveStudentLessons -----> data: \(data)")
+            print("retrieveStudentLessons -----> error: \(error)")
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -552,19 +574,23 @@ class DataPost: ObservableObject {
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
+            print("retrieveStudentLessons -----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
                 print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 
                 
-                print("receivedResponse \(self.receivedResponse)")
+                print("retrieveStudentLessons - receivedResponse \(self.receivedResponse)")
                 
                 var receivedJSON = responseJSON["document"] as! [String:Any]
                 
                 var jsonColumn = "taken_lessons"
                 if type == "Instructor" {
                     jsonColumn = "lessons_given"
+                }else{
+                    if receivedJSON.keys.contains("lessons_taken"){
+                        jsonColumn = "lessons_taken"
+                    }
                 }
                 
                 var takenLessons: [String] = receivedJSON[jsonColumn] as! [String]
@@ -600,7 +626,8 @@ class DataPost: ObservableObject {
         let body: [String: Any] = ["collection": "Lesson",
                                    "database": "ideapp",
                                    "dataSource": "ProjectCluster",
-                                   "filter": ["code": name ]
+                                   //"filter": ["code": name ]
+                                   "filter": ["_id": ["$oid":name] ]
                                 ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
