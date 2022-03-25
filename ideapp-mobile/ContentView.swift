@@ -161,15 +161,14 @@ struct ContentView: View {
             var userType: Int = UserDefaults.standard.integer(forKey: "Type")
             
             if (userType == 1){
-                            print("Instructor")
-                            manager.retrieveStudentLessons(mail: userMail, type: "Instructor")
-                            manager.profileInfo(collection: "Instructor")
-                            
-                        }else{
-                            print("Student")
-                            manager.retrieveStudentLessons(mail: userMail, type: "students")
-                            manager.profileInfo(collection: "students")
-                        }
+                print("Instructor")
+                manager.retrieveStudentLessons(mail: userMail, type: "Instructor")
+                manager.profileInfo(collection: "Instructor")
+            }else{
+                print("Student")
+                manager.retrieveStudentLessons(mail: userMail, type: "students")
+                manager.profileInfo(collection: "students")
+            }
             
             checkLessons()
             checkEvents()
@@ -289,10 +288,6 @@ class DataPost: ObservableObject {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
         } while !profileInfoDone
         
-        repeat{
-            
-        } while receivedHASHDone == ""
-        print("Here")
     }
     
     // Write the given dictionary to the db
