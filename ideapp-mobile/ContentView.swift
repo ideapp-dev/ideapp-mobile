@@ -144,30 +144,15 @@ struct ContentView: View {
         UserDefaults.standard.set(true, forKey: "Token")
         UserDefaults.standard.set(0, forKey: "Type")
         
-        print("Setting test1 to the UserDefaults.standard")
-        UserDefaults.standard.set("test1", forKey: "Name")
-        
-        print("Setting test1 to the UserDefaults.standard")
-        UserDefaults.standard.set("test1", forKey: "Surname")
-        
         print("Setting test1@etu.edu.tr to the UserDefaults.standard")
         UserDefaults.standard.set("test1@etu.edu.tr", forKey: "Email")
-        
-        print("Setting 161101064 to the UserDefaults.standard")
-        UserDefaults.standard.set("161101064", forKey: "Student ID")
         
         // Until here
         
         var isAuthorized: Bool = UserDefaults.standard.bool(forKey: "Token")
     
-        if isAuthorized == true{
-            var userName: String = UserDefaults.standard.string(forKey: "Name")!
-            
-            var userSurname: String = UserDefaults.standard.string(forKey: "Surname")!
-            
+        if isAuthorized == true {
             var userMail: String = UserDefaults.standard.string(forKey: "Email")!
-            
-            var userStudentId: String = UserDefaults.standard.string(forKey: "Student ID")!
 
             _showLogin = State(initialValue: false) // normalle false
             _showHomeScreen = State(initialValue: true)
@@ -176,13 +161,15 @@ struct ContentView: View {
             var userType: Int = UserDefaults.standard.integer(forKey: "Type")
             
             if (userType == 1){
-                print("Instructor")
-                manager.retrieveStudentLessons(mail: userMail, type: "Instructor")
-                
-            }else{
-                print("Student")
-                manager.retrieveStudentLessons(mail: userMail, type: "students")
-            }
+                            print("Instructor")
+                            manager.retrieveStudentLessons(mail: userMail, type: "Instructor")
+                            manager.profileInfo(collection: "Instructor")
+                            
+                        }else{
+                            print("Student")
+                            manager.retrieveStudentLessons(mail: userMail, type: "students")
+                            manager.profileInfo(collection: "students")
+                        }
             
             checkLessons()
             checkEvents()
@@ -190,7 +177,6 @@ struct ContentView: View {
     }
     
     var body: some View {
-         EmptyView()
 
         
          return Group {
@@ -234,6 +220,80 @@ class DataPost: ObservableObject {
     var retrieveStudentLessonName: Bool = false
     var retrieveStudentLessonDone: Bool = false
     var retrieveStudentLessonDetails: Bool = false
+    
+    var profileInfoDone = false
+    
+    func profileInfo(collection: String){
+        
+        let body: [String: Any] = ["collection": collection,
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                   "filter": ["email": UserDefaults.standard.string(forKey: "Email")! ] ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        var receivedHASHDone = ""
+        
+        print("-----> body: \(body)")
+        print("-----> jsonData: \(jsonData)")
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("-----> data: \(data)")
+            print("-----> error: \(error)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("-----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("-----2> responseJSON: \(responseJSON)")
+                self.receivedResponse = responseJSON
+                
+                
+                var receivedJSON = responseJSON["document"] as! [String:Any]
+                var receivedHASH: String = receivedJSON["password"] as! String
+                
+                // control mechanism to check collection type
+                if (collection == "students") {
+                    name = receivedJSON["name"] as! String
+                    sirname = receivedJSON["sirname"] as! String
+                    var tempID = receivedJSON["student_id"] as! Int
+                    studentId = "\(tempID)"
+                }
+                // rest of columns
+             
+                self.profileInfoDone = true
+            }
+            
+        }
+        
+        task.resume()
+        
+        // Necessary for the program to wait until the whole request is received
+        repeat {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        } while !profileInfoDone
+        
+        repeat{
+            
+        } while receivedHASHDone == ""
+        print("Here")
+    }
     
     // Write the given dictionary to the db
     func createLesson(lesson: NSDictionary){

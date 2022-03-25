@@ -25,13 +25,13 @@ struct Profile: View{
                 HStack {
                     Text("Name").bold()
                     Spacer()
-                    Text("\(UserDefaults.standard.string(forKey: "Name")!)")
+                    Text("\(name)")
                 }.padding([.leading, .trailing], 20)
                 
                 HStack {
                     Text("Surname").bold()
                     Spacer()
-                    Text("\(UserDefaults.standard.string(forKey: "Surname")!)")
+                    Text("\(sirname)")
                 }.padding([.leading, .trailing], 20)
                 
                 HStack {
@@ -43,7 +43,7 @@ struct Profile: View{
                 HStack {
                     Text("Student ID").bold()
                     Spacer()
-                    Text("\(UserDefaults.standard.string(forKey: "Student ID")!)")
+                    Text("\(studentId)")
                 }.padding([.leading, .trailing], 20)
                 
                 Spacer()
