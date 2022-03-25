@@ -39,7 +39,7 @@ struct CreateEvent: View {
             
             Spacer()
             
-            Text("Create Lesson")
+            Text("Create Event")
                 .bold()
                 .font(.title)
             
