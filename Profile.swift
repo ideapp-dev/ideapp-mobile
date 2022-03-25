@@ -19,80 +19,105 @@ struct Profile: View{
     @State var updated: Bool = false
     
     var body: some View {
-        VStack {
         
-            Text("Email").bold()
-            Text("\(UserDefaults.standard.string(forKey: "Email")!)")
-            
-            Button(action: {
-                    UserDefaults.standard.set(false, forKey: "Token")
-                    UserDefaults.standard.set("", forKey: "Email")
-                
-                    showHomeScreen = false
-                
-                    updated = false
-                            
-                    }, label: {
+        VStack {
+            VStack {
                 HStack {
+                    Text("Name").bold()
                     Spacer()
-                    Text("Logout")
-                        .foregroundColor(.white)
+                    Text("\(UserDefaults.standard.string(forKey: "Name")!)")
+                }.padding([.leading, .trailing], 20)
+                
+                HStack {
+                    Text("Surname").bold()
                     Spacer()
-                }.padding()
-                    .background(Color.blue)
-                    .cornerRadius(5.0)
-                    }).padding()
+                    Text("\(UserDefaults.standard.string(forKey: "Surname")!)")
+                }.padding([.leading, .trailing], 20)
+                
+                HStack {
+                    Text("Email").bold()
+                    Spacer()
+                    Text("\(UserDefaults.standard.string(forKey: "Email")!)")
+                }.padding([.leading, .trailing], 20)
+                
+                HStack {
+                    Text("Student ID").bold()
+                    Spacer()
+                    Text("\(UserDefaults.standard.string(forKey: "Student ID")!)")
+                }.padding([.leading, .trailing], 20)
+                
+                Spacer()
+                
+                Button(action: {
+                        UserDefaults.standard.set(false, forKey: "Token")
+                        UserDefaults.standard.set("", forKey: "Email")
+                    
+                        showHomeScreen = false
+                    
+                        updated = false
+                                
+                        }, label: {
+                    HStack {
+                        Spacer()
+                        Text("Logout")
+                            .foregroundColor(.white)
+                        Spacer()
+                    }.padding()
+                        .background(Color.blue)
+                        .cornerRadius(5.0)
+                        }).padding()
 
-        }.toolbar {
-            // 2.
-            ToolbarItem(placement: .bottomBar) {
-                // 3.
-                HStack() {
-                    
-                    Button(action: {
-                        self.showEvents = false
-                        self.showLessons = true
-                        self.showProfile = false
-                    }, label: {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "text.book.closed")
-                            Text("Lessons")
-                                .foregroundColor(.blue)
-                            Spacer()
-                        }.cornerRadius(5.0)
-                    })
-                    
-                    Button(action: {
-                        self.showEvents = true
-                        self.showLessons = false
-                        self.showProfile = false
-                    }, label: {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "calendar")
-                            Text("Events")
-                                .foregroundColor(.blue)
-                            Spacer()
-                        }.cornerRadius(5.0)
-                    })
-                    Button(action: {
-                        self.showEvents = false
-                        self.showLessons = false
-                        self.showProfile = true
-                    }, label: {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "person.crop.circle")
-                            Text("Profile")
-                                .foregroundColor(.blue)
-                            Spacer()
-                        }.cornerRadius(5.0)
-                    })
-                    
-                    
+            }.toolbar {
+                // 2.
+                ToolbarItem(placement: .bottomBar) {
+                    // 3.
+                    HStack() {
+                        
+                        Button(action: {
+                            self.showEvents = false
+                            self.showLessons = true
+                            self.showProfile = false
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "text.book.closed")
+                                Text("Lessons")
+                                    .foregroundColor(.blue)
+                                Spacer()
+                            }.cornerRadius(5.0)
+                        })
+                        
+                        Button(action: {
+                            self.showEvents = true
+                            self.showLessons = false
+                            self.showProfile = false
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "calendar")
+                                Text("Events")
+                                    .foregroundColor(.blue)
+                                Spacer()
+                            }.cornerRadius(5.0)
+                        })
+                        Button(action: {
+                            self.showEvents = false
+                            self.showLessons = false
+                            self.showProfile = true
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "person.crop.circle")
+                                Text("Profile")
+                                    .foregroundColor(.blue)
+                                Spacer()
+                            }.cornerRadius(5.0)
+                        })
+                        
+                        
+                    }
                 }
-            }
+            }.padding(.top, 20)
         }
 
     }

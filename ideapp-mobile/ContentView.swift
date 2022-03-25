@@ -144,15 +144,30 @@ struct ContentView: View {
         UserDefaults.standard.set(true, forKey: "Token")
         UserDefaults.standard.set(0, forKey: "Type")
         
+        print("Setting test1 to the UserDefaults.standard")
+        UserDefaults.standard.set("test1", forKey: "Name")
+        
+        print("Setting test1 to the UserDefaults.standard")
+        UserDefaults.standard.set("test1", forKey: "Surname")
+        
         print("Setting test1@etu.edu.tr to the UserDefaults.standard")
         UserDefaults.standard.set("test1@etu.edu.tr", forKey: "Email")
+        
+        print("Setting 161101064 to the UserDefaults.standard")
+        UserDefaults.standard.set("161101064", forKey: "Student ID")
         
         // Until here
         
         var isAuthorized: Bool = UserDefaults.standard.bool(forKey: "Token")
     
         if isAuthorized == true{
+            var userName: String = UserDefaults.standard.string(forKey: "Name")!
+            
+            var userSurname: String = UserDefaults.standard.string(forKey: "Surname")!
+            
             var userMail: String = UserDefaults.standard.string(forKey: "Email")!
+            
+            var userStudentId: String = UserDefaults.standard.string(forKey: "Student ID")!
 
             _showLogin = State(initialValue: false) // normalle false
             _showHomeScreen = State(initialValue: true)
