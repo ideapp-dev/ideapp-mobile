@@ -168,10 +168,12 @@ struct ContentView: View {
                 print("Instructor")
                 manager.retrieveStudentLessons(mail: userMail, type: "Instructor")
                 manager.profileInfo(collection: "Instructor")
+                // manager.retrieveExamDetails(mail: userMail, type: "Instructor")
             }else{
                 print("Student")
                 manager.retrieveStudentLessons(mail: userMail, type: "students")
                 manager.profileInfo(collection: "students")
+                manager.retrieveExamDetails(mail: userMail, type: "students")
             }
             
             checkLessons()
@@ -180,19 +182,20 @@ struct ContentView: View {
     }
     
     var body: some View {
-
         
-         return Group {
-         
-             if showLogin == true && showHomeScreen == false {
-                 Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-             }
-             else if showLogin == false && showHomeScreen == false{
-                 Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-             }else{
-                 HomeScreen(showHomeScreen: $showHomeScreen)
-             }
-         }
+        return Grades()
+        
+//         return Group {
+//
+//             if showLogin == true && showHomeScreen == false {
+//                 Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+//             }
+//             else if showLogin == false && showHomeScreen == false{
+//                 Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+//             }else{
+//                 HomeScreen(showHomeScreen: $showHomeScreen)
+//             }
+//         }
         
 
          
@@ -223,6 +226,8 @@ class DataPost: ObservableObject {
     var retrieveStudentLessonName: Bool = false
     var retrieveStudentLessonDone: Bool = false
     var retrieveStudentLessonDetails: Bool = false
+    
+    var retrieveExamDetails: Bool = false
     
     var profileInfoDone = false
     
@@ -670,6 +675,110 @@ class DataPost: ObservableObject {
 
     }
     
+    
+    
+    
+    
+    
+    func retrieveExamDetails(mail:String, type:String) {
+//        if (type == "Instructor") {
+//            // instructor section
+//            print("Exam details are being retrieved")
+//            // do nothing for now
+//        } else {
+//            // student section
+//            print("Exam details are being retrieved")
+//            
+//            // grade retrieval part
+//            print("retireveExamDetails - \(mail) \(type)")
+//            
+//            let body: [String: Any] = ["collection": "Exam",
+//                                       "database": "ideapp",
+//                                       "dataSource": "ProjectCluster",
+//                                       // "filter": "scores"
+//                                    ]
+//            
+//            let jsonData = try? JSONSerialization.data(withJSONObject: body)
+//        
+//            print("retireveExamDetails -----> body: \(body)")
+//            print("retireveExamDetails -----> jsonData: \(jsonData)")
+//            
+//            let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/find")!
+//            var request = URLRequest(url: url)
+//            request.httpMethod = "POST"
+//            //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//            request.setValue("application/json", forHTTPHeaderField: "Accept")
+//            request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+//            request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+//            request.httpBody = jsonData
+//
+//            
+//            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//                print("retireveExamDetails -----> data: \(data)")
+//                print("retireveExamDetails -----> error: \(error)")
+//                
+//                guard let data = data, error == nil else {
+//                    print(error?.localizedDescription ?? "No data")
+//                    return
+//                }
+//                
+//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//                print("retireveExamDetails -----1> responseJSON: \(responseJSON)")
+//                if let responseJSON = responseJSON as? [String: Any] {
+//                    print("-----2> responseJSON: \(responseJSON)")
+//                    self.receivedResponse = responseJSON
+//                    
+//                    
+//                    print("retireveExamDetails - receivedResponse \(self.receivedResponse)")
+//                    
+////                    var receivedJSON = responseJSON["document"] as! [String:Any]
+////
+////                    var jsonColumn = "exam_scores"
+////                    if type == "Instructor" {
+////                        jsonColumn = "lessons_given"
+////                    }else{
+////                        if receivedJSON.keys.contains("lessons_taken"){
+////                            jsonColumn = "lessons_taken"
+////                        }
+////                    }
+////
+////                    var takenLessons: [String] = receivedJSON[jsonColumn] as! [String]
+////
+////                    var takenLessonsCount: Int = takenLessons.count
+////                    var currentlyAdded: Int = 1
+////
+////                    for lesson in takenLessons{
+////                        print("Adding lesson name \(lesson) to studentLessonNames")
+////                        studentLessonNames.append(lesson)
+////                        currentlyAdded += 1
+////                    }
+////
+////                    if currentlyAdded >= takenLessonsCount {
+////                        self.retrieveStudentLessonName = true
+////                    }
+////
+//                }
+//                
+//            }
+//            
+//            task.resume()
+//            
+//            
+//            repeat {
+//                RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+//            } while !retrieveExamDetails
+//
+//        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     func retrieveStudentLessons(mail:String, type:String){
         
         print("retrieveStudentLessons - \(mail) \(type)")
@@ -694,7 +803,6 @@ class DataPost: ObservableObject {
         request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
         request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
         request.httpBody = jsonData
-        
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
