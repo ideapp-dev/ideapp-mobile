@@ -127,13 +127,8 @@ struct Lessons: View {
                             Spacer()
                         }.cornerRadius(5.0)
                     })
-                    
-                    
                 }
             }
         }
-        
-        
     }
-    
 }

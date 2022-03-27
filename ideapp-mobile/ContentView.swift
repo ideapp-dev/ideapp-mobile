@@ -141,11 +141,13 @@ struct ContentView: View {
         // Delete the following after testing
         // test1@etu.edu.tr
         
+
         UserDefaults.standard.set(true, forKey: "Token")
         UserDefaults.standard.set(0, forKey: "Type")
         
         print("Setting test1@etu.edu.tr to the UserDefaults.standard")
         UserDefaults.standard.set("test1@etu.edu.tr", forKey: "Email")
+        
         
         // Until here
         
@@ -249,8 +251,8 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            print("profileInfo-----> data: \(data)")
+            print("profileInfo-----> error: \(error)")
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -258,9 +260,9 @@ class DataPost: ObservableObject {
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
+            print("profileInfo-----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                print("profileInfo-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 
                 
@@ -271,8 +273,20 @@ class DataPost: ObservableObject {
                 if (collection == "students") {
                     name = receivedJSON["name"] as! String
                     sirname = receivedJSON["sirname"] as! String
-                    var tempID = receivedJSON["student_id"] as! Int
-                    studentId = "\(tempID)"
+                    // var tempID = receivedJSON["student_id"] as! String
+                    
+                    var tempString: String = ""
+                    
+                    if receivedJSON["student_id"] is String {
+                        tempString = receivedJSON["student_id"] as! String
+                    }else if receivedJSON["student_id"] is Int {
+                        var tempID: Int = receivedJSON["student_id"] as! Int
+                        tempString = "\(tempID)"
+                    }
+                    
+                    print("profileInfo -> \(tempString)")
+
+                    studentId = tempString
                 }
                 // rest of columns
              
@@ -478,7 +492,6 @@ class DataPost: ObservableObject {
             
                 
                 if let tempAuthValue = BCryptSwift.verifyPassword(givenPassword, matchesHash: receivedHASH){
-                    
                     self.isAuthorized = tempAuthValue
                     self.loginDone = true
                 }else{
@@ -502,9 +515,11 @@ class DataPost: ObservableObject {
         
         print("return isAuthorized function \(self.isAuthorized)")
         
+        /*
         repeat{
             
         } while receivedHASHDone == ""
+        */
         
         return isAuthorized
     }
@@ -704,8 +719,8 @@ class DataPost: ObservableObject {
         
         
         
-        print("-----> body: \(body)")
-        print("-----> jsonData: \(jsonData)")
+        print("retrieveLessonDetails -----> body: \(body)")
+        print("retrieveLessonDetails -----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -720,55 +735,74 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            print("retrieveLessonDetails -----> data: \(data)")
+            print("retrieveLessonDetails -----> error: \(error)")
+            print("retrieveLessonDetails -----> response: \(response)")
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 return
             }
             
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
-            if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
-                self.receivedResponse = responseJSON
-                
-                
-                print("receivedResponse \(self.receivedResponse)")
-                
-                var receivedJSON = responseJSON["document"] as! [String:Any]
-                
-                var lessonId = receivedJSON["_id"] as! String
-                var lessonName = receivedJSON["name"] as! String
-                var lessonCredit = receivedJSON["credit"] as! Int
-                var lessonFaculty = receivedJSON["faculty"] as! String
-                var lessonSemester = receivedJSON["semester"] as! String
-                var lessonInstructor = receivedJSON["instructor"] as! String
-                var eventTime: [String:NSNumber] = receivedJSON["time"] as! [String:NSNumber]
-                
-                var day:Int = 0
-                var time:Int = 0
-                
-                var dayTime: [Int: Int] = [:]
-                
-                print("Adding lesson with name \(lessonName)")
-                
-                for (key, value) in eventTime {
-                    print("key: \(key) & value: \(value)")
-                    
-                    day = (key as NSString).integerValue
-                    time = value.intValue
-                    dayTime[day] = time
-                }
-                
-                studentLessons.append(SingleLesson(id: lessonId, name: lessonName, credit: lessonCredit, faculty: lessonFaculty, semester: lessonSemester, instructor: lessonInstructor, time: dayTime))
-                
+            guard let response = response else{
                 self.retrieveStudentLessonDetails = true
-                
-                
+                return
             }
             
+
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
+                var httpCode = httpResponse.statusCode
+                
+                if httpCode == 400 || httpCode == 401 || httpCode == 404 {
+                    self.retrieveStudentLessonDetails = true
+                    return
+                }
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
+            
+            if self.receivedResponse != nil {
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
+                    self.receivedResponse = responseJSON
+                    
+                    
+                    print("receivedResponse \(self.receivedResponse)")
+                    
+                    var receivedJSON = responseJSON["document"] as! [String:Any]
+                    
+                    var lessonId = receivedJSON["_id"] as! String
+                    var lessonName = receivedJSON["name"] as! String
+                    var lessonCredit = receivedJSON["credit"] as! Int
+                    var lessonFaculty = receivedJSON["faculty"] as! String
+                    var lessonSemester = receivedJSON["semester"] as! String
+                    var lessonInstructor = receivedJSON["instructor"] as! String
+                    var eventTime: [String:NSNumber] = receivedJSON["time"] as! [String:NSNumber]
+                    
+                    var day:Int = 0
+                    var time:Int = 0
+                    
+                    var dayTime: [Int: Int] = [:]
+                    
+                    print("Adding lesson with name \(lessonName)")
+                    
+                    for (key, value) in eventTime {
+                        print("key: \(key) & value: \(value)")
+                        
+                        day = (key as NSString).integerValue
+                        time = value.intValue
+                        dayTime[day] = time
+                    }
+                    
+                    studentLessons.append(SingleLesson(id: lessonId, name: lessonName, credit: lessonCredit, faculty: lessonFaculty, semester: lessonSemester, instructor: lessonInstructor, time: dayTime))
+                    self.retrieveStudentLessonDetails = true
+                }
+            }else{
+                self.retrieveStudentLessonDetails = true
+            }
         }
         
         task.resume()

@@ -90,8 +90,9 @@ struct Events: View {
                     }
             .sheet(isPresented: $showCreateEvent, content: {
                         CreateEvent(showCreateEvent: $showCreateEvent, updated: $updated)
-            })
-            
+            }).padding()
+                        
+
             Spacer()
 
             

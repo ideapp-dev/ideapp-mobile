@@ -40,11 +40,14 @@ struct Profile: View{
                     Text("\(UserDefaults.standard.string(forKey: "Email")!)")
                 }.padding([.leading, .trailing], 20)
                 
-                HStack {
-                    Text("Student ID").bold()
-                    Spacer()
-                    Text("\(studentId)")
-                }.padding([.leading, .trailing], 20)
+                if type == 0 {
+                    HStack {
+                        Text("Student ID").bold()
+                        Spacer()
+                        Text("\(studentId)")
+                    }.padding([.leading, .trailing], 20)
+                }
+                
                 
                 Spacer()
                 
