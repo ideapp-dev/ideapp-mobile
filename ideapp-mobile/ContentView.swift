@@ -445,7 +445,11 @@ class DataPost: ObservableObject {
     // Login the user depending on the inputs given
     func login(user: NSDictionary, collection: String) -> Bool{
         
-        
+        if collection == "Instructor" {
+            type = 1
+        }else{
+            type = 0
+        }
         
         let body: [String: Any] = ["collection": collection,
                                    "database": "ideapp",
@@ -519,7 +523,7 @@ class DataPost: ObservableObject {
                     if let tempAuthValue = BCryptSwift.verifyPassword(givenPassword, matchesHash: receivedHASH){
                         self.isAuthorized = tempAuthValue
                         
-                        if tempAuthValue == false{ 
+                        if tempAuthValue == false{
                             self.errorMessagePassword = "Wrong password"
                             print("login -----> errorMessagePassword \(self.errorMessagePassword)")
                         }
