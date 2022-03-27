@@ -21,6 +21,22 @@ struct Profile: View{
     var body: some View {
         
         VStack {
+            
+            VStack (alignment: .leading){
+                if type == 0{
+                    Text("Student")
+                        .font(.system(size: 30))
+                        .bold()
+                        .padding()
+                }else{
+                    Text("Instructor")
+                        .font(.system(size: 30))
+                        .bold()
+                        .padding()
+                }
+                
+            }
+            
             VStack {
                 HStack {
                     Text("Name").bold()
