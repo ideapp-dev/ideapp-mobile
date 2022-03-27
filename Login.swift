@@ -18,6 +18,9 @@ struct Login: View {
     @Binding var showHomeScreen: Bool
     @State var manager = DataPost()
     
+    @State var errorMail = ""
+    @State var errorPassword = ""
+    
     var body: some View {
         
         
@@ -42,13 +45,25 @@ struct Login: View {
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(5.0)
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+            
+            if errorMail != "" {
+                Text("\(errorMail)")
+            }
+            
             SecureField("Password",text: $password)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(5.0)
             
+            if errorPassword != "" {
+                Text("\(errorPassword)")
+            }
+            
             Button(action: {
                 //var username = email.components(separatedBy: "@")[0]
+                
                 
                 var currentCollection: String = "students"
                 
@@ -58,6 +73,12 @@ struct Login: View {
                 
                 var entityToInsert: NSDictionary = ["email":email, "password": password]
                 var isAuthorized = manager.login(user: entityToInsert, collection: currentCollection)
+                
+                errorMail = manager.errorMessageMail
+                errorPassword = manager.errorMessagePassword
+                
+                manager.errorMessageMail = ""
+                manager.errorMessagePassword = ""
                 
                 print("Result of isAuthorized is \(isAuthorized)")
                 

@@ -53,10 +53,12 @@ struct Register: View {
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
+                    .textInputAutocapitalization(.never)
                 TextField("Password",text: $password)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
+                    .textInputAutocapitalization(.never)
                 
                 if type == 0 {
                     TextField("Student ID",text: $studentId)

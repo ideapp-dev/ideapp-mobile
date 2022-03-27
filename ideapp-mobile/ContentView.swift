@@ -34,6 +34,8 @@ var studentLessonNames: [String] = []
 var dayNumber: Int = 1
 var hourNumber: Int = 1
 
+
+
 var type = 0
 
 
@@ -437,8 +439,13 @@ class DataPost: ObservableObject {
         task.resume()
     }
     
+    var errorMessageMail: String = ""
+    var errorMessagePassword: String = ""
+    
     // Login the user depending on the inputs given
     func login(user: NSDictionary, collection: String) -> Bool{
+        
+        
         
         let body: [String: Any] = ["collection": collection,
                                    "database": "ideapp",
@@ -449,9 +456,9 @@ class DataPost: ObservableObject {
         
         var receivedHASHDone = ""
         
-        print("-----> user: \(user)")
-        print("-----> body: \(body)")
-        print("-----> jsonData: \(jsonData)")
+        print("login -----> user: \(user)")
+        print("login -----> body: \(body)")
+        print("login -----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -464,42 +471,79 @@ class DataPost: ObservableObject {
         request.httpBody = jsonData
         
         
+
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            print("login -----> data: \(data)")
+            print("login -----> error: \(error)")
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 return
             }
             
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
-            if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
-                self.receivedResponse = responseJSON
+            if let httpResponse = response as? HTTPURLResponse {
+                print("login -----> httpResponse.statusCode \(httpResponse.statusCode)")
+                var httpCode = httpResponse.statusCode
                 
-                
-                var receivedJSON = responseJSON["document"] as! [String:Any]
-                var receivedHASH: String = receivedJSON["password"] as! String
-                
-                receivedHASHDone = receivedHASH
-                
-                var givenPassword: String = user["password"] as! String
-                
-                print("givenPassword \(givenPassword) & receivedHASH \(receivedHASH)")
-            
-                
-                if let tempAuthValue = BCryptSwift.verifyPassword(givenPassword, matchesHash: receivedHASH){
-                    self.isAuthorized = tempAuthValue
-                    self.loginDone = true
-                }else{
+                if httpCode == 400 || httpCode == 401 || httpCode == 404 {
+                    
+                    self.errorMessageMail = "mail you entered wasn't found"
+                    
                     self.isAuthorized = false
                     self.loginDone = true
+                    
+                    return
                 }
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+
+            
+            print("login -----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("login -----2> responseJSON: \(responseJSON)")
+                self.receivedResponse = responseJSON
                 
-                print("isAuthorized function \(self.isAuthorized)")
+                if let receivedJSON = responseJSON["document"] as? [String:Any]{
+                    //var receivedJSON = responseJSON["document"] as! [String:Any]
+                    var receivedHASH: String = receivedJSON["password"] as! String
+                    
+                    receivedHASHDone = receivedHASH
+                    
+                    var givenPassword: String = user["password"] as! String
+                    
+                    print("givenPassword \(givenPassword) & receivedHASH \(receivedHASH)")
+                
+                    
+                    if let tempAuthValue = BCryptSwift.verifyPassword(givenPassword, matchesHash: receivedHASH){
+                        self.isAuthorized = tempAuthValue
+                        
+                        if tempAuthValue == false{ 
+                            self.errorMessagePassword = "Wrong password"
+                            print("login -----> errorMessagePassword \(self.errorMessagePassword)")
+                        }
+                        
+                        self.loginDone = true
+                    }else{
+                        self.errorMessagePassword = "Wrong password"
+                        print("login -----> errorMessageMail \(self.errorMessagePassword)")
+                        
+                        self.isAuthorized = false
+                        self.loginDone = true
+                    }
+                    
+                    print("isAuthorized function \(self.isAuthorized)")
+                }else{
+                    print("login -----> receivedJSON is null")
+                    self.errorMessageMail = "mail you entered wasn't found"
+                    print("login -----> errorMessageMail \(self.errorMessageMail)")
+                    
+                    self.isAuthorized = false
+                    self.loginDone = true
+                    
+                }
+            
                 
             }
             
@@ -748,8 +792,6 @@ class DataPost: ObservableObject {
                 self.retrieveStudentLessonDetails = true
                 return
             }
-            
-
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
