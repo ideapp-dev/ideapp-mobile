@@ -20,11 +20,14 @@ struct Lessons: View {
     var body: some View {
         VStack{
             VStack (alignment: .leading){
-                Text("Your lessons")
-                    .font(.system(size: 30))
-                    .bold()
-                    .padding()
-            
+                HStack {
+                    Spacer()
+                    Text("Your lessons")
+                        .font(.system(size: 30))
+                        .bold()
+                        .padding()
+                    Spacer()
+                }
             }
             
             
