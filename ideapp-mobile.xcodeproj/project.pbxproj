@@ -10,6 +10,7 @@
 		36BBE7EC8FABDFE2A908025E /* Pods_ideapp_mobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EAE358C9BC802416CAB280 /* Pods_ideapp_mobileTests.framework */; };
 		6D32F3C7A0FA40AFB9AAB79C /* Pods_ideapp_mobile_ideapp_mobileUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E7E0A32F7DED2F4F2D4BD3 /* Pods_ideapp_mobile_ideapp_mobileUITests.framework */; };
 		9DC69D3827F0A6760009BBB3 /* Grades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC69D3727F0A6760009BBB3 /* Grades.swift */; };
+		CB0B2845280B0306004AE52E /* exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0B2844280B0306004AE52E /* exam.swift */; };
 		CB2B81B927D244C600994C83 /* lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2B81B827D244C600994C83 /* lesson.swift */; };
 		CB32B54627BC13FE00B6181E /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32B54527BC13FE00B6181E /* event.swift */; };
 		CB50495127E4DABC000F1518 /* Pods_ideapp_mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F036DB3688476CDC880686 /* Pods_ideapp_mobile.framework */; };
@@ -54,6 +55,7 @@
 		919C9F748F68F4153DD08FE5 /* Pods-ideapp-mobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ideapp-mobileTests.release.xcconfig"; path = "Target Support Files/Pods-ideapp-mobileTests/Pods-ideapp-mobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		98F036DB3688476CDC880686 /* Pods_ideapp_mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ideapp_mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DC69D3727F0A6760009BBB3 /* Grades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades.swift; sourceTree = "<group>"; };
+		CB0B2844280B0306004AE52E /* exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exam.swift; sourceTree = "<group>"; };
 		CB2B81B827D244C600994C83 /* lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lesson.swift; sourceTree = "<group>"; };
 		CB32B54527BC13FE00B6181E /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
 		CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLesson.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				CBE295BF27E4DE4D004AED57 /* HomeScreen.swift */,
 				CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */,
 				CB2B81B827D244C600994C83 /* lesson.swift */,
+				CB0B2844280B0306004AE52E /* exam.swift */,
 				CB32B54527BC13FE00B6181E /* event.swift */,
 				CBEA29E527ABDCA200B87CF0 /* ideapp-mobile */,
 				CBEA29F627ABDCA300B87CF0 /* ideapp-mobileTests */,
@@ -448,6 +451,7 @@
 				CBE295BC27E4DCAA004AED57 /* CreateLesson.swift in Sources */,
 				CBE295C427E4DE8C004AED57 /* Register.swift in Sources */,
 				9DC69D3827F0A6760009BBB3 /* Grades.swift in Sources */,
+				CB0B2845280B0306004AE52E /* exam.swift in Sources */,
 				CBE295C627E4DEC4004AED57 /* Profile.swift in Sources */,
 				CB2B81B927D244C600994C83 /* lesson.swift in Sources */,
 				CBE295CA27E4DF17004AED57 /* CreateEvent.swift in Sources */,

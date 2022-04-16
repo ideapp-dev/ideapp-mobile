@@ -28,12 +28,14 @@ var studentId:String = ""
 var password:String = ""
 
 var studentEvents: [SingleEvent] = []
+var studentExam: [SingleExam] = []
 
 var studentLessons: [SingleLesson] = []
 var studentLessonNames: [String] = []
 var dayNumber: Int = 1
 var hourNumber: Int = 1
 
+var lessonIdName: [String:String] = [:]
 
 
 var type = 0
@@ -173,7 +175,7 @@ struct ContentView: View {
                 print("Student")
                 manager.retrieveStudentLessons(mail: userMail, type: "students")
                 manager.profileInfo(collection: "students")
-                manager.retrieveExamDetails(mail: userMail, type: "students")
+                //manager.retrieveExamDetails(mail: userMail, type: "students")
             }
             
             checkLessons()
@@ -181,21 +183,23 @@ struct ContentView: View {
         }
     }
     
+
+    
     var body: some View {
         
-        return Grades()
+
         
-//         return Group {
-//
-//             if showLogin == true && showHomeScreen == false {
-//                 Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-//             }
-//             else if showLogin == false && showHomeScreen == false{
-//                 Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
-//             }else{
-//                 HomeScreen(showHomeScreen: $showHomeScreen)
-//             }
-//         }
+         return Group {
+
+             if showLogin == true && showHomeScreen == false {
+                 Login(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+             }
+             else if showLogin == false && showHomeScreen == false{
+                 Register(showLogin: $showLogin, showHomeScreen: $showHomeScreen)
+             }else{
+                 HomeScreen(showHomeScreen: $showHomeScreen)
+             }
+         }
         
 
          
@@ -226,8 +230,9 @@ class DataPost: ObservableObject {
     var retrieveStudentLessonName: Bool = false
     var retrieveStudentLessonDone: Bool = false
     var retrieveStudentLessonDetails: Bool = false
+    var retrieveStudentExamDetails: Bool = false
     
-    var retrieveExamDetails: Bool = false
+    var retrieveExamDetailsControl: Bool = false
     
     var profileInfoDone = false
     
@@ -675,109 +680,7 @@ class DataPost: ObservableObject {
 
     }
     
-    
-    
-    
-    
-    
-    func retrieveExamDetails(mail:String, type:String) {
-//        if (type == "Instructor") {
-//            // instructor section
-//            print("Exam details are being retrieved")
-//            // do nothing for now
-//        } else {
-//            // student section
-//            print("Exam details are being retrieved")
-//            
-//            // grade retrieval part
-//            print("retireveExamDetails - \(mail) \(type)")
-//            
-//            let body: [String: Any] = ["collection": "Exam",
-//                                       "database": "ideapp",
-//                                       "dataSource": "ProjectCluster",
-//                                       // "filter": "scores"
-//                                    ]
-//            
-//            let jsonData = try? JSONSerialization.data(withJSONObject: body)
-//        
-//            print("retireveExamDetails -----> body: \(body)")
-//            print("retireveExamDetails -----> jsonData: \(jsonData)")
-//            
-//            let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/find")!
-//            var request = URLRequest(url: url)
-//            request.httpMethod = "POST"
-//            //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
-//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//            request.setValue("application/json", forHTTPHeaderField: "Accept")
-//            request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
-//            request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
-//            request.httpBody = jsonData
-//
-//            
-//            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//                print("retireveExamDetails -----> data: \(data)")
-//                print("retireveExamDetails -----> error: \(error)")
-//                
-//                guard let data = data, error == nil else {
-//                    print(error?.localizedDescription ?? "No data")
-//                    return
-//                }
-//                
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print("retireveExamDetails -----1> responseJSON: \(responseJSON)")
-//                if let responseJSON = responseJSON as? [String: Any] {
-//                    print("-----2> responseJSON: \(responseJSON)")
-//                    self.receivedResponse = responseJSON
-//                    
-//                    
-//                    print("retireveExamDetails - receivedResponse \(self.receivedResponse)")
-//                    
-////                    var receivedJSON = responseJSON["document"] as! [String:Any]
-////
-////                    var jsonColumn = "exam_scores"
-////                    if type == "Instructor" {
-////                        jsonColumn = "lessons_given"
-////                    }else{
-////                        if receivedJSON.keys.contains("lessons_taken"){
-////                            jsonColumn = "lessons_taken"
-////                        }
-////                    }
-////
-////                    var takenLessons: [String] = receivedJSON[jsonColumn] as! [String]
-////
-////                    var takenLessonsCount: Int = takenLessons.count
-////                    var currentlyAdded: Int = 1
-////
-////                    for lesson in takenLessons{
-////                        print("Adding lesson name \(lesson) to studentLessonNames")
-////                        studentLessonNames.append(lesson)
-////                        currentlyAdded += 1
-////                    }
-////
-////                    if currentlyAdded >= takenLessonsCount {
-////                        self.retrieveStudentLessonName = true
-////                    }
-////
-//                }
-//                
-//            }
-//            
-//            task.resume()
-//            
-//            
-//            repeat {
-//                RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
-//            } while !retrieveExamDetails
-//
-//        }
-    }
-    
-    
-    
-    
-    
-    
-    
+        
     
     func retrieveStudentLessons(mail:String, type:String){
         
@@ -832,6 +735,104 @@ class DataPost: ObservableObject {
                     if receivedJSON.keys.contains("lessons_taken"){
                         jsonColumn = "lessons_taken"
                     }
+                    
+                    if receivedJSON.keys.contains("exams"){
+                        print("!!!!Exams \(receivedJSON["exams"])")
+                        var examsTaken: NSArray = receivedJSON["exams"] as! NSArray
+                        print("!!!!examsTaken \(examsTaken)")
+                        
+                        for exam in examsTaken{
+                            var item: [String: Any] = exam as! [String: Any]
+                            
+                            var answers: [String] = item["answers"] as! [String]
+                            var scores: [Any] = item["score"] as! [Any]
+                            var scoresNew: [String] = []
+                            
+                            for object in scores {
+                                if object is NSNull {
+                                    scoresNew.append("not answered")
+                                } else {
+                                    scoresNew.append(object as! String)
+                                }
+                            }
+                            
+                            var id: String = item["exam_id"] as! String
+                            
+  
+                
+                            
+                            var paramsToSend: [String:Any] = ["answers": answers, "scores":scores, "id":id]
+                            
+                            let json: [String: Any] = ["collection": "Exam",
+                                                       "database": "ideapp",
+                                                       "dataSource": "ProjectCluster",
+                                                       "filter": ["_id": ["$oid":id] ]
+                                                    ]
+
+                                    let jsonData = try? JSONSerialization.data(withJSONObject: json)
+
+                                    // create post request
+                                    let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+                                    var request = URLRequest(url: url)
+                                    request.httpMethod = "POST"
+                                    request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+                                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                                    request.setValue("application/json", forHTTPHeaderField: "Accept")
+                                    request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+                                    request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+
+                                    // insert json data to the request
+                                    request.httpBody = jsonData
+
+                                    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                                        guard let data = data, error == nil else {
+                                            print(error?.localizedDescription ?? "No data")
+                                            self.retrieveStudentExamDetails = true
+                                            return
+                                        }
+                                        let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                                        if let responseJSON = responseJSON as? [String: Any] {
+                                            self.receivedResponse = responseJSON
+                                            self.retrieveStudentExamDetails = true
+                                            
+                                            var receivedJSON = responseJSON["document"] as! [String:Any]
+                                            
+                                            var lesson_id = receivedJSON["lesson_id"] as! String
+                                            var questions = receivedJSON["questions"] as! [String]
+                                            var end_time = receivedJSON["end_time"] as! String
+                                            var start_time = receivedJSON["start_time"] as! String
+                                            var name = receivedJSON["name"] as! String
+                                            
+                                            
+                                            studentExam.append(SingleExam(id: name, lesson_id: lesson_id, questions: questions, answers: answers, score: scoresNew, name: name, start_time: start_time, end_time: end_time))
+                                            
+                                            print("!!!!answers \(answers)")
+                                            print("!!!!scores \(scoresNew)")
+                                            print("!!!!id \(id)")
+                                            print("StudentExam is \(studentExam)")
+                                            
+                                        }
+                                    }
+
+                                    task.resume()
+                            
+
+                            
+                            //self.retrieveExamDetails(name:id, answerParam: answers, scoreParam: scoresNew)
+                        }
+                        
+                        
+                        /*
+                        var takenLessonsCount: Int = takenLessons.count
+                        var currentlyAdded: Int = 1
+                        
+                        for lesson in takenLessons{
+                            print("Adding lesson name \(lesson) to studentLessonNames")
+                            studentLessonNames.append(lesson)
+                            currentlyAdded += 1
+                        }
+                        */
+                    }
                 }
                 
                 var takenLessons: [String] = receivedJSON[jsonColumn] as! [String]
@@ -859,6 +860,139 @@ class DataPost: ObservableObject {
         repeat {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
         } while !retrieveStudentLessonName
+
+    }
+    
+    func retrieveExamDetails(name:String, answerParam:[String], scoreParam:[String]){
+        
+
+        let json: [String: Any] = ["collection": "Exam",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                   "filter": ["_id": ["$oid":"name"] ]
+                                ]
+
+                let jsonData = try? JSONSerialization.data(withJSONObject: json)
+
+                // create post request
+                let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("application/json", forHTTPHeaderField: "Accept")
+                request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+                request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+
+                // insert json data to the request
+                request.httpBody = jsonData
+        
+                print("retrieveExamDetails")
+
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print(error?.localizedDescription ?? "No data")
+                        self.retrieveStudentExamDetails = true
+                        return
+                    }
+                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                    if let responseJSON = responseJSON as? [String: Any] {
+                        print("retrieveExamDetails \(responseJSON)")
+                        self.receivedResponse = responseJSON
+                        print("retrieveExamDetails \(self.receivedResponse)") //Code after Successfull POST Request
+                        self.retrieveStudentExamDetails = true
+                        
+                    }
+                }
+
+                task.resume()
+        
+
+        
+        /*
+         
+         let body: [String: Any] = ["collection": "Exam",
+                                    "database": "ideapp",
+                                    "dataSource": "ProjectCluster",
+                                    "filter": ["_id": ["$oid":"name"] ]
+                                 ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        
+        print("retrieveLessonDetails -----> body: \(body)")
+        print("retrieveLessonDetails -----> jsonData: \(jsonData)")
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("retrieveLessonDetails -----> data: \(data)")
+            print("retrieveLessonDetails -----> error: \(error)")
+            print("retrieveLessonDetails -----> response: \(response)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
+                var httpCode = httpResponse.statusCode
+                
+                if httpCode == 400 || httpCode == 401 || httpCode == 404 {
+                    self.retrieveStudentExamDetails = true
+                    return
+                }
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
+            
+            if self.receivedResponse != nil {
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
+                    self.receivedResponse = responseJSON
+                    
+                    
+                    print("receivedResponse \(self.receivedResponse)")
+                    
+                    var receivedJSON = responseJSON["document"] as! [String:Any]
+                    
+                    var questions = receivedJSON["questions"] as! [String]
+                    var end_time = receivedJSON["end_time"] as! String
+                    var start_time = receivedJSON["start_time"] as! String
+                    var name = receivedJSON["name"] as! String
+                    
+                    var answers: [String] = []
+
+
+                    studentExam.append(SingleExam(id: name, questions: questions, answers: answerParam, score: scoreParam, name: name, start_time: start_time, end_time: end_time))
+                    print("Exam details studentExam \(studentExam)")
+                    self.retrieveStudentExamDetails = true
+                }
+            }else{
+                self.retrieveStudentExamDetails = true
+            }
+        }
+        
+        task.resume()
+        
+        
+        repeat {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        } while !retrieveStudentExamDetails
+        
+        */
 
     }
     
@@ -950,6 +1084,8 @@ class DataPost: ObservableObject {
                         time = value.intValue
                         dayTime[day] = time
                     }
+                    
+                    lessonIdName[lessonId] = lessonName
                     
                     studentLessons.append(SingleLesson(id: lessonId, name: lessonName, credit: lessonCredit, faculty: lessonFaculty, semester: lessonSemester, instructor: lessonInstructor, time: dayTime))
                     self.retrieveStudentLessonDetails = true

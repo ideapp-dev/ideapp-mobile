@@ -16,6 +16,7 @@ struct Lessons: View {
     @Binding var showProfile: Bool
     
     @Binding var showHomeScreen: Bool
+    @State var presentingModal = false
     
     var body: some View {
         VStack{
@@ -69,7 +70,20 @@ struct Lessons: View {
                 {
                     ForEach(studentLessons) {
                         item in if item.time[4] != nil{
-                            Text("\(item.name) at \(timeEnum[item.time[4]!]!)")
+                            
+                            
+                            /*
+                             @State var lessonName = "Bil 101"
+                             return Grades(lessonName: $lessonName)
+                             */
+
+                            Button("\(item.name) at \(timeEnum[item.time[4]!]!)") {
+                                self.presentingModal = true
+                                
+                            }
+                            .sheet(isPresented: $presentingModal) {
+                                Grades(lessonName: item.name, presentedAsModal: self.$presentingModal) }
+
                                 
                         }
                     }
