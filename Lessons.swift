@@ -39,7 +39,12 @@ struct Lessons: View {
                     
                     ForEach(studentLessons) {
                         item in if item.time[1] != nil{
-                            Text("\(item.name) at \(timeEnum[item.time[1]!]!)")
+                            Button("\(item.name) at \(timeEnum[item.time[1]!]!)") {
+                                self.presentingModal = true
+                                
+                            }
+                            .sheet(isPresented: $presentingModal) {
+                                Grades(lessonName: item.name, presentedAsModal: self.$presentingModal) }
                         }
                     }
                 }
@@ -49,7 +54,13 @@ struct Lessons: View {
                     
                     ForEach(studentLessons) {
                         item in if item.time[2] != nil{
-                            Text("\(item.name) at \(timeEnum[item.time[2]!]!)")
+                            
+                            Button("\(item.name) at \(timeEnum[item.time[2]!]!)") {
+                                self.presentingModal = true
+                                
+                            }
+                            .sheet(isPresented: $presentingModal) {
+                                Grades(lessonName: item.name, presentedAsModal: self.$presentingModal) }
                         }
                     }
                 }
@@ -60,7 +71,13 @@ struct Lessons: View {
                     
                     ForEach(studentLessons) {
                         item in if item.time[3] != nil{
-                            Text("\(item.name) at \(timeEnum[item.time[3]!]!)")
+                            
+                            Button("\(item.name) at \(timeEnum[item.time[3]!]!)") {
+                                self.presentingModal = true
+                                
+                            }
+                            .sheet(isPresented: $presentingModal) {
+                                Grades(lessonName: item.name, presentedAsModal: self.$presentingModal) }
                         }
                     }
                 }
@@ -71,12 +88,6 @@ struct Lessons: View {
                     ForEach(studentLessons) {
                         item in if item.time[4] != nil{
                             
-                            
-                            /*
-                             @State var lessonName = "Bil 101"
-                             return Grades(lessonName: $lessonName)
-                             */
-
                             Button("\(item.name) at \(timeEnum[item.time[4]!]!)") {
                                 self.presentingModal = true
                                 
@@ -84,7 +95,6 @@ struct Lessons: View {
                             .sheet(isPresented: $presentingModal) {
                                 Grades(lessonName: item.name, presentedAsModal: self.$presentingModal) }
 
-                                
                         }
                     }
                 }
@@ -92,7 +102,13 @@ struct Lessons: View {
                 {
                     ForEach(studentLessons) {
                         item in if item.time[5] != nil{
-                            Text("\(item.name) at \(timeEnum[item.time[5]!]!)")
+                            
+                            Button("\(item.name) at \(timeEnum[item.time[5]!]!)") {
+                                self.presentingModal = true
+                                
+                            }
+                            .sheet(isPresented: $presentingModal) {
+                                Grades(lessonName: item.name, presentedAsModal: self.$presentingModal) }
                                 
                         }
                     }
