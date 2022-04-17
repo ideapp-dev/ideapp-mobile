@@ -127,7 +127,7 @@ strip_invalid_archs() {
   binary="$1"
   warn_missing_arch=${2:-true}
   # Get architectures for current target binary
-  binary_archs="$(lipo -info "$binary" | rev | cut -d ':' -f1 | awk '{$1=$1;//print}' | rev)"
+  binary_archs="$(lipo -info "$binary" | rev | cut -d ':' -f1 | awk '{$1=$1;print}' | rev)"
   # Intersect them with the architectures we are building for
   intersected_archs="$(echo ${ARCHS[@]} ${binary_archs[@]} | tr ' ' '\n' | sort | uniq -d)"
   # If there are no archs supported by this binary then warn the user
