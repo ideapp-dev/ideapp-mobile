@@ -868,7 +868,7 @@ struct CreateEvent: View {
                 
                 for row in 1..<7 {
                   for column in 1..<8 {
-                    print("column: \(column) row: \(row) value:\(timeSelected[column][row])")
+                    //print("column: \(column) row: \(row) value:\(timeSelected[column][row])")
                       if timeSelected[column][row] {
                           time["\(column)"] = row
                       }
@@ -877,7 +877,7 @@ struct CreateEvent: View {
                 
                 var entityToInsert: NSDictionary = ["owner":UserDefaults.standard.string(forKey: "Email")!, "isCompleted":false, "name": name , "time":time]
                 
-                print("entityToInsert :\(entityToInsert)")
+                //print("entityToInsert :\(entityToInsert)")
                 manager.createEvent(event: entityToInsert)
                 
                 studentEvents.append(SingleEvent(id: manager.newId, name: name, time: time))

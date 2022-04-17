@@ -40,7 +40,7 @@ struct Events: View {
                     ForEach(studentEvents) {
                         item in if item.time["\(dayNumber)"] != nil{
                             Button {
-                                print("Button pressed")
+                                //print("Button pressed")
                                 studentEvents = studentEvents.filter { $0.name != item.name }
                                 self.updated = true
                                 
@@ -57,7 +57,7 @@ struct Events: View {
                     ForEach(studentEvents) {
                         item in if item.time["\(dayNumber+1)"] != nil{
                             Button {
-                                print("Button pressed")
+                                //print("Button pressed")
                                 studentEvents = studentEvents.filter { $0.name != item.name }
                                 self.updated = true
                                 

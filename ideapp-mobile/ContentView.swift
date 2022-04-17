@@ -113,7 +113,7 @@ struct ContentView: View {
                             var itemDay: Int = i+1
                             var newTime: [String:Int] = ["\(itemDay)":itemHour]
                             
-                            print("ContentViewEvents - studentEvents \(studentEvents)")
+                            //print("ContentViewEvents - studentEvents \(studentEvents)")
                             
                             studentEvents = studentEvents.filter { $0.id != item.id }
                             studentEvents.append(SingleEvent(id: item.id, name: item.name, time: newTime))
@@ -250,8 +250,8 @@ class DataPost: ObservableObject {
         
         var receivedHASHDone = ""
         
-        print("-----> body: \(body)")
-        print("-----> jsonData: \(jsonData)")
+        //print("-----> body: \(body)")
+        //print("-----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -266,18 +266,18 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("profileInfo-----> data: \(data)")
-            print("profileInfo-----> error: \(error)")
+            //print("profileInfo-----> data: \(data)")
+            //print("profileInfo-----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("profileInfo-----1> responseJSON: \(responseJSON)")
+            //print("profileInfo-----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("profileInfo-----2> responseJSON: \(responseJSON)")
+                //print("profileInfo-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 
                 
@@ -302,7 +302,7 @@ class DataPost: ObservableObject {
                         tempString = "\(tempID)"
                     }
                     
-                    print("profileInfo -> \(tempString)")
+                    //print("profileInfo -> \(tempString)")
 
                     studentId = tempString
                 }else if (collection == "Instructor") {
@@ -331,6 +331,7 @@ class DataPost: ObservableObject {
     
     // Write the given dictionary to the db
     func createLesson(lesson: NSDictionary){
+        print("Creating lesson")
         
         let body: [String: Any] = ["collection": "Lesson",
                                    "database": "ideapp",
@@ -338,7 +339,7 @@ class DataPost: ObservableObject {
                                    "document": lesson ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
-        print("createLesson body \(body)")
+        //print("createLesson body \(body)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/insertOne")!
         var request = URLRequest(url: url)
@@ -351,18 +352,18 @@ class DataPost: ObservableObject {
         request.httpBody = jsonData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("createLesson-----> data: \(data)")
-            print("createLesson-----> error: \(error)")
+            //print("createLesson-----> data: \(data)")
+            //print("createLesson-----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("createLesson-----1> responseJSON: \(responseJSON)")
+            //print("createLesson-----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("createLesson-----2> responseJSON: \(responseJSON)")
+                //print("createLesson-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 var currentResponse: [String:String] = responseJSON as! [String:String]
                 var createdId: String = currentResponse["insertedId"] as! String
@@ -397,18 +398,18 @@ class DataPost: ObservableObject {
         request.httpBody = jsonData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            //print("-----> data: \(data)")
+            //print("-----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
+            //print("-----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                //print("-----2> responseJSON: \(responseJSON)")
                 
                 self.newId = responseJSON["insertedId"] as! String
                 
@@ -447,18 +448,18 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            //print("-----> data: \(data)")
+            //print("-----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
+            //print("-----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                //print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 self.done = true
             }
@@ -493,18 +494,18 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("enrollToLesson -----> data: \(data)")
-            print("enrollToLesson -----> error: \(error)")
+            //print("enrollToLesson -----> data: \(data)")
+            //print("enrollToLesson -----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("enrollToLesson -----1> responseJSON: \(responseJSON)")
+            //print("enrollToLesson -----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                //print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 self.done = true
             }
@@ -540,18 +541,18 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("enrollToLesson -----> data: \(data)")
-            print("enrollToLesson -----> error: \(error)")
+            //print("enrollToLesson -----> data: \(data)")
+            //print("enrollToLesson -----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("enrollToLesson -----1> responseJSON: \(responseJSON)")
+            //print("enrollToLesson -----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                //print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 self.done = true
             }
@@ -582,9 +583,9 @@ class DataPost: ObservableObject {
         
         var receivedHASHDone = ""
         
-        print("login -----> user: \(user)")
-        print("login -----> body: \(body)")
-        print("login -----> jsonData: \(jsonData)")
+        //print("login -----> user: \(user)")
+        //print("login -----> body: \(body)")
+        //print("login -----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -600,16 +601,16 @@ class DataPost: ObservableObject {
 
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("login -----> data: \(data)")
-            print("login -----> error: \(error)")
+            //print("login -----> data: \(data)")
+            //print("login -----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("login -----> httpResponse.statusCode \(httpResponse.statusCode)")
+                //print("login -----> httpResponse.statusCode \(httpResponse.statusCode)")
                 var httpCode = httpResponse.statusCode
                 
                 if httpCode == 400 || httpCode == 401 || httpCode == 404 {
@@ -626,9 +627,9 @@ class DataPost: ObservableObject {
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
 
             
-            print("login -----1> responseJSON: \(responseJSON)")
+            //print("login -----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("login -----2> responseJSON: \(responseJSON)")
+                //print("login -----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 
                 if let receivedJSON = responseJSON["document"] as? [String:Any]{
@@ -639,7 +640,7 @@ class DataPost: ObservableObject {
                     
                     var givenPassword: String = user["password"] as! String
                     
-                    print("givenPassword \(givenPassword) & receivedHASH \(receivedHASH)")
+                    //print("givenPassword \(givenPassword) & receivedHASH \(receivedHASH)")
                 
                     
                     if let tempAuthValue = BCryptSwift.verifyPassword(givenPassword, matchesHash: receivedHASH){
@@ -647,23 +648,23 @@ class DataPost: ObservableObject {
                         
                         if tempAuthValue == false{
                             self.errorMessagePassword = "Wrong password"
-                            print("login -----> errorMessagePassword \(self.errorMessagePassword)")
+                            //print("login -----> errorMessagePassword \(self.errorMessagePassword)")
                         }
                         
                         self.loginDone = true
                     }else{
                         self.errorMessagePassword = "Wrong password"
-                        print("login -----> errorMessageMail \(self.errorMessagePassword)")
+                        //print("login -----> errorMessageMail \(self.errorMessagePassword)")
                         
                         self.isAuthorized = false
                         self.loginDone = true
                     }
                     
-                    print("isAuthorized function \(self.isAuthorized)")
+                    //print("isAuthorized function \(self.isAuthorized)")
                 }else{
-                    print("login -----> receivedJSON is null")
+                    //print("login -----> receivedJSON is null")
                     self.errorMessageMail = "mail you entered wasn't found"
-                    print("login -----> errorMessageMail \(self.errorMessageMail)")
+                    //print("login -----> errorMessageMail \(self.errorMessageMail)")
                     
                     self.isAuthorized = false
                     self.loginDone = true
@@ -683,7 +684,7 @@ class DataPost: ObservableObject {
         } while !loginDone
 
         
-        print("return isAuthorized function \(self.isAuthorized)")
+        //print("return isAuthorized function \(self.isAuthorized)")
         
         /*
         repeat{
@@ -707,8 +708,8 @@ class DataPost: ObservableObject {
         
         
         
-        print("-----> body: \(body)")
-        print("-----> jsonData: \(jsonData)")
+        //print("-----> body: \(body)")
+        //print("-----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/find")!
         var request = URLRequest(url: url)
@@ -723,18 +724,18 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            //print("-----> data: \(data)")
+            //print("-----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> retrieveEVents responseJSON: \(responseJSON)")
+            //print("-----1> retrieveEVents responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> retrieveEVents responseJSON: \(responseJSON)")
+                //print("-----2> retrieveEVents responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 
                 
@@ -757,7 +758,7 @@ class DataPost: ObservableObject {
                     var time: [String:Int] = [:]
                     
                     for (key, value) in eventTime {
-                        print("key: \(key) & value: \(value)")
+                        //print("key: \(key) & value: \(value)")
                         
                         day = (key as NSString).integerValue
                         hour = value.intValue
@@ -769,14 +770,14 @@ class DataPost: ObservableObject {
     
                 }
                 
-                print("studentEvents.count \(studentEvents.count)")
-                print("eventTime.count \(receivedJSON.count)")
+                //print("studentEvents.count \(studentEvents.count)")
+                //print("eventTime.count \(receivedJSON.count)")
                 if studentEvents.count == receivedJSON.count {
                     self.retrieveEventDone = true
                 }
                 
-                print("retrieveEvents \(receivedJSON)")
-                print("studentEvents \(studentEvents)")
+                //print("retrieveEvents \(receivedJSON)")
+                //print("studentEvents \(studentEvents)")
                 
                 
                 
@@ -796,7 +797,7 @@ class DataPost: ObservableObject {
     
     func retrieveStudentLessons(mail:String, type:String){
         
-        print("retrieveStudentLessons - \(mail) \(type)")
+        //print("retrieveStudentLessons - \(mail) \(type)")
         
         let body: [String: Any] = ["collection": type,
                                    "database": "ideapp",
@@ -806,8 +807,8 @@ class DataPost: ObservableObject {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
     
-        print("retrieveStudentLessons -----> body: \(body)")
-        print("retrieveStudentLessons -----> jsonData: \(jsonData)")
+        //print("retrieveStudentLessons -----> body: \(body)")
+        //print("retrieveStudentLessons -----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -821,22 +822,22 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("retrieveStudentLessons -----> data: \(data)")
-            print("retrieveStudentLessons -----> error: \(error)")
+            //print("retrieveStudentLessons -----> data: \(data)")
+            //print("retrieveStudentLessons -----> error: \(error)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("retrieveStudentLessons -----1> responseJSON: \(responseJSON)")
+            //print("retrieveStudentLessons -----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                //print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
                 
                 
-                print("retrieveStudentLessons - receivedResponse \(self.receivedResponse)")
+                //print("retrieveStudentLessons - receivedResponse \(self.receivedResponse)")
                 
                 var receivedJSON = responseJSON["document"] as! [String:Any]
                 
@@ -849,9 +850,9 @@ class DataPost: ObservableObject {
                     }
                     
                     if receivedJSON.keys.contains("exams"){
-                        print("!!!!Exams \(receivedJSON["exams"])")
+                        //print("!!!!Exams \(receivedJSON["exams"])")
                         var examsTaken: NSArray = receivedJSON["exams"] as! NSArray
-                        print("!!!!examsTaken \(examsTaken)")
+                        //print("!!!!examsTaken \(examsTaken)")
                         
                         for exam in examsTaken{
                             var item: [String: Any] = exam as! [String: Any]
@@ -898,7 +899,7 @@ class DataPost: ObservableObject {
 
                                     let task = URLSession.shared.dataTask(with: request) { data, response, error in
                                         guard let data = data, error == nil else {
-                                            print(error?.localizedDescription ?? "No data")
+                                            //print(error?.localizedDescription ?? "No data")
                                             self.retrieveStudentExamDetails = true
                                             return
                                         }
@@ -918,10 +919,10 @@ class DataPost: ObservableObject {
                                             
                                             studentExam.append(SingleExam(id: name, lesson_id: lesson_id, questions: questions, answers: answers, score: scoresNew, name: name, start_time: start_time, end_time: end_time))
                                             
-                                            print("!!!!answers \(answers)")
-                                            print("!!!!scores \(scoresNew)")
-                                            print("!!!!id \(id)")
-                                            print("StudentExam is \(studentExam)")
+                                            //print("!!!!answers \(answers)")
+                                            //print("!!!!scores \(scoresNew)")
+                                            //print("!!!!id \(id)")
+                                            //print("StudentExam is \(studentExam)")
                                             
                                         }
                                     }
@@ -939,7 +940,7 @@ class DataPost: ObservableObject {
                 var currentlyAdded: Int = 1
                 
                 for lesson in takenLessons{
-                    print("Adding lesson name \(lesson) to studentLessonNames")
+                    //print("Adding lesson name \(lesson) to studentLessonNames")
                     studentLessonNames.append(lesson)
                     currentlyAdded += 1
                 }
@@ -984,16 +985,16 @@ class DataPost: ObservableObject {
                 // insert json data to the request
                 request.httpBody = jsonData
         
-                print("retrieveAllLessons")
+                //print("retrieveAllLessons")
 
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
                     guard let data = data, error == nil else {
-                        print(error?.localizedDescription ?? "No data")
+                        //print(error?.localizedDescription ?? "No data")
                         self.retrieveStudentExamDetails = true
                         return
                     }
                     let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                    print("retrieveAllLessons -> responseJSON \(responseJSON)")
+                    //print("retrieveAllLessons -> responseJSON \(responseJSON)")
                     if let responseJSON = responseJSON as? [String: Any] {
                         
                         self.receivedResponse = responseJSON
@@ -1001,7 +1002,7 @@ class DataPost: ObservableObject {
                         var receivedJSON = responseJSON["documents"] as! [[String:Any]]
                         
                         for item in receivedJSON{
-                            print("retrieveAllLessons -> item \(item)")
+                            //print("retrieveAllLessons -> item \(item)")
                             
                             var lesson_id = item["_id"] as! String
                             var name = item["name"] as! String
@@ -1015,7 +1016,7 @@ class DataPost: ObservableObject {
                             
 
                             allLessonIdNames[lesson_id] = name
-                            print("retrieveAllLessons -> allLessonIdNames \(allLessonIdNames)")
+                            //print("retrieveAllLessons -> allLessonIdNames \(allLessonIdNames)")
                         }
                     }
                 }
@@ -1031,8 +1032,8 @@ class DataPost: ObservableObject {
         
         
         
-        print("retrieveLessonDetails -----> body: \(body)")
-        print("retrieveLessonDetails -----> jsonData: \(jsonData)")
+        //print("retrieveLessonDetails -----> body: \(body)")
+        //print("retrieveLessonDetails -----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -1047,12 +1048,12 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("retrieveLessonDetails -----> data: \(data)")
-            print("retrieveLessonDetails -----> error: \(error)")
-            print("retrieveLessonDetails -----> response: \(response)")
+            //print("retrieveLessonDetails -----> data: \(data)")
+            //print("retrieveLessonDetails -----> error: \(error)")
+            //print("retrieveLessonDetails -----> response: \(response)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
@@ -1062,7 +1063,7 @@ class DataPost: ObservableObject {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
+                //print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
                 var httpCode = httpResponse.statusCode
                 
                 if httpCode == 400 || httpCode == 401 || httpCode == 404 {
@@ -1072,15 +1073,15 @@ class DataPost: ObservableObject {
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
+            //print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
             
             if self.receivedResponse != nil {
                 if let responseJSON = responseJSON as? [String: Any] {
-                    print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
+                    //print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
                     self.receivedResponse = responseJSON
                     
                     
-                    print("receivedResponse \(self.receivedResponse)")
+                    //print("receivedResponse \(self.receivedResponse)")
                     
                     var receivedJSON = responseJSON["document"] as! [String:Any]
                     
@@ -1097,10 +1098,10 @@ class DataPost: ObservableObject {
                     
                     var dayTime: [Int: Int] = [:]
                     
-                    print("Adding lesson with name \(lessonName)")
+                    //print("Adding lesson with name \(lessonName)")
                     
                     for (key, value) in eventTime {
-                        print("key: \(key) & value: \(value)")
+                        //print("key: \(key) & value: \(value)")
                         
                         day = (key as NSString).integerValue
                         time = value.intValue
@@ -1141,8 +1142,8 @@ class DataPost: ObservableObject {
         
         
         
-        print("retrieveLessonDetails -----> body: \(body)")
-        print("retrieveLessonDetails -----> jsonData: \(jsonData)")
+        //print("retrieveLessonDetails -----> body: \(body)")
+        //print("retrieveLessonDetails -----> jsonData: \(jsonData)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
         var request = URLRequest(url: url)
@@ -1157,12 +1158,12 @@ class DataPost: ObservableObject {
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("retrieveLessonDetails -----> data: \(data)")
-            print("retrieveLessonDetails -----> error: \(error)")
-            print("retrieveLessonDetails -----> response: \(response)")
+            //print("retrieveLessonDetails -----> data: \(data)")
+            //print("retrieveLessonDetails -----> error: \(error)")
+            //print("retrieveLessonDetails -----> response: \(response)")
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                //print(error?.localizedDescription ?? "No data")
                 return
             }
             
@@ -1172,7 +1173,7 @@ class DataPost: ObservableObject {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
+                //print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
                 var httpCode = httpResponse.statusCode
                 
                 if httpCode == 400 || httpCode == 401 || httpCode == 404 {
@@ -1182,15 +1183,15 @@ class DataPost: ObservableObject {
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
+            //print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
             
             if self.receivedResponse != nil {
                 if let responseJSON = responseJSON as? [String: Any] {
-                    print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
+                    //print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
                     self.receivedResponse = responseJSON
                     
                     
-                    print("receivedResponse \(self.receivedResponse)")
+                    //print("receivedResponse \(self.receivedResponse)")
                     
                     var receivedJSON = responseJSON["document"] as! [String:Any]
                     
@@ -1213,7 +1214,7 @@ class DataPost: ObservableObject {
                         print("Adding lesson with name \(lessonName)")
                         
                         for (key, value) in eventTime {
-                            print("key: \(key) & value: \(value)")
+                            //print("key: \(key) & value: \(value)")
                             
                             day = (key as NSString).integerValue
                             time = value.intValue
