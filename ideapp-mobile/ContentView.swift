@@ -130,9 +130,9 @@ struct ContentView: View {
             var currentIndex: Int = 1
             
             for lesson in studentLessonNames{
-                print("Lesson \(lesson)")
+                //print("Lesson \(lesson)")
                 var lessonName: String = lesson as! String
-                print("Adding lesson \(lessonName)")
+                //print("Adding lesson \(lessonName)")
                 manager.retrieveStudentLessonDone = false
                 manager.retrieveLessonDetails(name: lessonName)
             }
@@ -141,7 +141,7 @@ struct ContentView: View {
         
         if manager.retrieveStudentLessonDetails{
             for lesson in studentLessons{
-                print("Full Lesson Details \(lesson)")
+                //print("Full Lesson Details \(lesson)")
             }
         }
     }
