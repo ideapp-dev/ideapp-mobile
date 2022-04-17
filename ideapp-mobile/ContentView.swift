@@ -190,12 +190,11 @@ struct ContentView: View {
     }
     
 
-    @State var showCreateLesson = false
+    //@State var showCreateLesson = false
     var body: some View {
         
-        return CreateLesson(showCreateLesson: $showCreateLesson)
+        //return CreateLesson(showCreateLesson: $showCreateLesson)
         
-        /*
          return Group {
 
              if showLogin == true && showHomeScreen == false {
@@ -207,10 +206,6 @@ struct ContentView: View {
                  HomeScreen(showHomeScreen: $showHomeScreen)
              }
          }
-        */
-        
-
-         
     }
 }
 
