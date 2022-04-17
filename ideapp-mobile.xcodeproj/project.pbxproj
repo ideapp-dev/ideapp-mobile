@@ -122,22 +122,54 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CBEA29DA27ABDCA200B87CF0 = {
+		CB26D1F6280C76C500CBA63B /* EventRescheduling */ = {
 			isa = PBXGroup;
 			children = (
-				CB26D1F4280C00A600CBA63B /* Enroll.swift */,
-				9DC69D3727F0A6760009BBB3 /* Grades.swift */,
-				CBE295CB27E4DF2F004AED57 /* Lessons.swift */,
-				CBE295C927E4DF17004AED57 /* CreateEvent.swift */,
 				CBE295C727E4DEE3004AED57 /* Events.swift */,
-				CBE295C527E4DEC4004AED57 /* Profile.swift */,
-				CBE295C327E4DE8C004AED57 /* Register.swift */,
-				CBE295C127E4DE6D004AED57 /* Login.swift */,
-				CBE295BF27E4DE4D004AED57 /* HomeScreen.swift */,
-				CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */,
+				CBE295C927E4DF17004AED57 /* CreateEvent.swift */,
+			);
+			path = EventRescheduling;
+			sourceTree = "<group>";
+		};
+		CB26D1F7280C76E300CBA63B /* Objects */ = {
+			isa = PBXGroup;
+			children = (
 				CB2B81B827D244C600994C83 /* lesson.swift */,
 				CB0B2844280B0306004AE52E /* exam.swift */,
 				CB32B54527BC13FE00B6181E /* event.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		CB26D1F8280C76FA00CBA63B /* UserAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				CBE295C127E4DE6D004AED57 /* Login.swift */,
+				CBE295C327E4DE8C004AED57 /* Register.swift */,
+				CBE295C527E4DEC4004AED57 /* Profile.swift */,
+			);
+			path = UserAuthentication;
+			sourceTree = "<group>";
+		};
+		CB26D1F9280C772400CBA63B /* Lesson */ = {
+			isa = PBXGroup;
+			children = (
+				9DC69D3727F0A6760009BBB3 /* Grades.swift */,
+				CBE295CB27E4DF2F004AED57 /* Lessons.swift */,
+				CB26D1F4280C00A600CBA63B /* Enroll.swift */,
+				CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */,
+			);
+			path = Lesson;
+			sourceTree = "<group>";
+		};
+		CBEA29DA27ABDCA200B87CF0 = {
+			isa = PBXGroup;
+			children = (
+				CB26D1F9280C772400CBA63B /* Lesson */,
+				CB26D1F8280C76FA00CBA63B /* UserAuthentication */,
+				CB26D1F6280C76C500CBA63B /* EventRescheduling */,
+				CB26D1F7280C76E300CBA63B /* Objects */,
+				CBE295BF27E4DE4D004AED57 /* HomeScreen.swift */,
 				CBEA29E527ABDCA200B87CF0 /* ideapp-mobile */,
 				CBEA29F627ABDCA300B87CF0 /* ideapp-mobileTests */,
 				CBEA2A0027ABDCA300B87CF0 /* ideapp-mobileUITests */,
