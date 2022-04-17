@@ -10,10 +10,10 @@ import BCryptSwift
 
 //MARK: - Register
 struct Register: View {
-    @State var name:String = ""
-    @State var sirname:String = ""
+    @State var givenName:String = ""
+    @State var givenSirname:String = ""
     @State var email:String = ""
-    @State var studentId:String = ""
+    @State var studentId:Int = 0
     @State var password:String = ""
     
     @State private var type = 0
@@ -41,11 +41,11 @@ struct Register: View {
             .padding()
             
             VStack{
-                TextField("Name",text: $name)
+                TextField("givenName",text: $givenName)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
-                TextField("Surname",text: $sirname)
+                TextField("Surname",text: $givenSirname)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
@@ -61,7 +61,7 @@ struct Register: View {
                     .textInputAutocapitalization(.never)
                 
                 if type == 0 {
-                    TextField("Student ID",text: $studentId)
+                    TextField("Student ID",value: $studentId, formatter: NumberFormatter())
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(5.0)
@@ -78,25 +78,30 @@ struct Register: View {
                     let hashed = try BCryptSwift.hashPassword(password, withSalt: salt)
                     
                     if type == 0 { // if student
-                        //var entityToInsert: NSDictionary = ["name":name, "sirname": sirname, "email": email, "password": password, "student-id": studentId]
+                        //var entityToInsert: NSDictionary = ["givenName":givenName, "givenSirname": givenSirname, "email": email, "password": password, "student-id": studentId]
                         //manager.registerInstructor(instructor: entityToInsert)
-                        var entityToInsert: NSDictionary = ["name":name, "sirname": sirname, "student_id": studentId ,"email": email, "password": hashed]
+                        var entityToInsert: NSDictionary = ["name":givenName, "sirname": givenSirname, "student_id": studentId ,"email": email, "password": hashed, "lessons_taken":[], "exams":[]]
                         
                         print("Signup with entityToInsert \(entityToInsert)")
                         
                         manager.signup(user: entityToInsert, collection: "students")
                         
-                        
                         self.showHomeScreen = true
+                        
+                        name = givenName
+                        sirname = givenSirname
                         
                         UserDefaults.standard.set(true, forKey: "Token")
                         UserDefaults.standard.set(type, forKey: "Type")
                         UserDefaults.standard.set(email, forKey: "Email")
                     } else {
-                        var entityToInsert: NSDictionary = ["name":name, "sirname": sirname, "email": email, "password": hashed]
+                        var entityToInsert: NSDictionary = ["name":givenName, "sirname": givenSirname, "email": email, "password": hashed, "lessons_given":[]]
                         manager.signup(user: entityToInsert, collection: "Instructor")
                         
                         self.showHomeScreen = true
+                        
+                        name = givenName
+                        sirname = givenSirname
                         
                         UserDefaults.standard.set(true, forKey: "Token")
                         UserDefaults.standard.set(type, forKey: "Type")

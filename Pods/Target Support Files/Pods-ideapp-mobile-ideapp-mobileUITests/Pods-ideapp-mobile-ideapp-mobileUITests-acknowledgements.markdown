@@ -190,7 +190,7 @@ Copyright (c) 2017 Felipe Florencio Garcia <felipeflorencio@me.com>
       the brackets!)  The text should be enclosed in the appropriate
       comment syntax for the file format. We also recommend that a
       file or class name and description of purpose be included on the
-      same "//printed page" as the copyright notice for easier
+      same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
    Copyright 2017 Felipe Florencio Garcia

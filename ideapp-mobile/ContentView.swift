@@ -152,10 +152,11 @@ struct ContentView: View {
         // test1@etu.edu.tr
         // yiğittest@etu.edu.tr
         
-
+        /*
         UserDefaults.standard.set(true, forKey: "Token")
         UserDefaults.standard.set(1, forKey: "Type")
         UserDefaults.standard.set("yigittest@etu.edu.tr", forKey: "Email")
+        */
         
     
         
