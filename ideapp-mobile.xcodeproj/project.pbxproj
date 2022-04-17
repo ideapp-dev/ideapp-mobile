@@ -11,6 +11,7 @@
 		6D32F3C7A0FA40AFB9AAB79C /* Pods_ideapp_mobile_ideapp_mobileUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E7E0A32F7DED2F4F2D4BD3 /* Pods_ideapp_mobile_ideapp_mobileUITests.framework */; };
 		9DC69D3827F0A6760009BBB3 /* Grades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC69D3727F0A6760009BBB3 /* Grades.swift */; };
 		CB0B2845280B0306004AE52E /* exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0B2844280B0306004AE52E /* exam.swift */; };
+		CB26D1F5280C00A600CBA63B /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB26D1F4280C00A600CBA63B /* Enroll.swift */; };
 		CB2B81B927D244C600994C83 /* lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2B81B827D244C600994C83 /* lesson.swift */; };
 		CB32B54627BC13FE00B6181E /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32B54527BC13FE00B6181E /* event.swift */; };
 		CB50495127E4DABC000F1518 /* Pods_ideapp_mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F036DB3688476CDC880686 /* Pods_ideapp_mobile.framework */; };
@@ -56,6 +57,7 @@
 		98F036DB3688476CDC880686 /* Pods_ideapp_mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ideapp_mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DC69D3727F0A6760009BBB3 /* Grades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades.swift; sourceTree = "<group>"; };
 		CB0B2844280B0306004AE52E /* exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exam.swift; sourceTree = "<group>"; };
+		CB26D1F4280C00A600CBA63B /* Enroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enroll.swift; sourceTree = "<group>"; };
 		CB2B81B827D244C600994C83 /* lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lesson.swift; sourceTree = "<group>"; };
 		CB32B54527BC13FE00B6181E /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
 		CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLesson.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		CBEA29DA27ABDCA200B87CF0 = {
 			isa = PBXGroup;
 			children = (
+				CB26D1F4280C00A600CBA63B /* Enroll.swift */,
 				9DC69D3727F0A6760009BBB3 /* Grades.swift */,
 				CBE295CB27E4DF2F004AED57 /* Lessons.swift */,
 				CBE295C927E4DF17004AED57 /* CreateEvent.swift */,
@@ -443,6 +446,7 @@
 			files = (
 				CBE295C227E4DE6D004AED57 /* Login.swift in Sources */,
 				CBEA29E927ABDCA200B87CF0 /* ContentView.swift in Sources */,
+				CB26D1F5280C00A600CBA63B /* Enroll.swift in Sources */,
 				CBEA29E727ABDCA200B87CF0 /* ideapp_mobileApp.swift in Sources */,
 				CBE295CC27E4DF2F004AED57 /* Lessons.swift in Sources */,
 				CBE295C027E4DE4D004AED57 /* HomeScreen.swift in Sources */,

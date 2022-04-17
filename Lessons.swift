@@ -15,8 +15,12 @@ struct Lessons: View {
     @Binding var showEvents: Bool
     @Binding var showProfile: Bool
     
+    @State var updated = false
+    
     @Binding var showHomeScreen: Bool
     @State var presentingModal = false
+    @State var showEnroll = false
+    @State var showCreateLesson = false
     
     var body: some View {
         VStack{
@@ -115,6 +119,44 @@ struct Lessons: View {
                 }
 
             }
+            
+            if (UserDefaults.standard.integer(forKey: "Type") == 0){
+                Button(action: {
+                    self.showEnroll = true
+                        }) {
+                            HStack {
+                                Spacer()
+                                Text("Enroll")
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }.padding()
+                                .background(Color.blue)
+                                .cornerRadius(5.0)
+                        }
+                .sheet(isPresented: $showEnroll, content: {
+                    Enroll(showEnroll: $showEnroll, updated: $updated, lesson: "")
+                }).padding()
+            }else{
+                Button(action: {
+                    self.showEnroll = true
+                        }) {
+                            HStack {
+                                Spacer()
+                                Text("Create")
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }.padding()
+                                .background(Color.blue)
+                                .cornerRadius(5.0)
+                        }
+                .sheet(isPresented: $showCreateLesson, content: {
+                    CreateLesson(showCreateLesson: $showCreateLesson)
+                }).padding()
+            }
+
+
+
+            Spacer()
         }.toolbar {
             // 2.
             ToolbarItem(placement: .bottomBar) {

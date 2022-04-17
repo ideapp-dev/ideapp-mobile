@@ -27,18 +27,21 @@ var email:String = ""
 var studentId:String = ""
 var password:String = ""
 
+var userId: String = ""
+
 var studentEvents: [SingleEvent] = []
 var studentExam: [SingleExam] = []
 
 var studentLessons: [SingleLesson] = []
 var studentLessonNames: [String] = []
-var dayNumber: Int = 1
-var hourNumber: Int = 1
+var dayNumber: Int = 6
+var hourNumber: Int = 2
 
 var lessonIdName: [String:String] = [:]
+var allLessonIdNames: [String:String] = [:]
 
 
-var type = 0
+var type = 1
 
 
 var timeEnum2 = [1:"08:30-10:20",
@@ -97,6 +100,7 @@ struct ContentView: View {
     }
     
     func checkEvents(){
+        //checkTime()
         manager.retrieveEvents()
         
         if manager.retrieveEventDone {
@@ -108,6 +112,8 @@ struct ContentView: View {
                             var itemHour: Int = item.time["\(i)"]!
                             var itemDay: Int = i+1
                             var newTime: [String:Int] = ["\(itemDay)":itemHour]
+                            
+                            print("ContentViewEvents - studentEvents \(studentEvents)")
                             
                             studentEvents = studentEvents.filter { $0.id != item.id }
                             studentEvents.append(SingleEvent(id: item.id, name: item.name, time: newTime))
@@ -144,19 +150,18 @@ struct ContentView: View {
         
         // Delete the following after testing
         // test1@etu.edu.tr
+        // yiğittest@etu.edu.tr
         
 
         UserDefaults.standard.set(true, forKey: "Token")
-        UserDefaults.standard.set(0, forKey: "Type")
+        UserDefaults.standard.set(1, forKey: "Type")
+        UserDefaults.standard.set("yigittest@etu.edu.tr", forKey: "Email")
         
-        print("Setting test1@etu.edu.tr to the UserDefaults.standard")
-        UserDefaults.standard.set("test1@etu.edu.tr", forKey: "Email")
-        
-        
-        // Until here
+    
         
         var isAuthorized: Bool = UserDefaults.standard.bool(forKey: "Token")
-    
+        type = UserDefaults.standard.integer(forKey: "Type")
+            
         if isAuthorized == true {
             var userMail: String = UserDefaults.standard.string(forKey: "Email")!
 
@@ -178,17 +183,19 @@ struct ContentView: View {
                 //manager.retrieveExamDetails(mail: userMail, type: "students")
             }
             
+            manager.retrieveAllLessons()
             checkLessons()
             checkEvents()
         }
     }
     
 
-    
+    @State var showCreateLesson = false
     var body: some View {
         
-
+        return CreateLesson(showCreateLesson: $showCreateLesson)
         
+        /*
          return Group {
 
              if showLogin == true && showHomeScreen == false {
@@ -200,6 +207,7 @@ struct ContentView: View {
                  HomeScreen(showHomeScreen: $showHomeScreen)
              }
          }
+        */
         
 
          
@@ -281,11 +289,14 @@ class DataPost: ObservableObject {
                 var receivedJSON = responseJSON["document"] as! [String:Any]
                 var receivedHASH: String = receivedJSON["password"] as! String
                 
+                userId = receivedJSON["_id"] as! String
                 // control mechanism to check collection type
                 if (collection == "students") {
                     name = receivedJSON["name"] as! String
                     sirname = receivedJSON["sirname"] as! String
                     // var tempID = receivedJSON["student_id"] as! String
+                    
+                    
                     
                     var tempString: String = ""
                     
@@ -299,6 +310,13 @@ class DataPost: ObservableObject {
                     print("profileInfo -> \(tempString)")
 
                     studentId = tempString
+                }else if (collection == "Instructor") {
+                    name = receivedJSON["name"] as! String
+                    sirname = receivedJSON["sirname"] as! String
+
+                    
+                    var tempString: String = ""
+                    
                 }
                 // rest of columns
              
@@ -325,6 +343,7 @@ class DataPost: ObservableObject {
                                    "document": lesson ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        print("createLesson body \(body)")
         
         let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/insertOne")!
         var request = URLRequest(url: url)
@@ -337,8 +356,8 @@ class DataPost: ObservableObject {
         request.httpBody = jsonData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(data)")
-            print("-----> error: \(error)")
+            print("createLesson-----> data: \(data)")
+            print("createLesson-----> error: \(error)")
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -346,10 +365,15 @@ class DataPost: ObservableObject {
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("-----1> responseJSON: \(responseJSON)")
+            print("createLesson-----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
-                print("-----2> responseJSON: \(responseJSON)")
+                print("createLesson-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
+                var currentResponse: [String:String] = responseJSON as! [String:String]
+                var createdId: String = currentResponse["insertedId"] as! String
+                
+                self.addLessonInstructor(lesson: createdId)
+                
                 self.done = true
             }
             
@@ -438,6 +462,99 @@ class DataPost: ObservableObject {
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             print("-----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("-----2> responseJSON: \(responseJSON)")
+                self.receivedResponse = responseJSON
+                self.done = true
+            }
+            
+        }
+        
+        task.resume()
+    }
+    
+    func addLessonInstructor(lesson: String){
+        
+
+        let dict_send: [String: Any] = ["collection": "students",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                    "filter": ["email": UserDefaults.standard.string(forKey: "Email")! ],
+                                        "update": ["$push": ["lessons_given": ["$oid":lesson] ]]
+                                    ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: dict_send)
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/updateOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("enrollToLesson -----> data: \(data)")
+            print("enrollToLesson -----> error: \(error)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("enrollToLesson -----1> responseJSON: \(responseJSON)")
+            if let responseJSON = responseJSON as? [String: Any] {
+                print("-----2> responseJSON: \(responseJSON)")
+                self.receivedResponse = responseJSON
+                self.done = true
+            }
+            
+        }
+        
+        task.resume()
+    }
+    
+    // Add the user to the db
+    func enrollToLesson(lesson: String){
+        
+
+        let dict_send: [String: Any] = ["collection": "students",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                    "filter": ["email": UserDefaults.standard.string(forKey: "Email")! ],
+                                        "update": ["$push": ["lessons_taken": ["$oid":lesson] ]]
+                                    ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: dict_send)
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/updateOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("enrollToLesson -----> data: \(data)")
+            print("enrollToLesson -----> error: \(error)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("enrollToLesson -----1> responseJSON: \(responseJSON)")
             if let responseJSON = responseJSON as? [String: Any] {
                 print("-----2> responseJSON: \(responseJSON)")
                 self.receivedResponse = responseJSON
@@ -817,21 +934,7 @@ class DataPost: ObservableObject {
                                     task.resume()
                             
 
-                            
-                            //self.retrieveExamDetails(name:id, answerParam: answers, scoreParam: scoresNew)
                         }
-                        
-                        
-                        /*
-                        var takenLessonsCount: Int = takenLessons.count
-                        var currentlyAdded: Int = 1
-                        
-                        for lesson in takenLessons{
-                            print("Adding lesson name \(lesson) to studentLessonNames")
-                            studentLessonNames.append(lesson)
-                            currentlyAdded += 1
-                        }
-                        */
                     }
                 }
                 
@@ -862,20 +965,19 @@ class DataPost: ObservableObject {
         } while !retrieveStudentLessonName
 
     }
-    
-    func retrieveExamDetails(name:String, answerParam:[String], scoreParam:[String]){
-        
 
-        let json: [String: Any] = ["collection": "Exam",
+    
+    func retrieveAllLessons(){
+        
+        let json: [String: Any] = ["collection": "Lesson",
                                    "database": "ideapp",
-                                   "dataSource": "ProjectCluster",
-                                   "filter": ["_id": ["$oid":"name"] ]
+                                   "dataSource": "ProjectCluster"
                                 ]
 
                 let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
                 // create post request
-                let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+                let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/find")!
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
@@ -887,7 +989,7 @@ class DataPost: ObservableObject {
                 // insert json data to the request
                 request.httpBody = jsonData
         
-                print("retrieveExamDetails")
+                print("retrieveAllLessons")
 
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
                     guard let data = data, error == nil else {
@@ -896,113 +998,38 @@ class DataPost: ObservableObject {
                         return
                     }
                     let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                    print("retrieveAllLessons -> responseJSON \(responseJSON)")
                     if let responseJSON = responseJSON as? [String: Any] {
-                        print("retrieveExamDetails \(responseJSON)")
-                        self.receivedResponse = responseJSON
-                        print("retrieveExamDetails \(self.receivedResponse)") //Code after Successfull POST Request
-                        self.retrieveStudentExamDetails = true
                         
+                        self.receivedResponse = responseJSON
+                        
+                        var receivedJSON = responseJSON["documents"] as! [[String:Any]]
+                        
+                        for item in receivedJSON{
+                            print("retrieveAllLessons -> item \(item)")
+                            
+                            var lesson_id = item["_id"] as! String
+                            var name = item["name"] as! String
+                            var credit = item["credit"] as! Int
+                            var faculty = item["faculty"] as! String
+                            var semester = item["semester"] as! String
+                            var instructor = item["instructor"] as! String
+                            //var time: [Int:Int] = receivedJSON["time"] as! [Int:Int]
+                            //var code: String = item["code"] as! String
+                            //var description: String = item["description"] as! String
+                            
+
+                            allLessonIdNames[lesson_id] = name
+                            print("retrieveAllLessons -> allLessonIdNames \(allLessonIdNames)")
+                        }
                     }
                 }
 
                 task.resume()
-        
-
-        
         /*
-         
-         let body: [String: Any] = ["collection": "Exam",
-                                    "database": "ideapp",
-                                    "dataSource": "ProjectCluster",
-                                    "filter": ["_id": ["$oid":"name"] ]
-                                 ]
-        
-        let jsonData = try? JSONSerialization.data(withJSONObject: body)
-        
-        
-        print("retrieveLessonDetails -----> body: \(body)")
-        print("retrieveLessonDetails -----> jsonData: \(jsonData)")
-        
-        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
-        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
-        request.httpBody = jsonData
-
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("retrieveLessonDetails -----> data: \(data)")
-            print("retrieveLessonDetails -----> error: \(error)")
-            print("retrieveLessonDetails -----> response: \(response)")
-            
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                return
-            }
-
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
-                var httpCode = httpResponse.statusCode
-                
-                if httpCode == 400 || httpCode == 401 || httpCode == 404 {
-                    self.retrieveStudentExamDetails = true
-                    return
-                }
-            }
-            
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
-            
-            if self.receivedResponse != nil {
-                if let responseJSON = responseJSON as? [String: Any] {
-                    print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
-                    self.receivedResponse = responseJSON
-                    
-                    
-                    print("receivedResponse \(self.receivedResponse)")
-                    
-                    var receivedJSON = responseJSON["document"] as! [String:Any]
-                    
-                    var questions = receivedJSON["questions"] as! [String]
-                    var end_time = receivedJSON["end_time"] as! String
-                    var start_time = receivedJSON["start_time"] as! String
-                    var name = receivedJSON["name"] as! String
-                    
-                    var answers: [String] = []
-
-
-                    studentExam.append(SingleExam(id: name, questions: questions, answers: answerParam, score: scoreParam, name: name, start_time: start_time, end_time: end_time))
-                    print("Exam details studentExam \(studentExam)")
-                    self.retrieveStudentExamDetails = true
-                }
-            }else{
-                self.retrieveStudentExamDetails = true
-            }
-        }
-        
-        task.resume()
-        
-        
-        repeat {
-            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
-        } while !retrieveStudentExamDetails
-        
-        */
-
-    }
-    
-    func retrieveLessonDetails(name:String){
-        
         let body: [String: Any] = ["collection": "Lesson",
                                    "database": "ideapp",
-                                   "dataSource": "ProjectCluster",
-                                   //"filter": ["code": name ]
-                                   "filter": ["_id": ["$oid":name] ]
+                                   "dataSource": "ProjectCluster"
                                 ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
@@ -1084,6 +1111,122 @@ class DataPost: ObservableObject {
                         time = value.intValue
                         dayTime[day] = time
                     }
+                    
+                    lessonIdName[lessonId] = lessonName
+                    
+                    studentLessons.append(SingleLesson(id: lessonId, name: lessonName, credit: lessonCredit, faculty: lessonFaculty, semester: lessonSemester, instructor: lessonInstructor, time: dayTime))
+                    self.retrieveStudentLessonDetails = true
+                }
+            }else{
+                self.retrieveStudentLessonDetails = true
+            }
+        }
+        
+        task.resume()
+        
+        
+        repeat {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        } while !retrieveStudentLessonDetails
+        
+        */
+
+    }
+    
+    func retrieveLessonDetails(name:String){
+        
+        let body: [String: Any] = ["collection": "Lesson",
+                                   "database": "ideapp",
+                                   "dataSource": "ProjectCluster",
+                                   //"filter": ["code": name ]
+                                   "filter": ["_id": ["$oid":name] ]
+                                ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+        
+        
+        
+        print("retrieveLessonDetails -----> body: \(body)")
+        print("retrieveLessonDetails -----> jsonData: \(jsonData)")
+        
+        let url = URL(string: "https://data.mongodb-api.com/app/data-rbevh/endpoint/data/beta/action/findOne")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("*", forHTTPHeaderField: "Access-Control-Request-Headers")
+        request.setValue("051yNXhgBv65BsCe530TOZdKGMcglM2TSWGrf70nAIpXGzConysHbv7Mo6I38FdH", forHTTPHeaderField: "api-key")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("retrieveLessonDetails -----> data: \(data)")
+            print("retrieveLessonDetails -----> error: \(error)")
+            print("retrieveLessonDetails -----> response: \(response)")
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            
+            guard let response = response else{
+                self.retrieveStudentLessonDetails = true
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("retrieveLessonDetails -----> httpResponse.statusCode \(httpResponse.statusCode)")
+                var httpCode = httpResponse.statusCode
+                
+                if httpCode == 400 || httpCode == 401 || httpCode == 404 {
+                    self.retrieveStudentLessonDetails = true
+                    return
+                }
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print("retrieveLessonDetails -----1> responseJSON: \(responseJSON)")
+            
+            if self.receivedResponse != nil {
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print("retrieveLessonDetails -----2> responseJSON: \(responseJSON)")
+                    self.receivedResponse = responseJSON
+                    
+                    
+                    print("receivedResponse \(self.receivedResponse)")
+                    
+                    var receivedJSON = responseJSON["document"] as! [String:Any]
+                    
+                    var lessonId = receivedJSON["_id"] as! String
+                    var lessonName = receivedJSON["name"] as! String
+                    var lessonCredit = receivedJSON["credit"] as! Int
+                    var lessonFaculty = receivedJSON["faculty"] as! String
+                    var lessonSemester = receivedJSON["semester"] as! String
+                    var lessonInstructor = receivedJSON["instructor"] as! String
+                    
+                   
+                    var dayTime: [Int: Int] = [:]
+                    if receivedJSON.keys.contains("time"){
+                        var eventTime: [String:NSNumber] = receivedJSON["time"] as! [String:NSNumber]
+                        
+                        var day:Int = 0
+                        var time:Int = 0
+
+                        
+                        print("Adding lesson with name \(lessonName)")
+                        
+                        for (key, value) in eventTime {
+                            print("key: \(key) & value: \(value)")
+                            
+                            day = (key as NSString).integerValue
+                            time = value.intValue
+                            dayTime[day] = time
+                        }
+                    }
+                    
+
                     
                     lessonIdName[lessonId] = lessonName
                     

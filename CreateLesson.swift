@@ -9,12 +9,15 @@ import SwiftUI
 
 
 struct CreateLesson: View {
+    @Binding var showCreateLesson: Bool
+    
     @State var name:String = ""
+    @State var code: String = ""
     @State var credit:Int = 0
     @State var faculty:String = ""
     @State var semester:String = ""
-    @State var instructor:String = ""
-    @State var time: [Int:Int] = [:]
+    
+    @State var time: [String:Int] = [:]
     
     @State var time11:Bool = false ;
     @State var time21:Bool = false ;
@@ -32,8 +35,6 @@ struct CreateLesson: View {
                                          [false, false, false, false, false, false, false]
     ]
     
-    @Binding var showLogin: Bool
-    @Binding var showHomeScreen: Bool
     
     @State var manager = DataPost()
     
@@ -54,6 +55,10 @@ struct CreateLesson: View {
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
+                TextField("Code",text: $code)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(5.0)
                 TextField("Credit",value: $credit, formatter: NumberFormatter())
                     .padding()
                     .background(Color(.systemGray6))
@@ -63,10 +68,6 @@ struct CreateLesson: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
                 TextField("Semester",text: $semester)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(5.0)
-                TextField("Instructor",text: $instructor)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
@@ -774,10 +775,19 @@ struct CreateLesson: View {
             
             Button(action: {
                 
-                var entityToInsert: NSDictionary = ["name":name, "credit": credit, "faculty": faculty, "semester": semester, "instructor":instructor, "time":time]
+                for i in 1..<7{
+                    for j in 1..<7{
+                        if timeSelected[i][j] == true {
+                            time["\(i)"] = j
+                        }
+                    }
+                }
+                
+                var entityToInsert: NSDictionary = ["name":name, "code": code, "credit": credit, "faculty": faculty, "semester": semester, "instructor":["$oid":userId] , "time":time]
                 manager.createLesson(lesson: entityToInsert)
                 
-                self.showHomeScreen = true
+                
+                self.showCreateLesson = false
             }, label: {
                 HStack {
                     Spacer()

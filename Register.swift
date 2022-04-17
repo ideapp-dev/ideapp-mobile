@@ -54,7 +54,7 @@ struct Register: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
                     .textInputAutocapitalization(.never)
-                TextField("Password",text: $password)
+                SecureField("Password",text: $password)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5.0)
