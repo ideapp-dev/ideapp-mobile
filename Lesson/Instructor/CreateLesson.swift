@@ -775,19 +775,25 @@ struct CreateLesson: View {
             
             Button(action: {
                 
+                var dayTime: [Int: Int] = [:]
+                var dayTime2: [String: Int] = [:]
+                
                 for i in 1..<7{
                     for j in 1..<7{
                         if timeSelected[i][j] == true {
-                            time["\(i)"] = j
+                            dayTime[i] = j
+                            dayTime2["\(i)"] = j
                         }
                     }
                 }
                 
-                var entityToInsert: NSDictionary = ["name":name, "code": code, "credit": credit, "faculty": faculty, "semester": semester, "instructor":["$oid":userId] , "time":time]
+
                 
-                var dayTime: [Int: Int] = [:]
-                dayTime[3] = 3
                 studentLessons.append(SingleLesson(id: "", name: name, credit: credit, faculty: faculty, semester: semester, instructor: userId, time: dayTime))
+
+                
+                
+                var entityToInsert: NSDictionary = ["name":"\(name)", "code": "\(code)", "description": "", "credit": credit, "faculty": "\(faculty)", "semester": "\(semester)", "instructor":["$oid":userId] , "time":dayTime2, "enrolledStudents":[]]
                 
                 manager.createLesson(lesson: entityToInsert)
                 
