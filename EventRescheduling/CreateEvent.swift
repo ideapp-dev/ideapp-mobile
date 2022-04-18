@@ -877,10 +877,12 @@ struct CreateEvent: View {
                 
                 var entityToInsert: NSDictionary = ["owner":UserDefaults.standard.string(forKey: "Email")!, "isCompleted":false, "name": name , "time":time]
                 
+                studentEvents.append(SingleEvent(id: manager.newId, name: name, time: time))
+                
                 print("entityToInsert :\(entityToInsert)")
                 manager.createEvent(event: entityToInsert)
                 
-                studentEvents.append(SingleEvent(id: manager.newId, name: name, time: time))
+
                 self.updated = true
                 
                 self.showCreateEvent = false

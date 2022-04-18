@@ -156,10 +156,26 @@
 			children = (
 				9DC69D3727F0A6760009BBB3 /* Grades.swift */,
 				CBE295CB27E4DF2F004AED57 /* Lessons.swift */,
-				CB26D1F4280C00A600CBA63B /* Enroll.swift */,
-				CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */,
+				CB26D1FB280C7B1200CBA63B /* Student */,
+				CB26D1FA280C7B0500CBA63B /* Instructor */,
 			);
 			path = Lesson;
+			sourceTree = "<group>";
+		};
+		CB26D1FA280C7B0500CBA63B /* Instructor */ = {
+			isa = PBXGroup;
+			children = (
+				CBE295BB27E4DCAA004AED57 /* CreateLesson.swift */,
+			);
+			path = Instructor;
+			sourceTree = "<group>";
+		};
+		CB26D1FB280C7B1200CBA63B /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				CB26D1F4280C00A600CBA63B /* Enroll.swift */,
+			);
+			path = Student;
 			sourceTree = "<group>";
 		};
 		CBEA29DA27ABDCA200B87CF0 = {

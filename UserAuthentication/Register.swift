@@ -13,7 +13,7 @@ struct Register: View {
     @State var name:String = ""
     @State var sirname:String = ""
     @State var email:String = ""
-    @State var studentId:String = ""
+    @State var studentId:Int = 0
     @State var password:String = ""
     
     @State private var type = 0
@@ -61,7 +61,7 @@ struct Register: View {
                     .textInputAutocapitalization(.never)
                 
                 if type == 0 {
-                    TextField("Student ID",text: $studentId)
+                    TextField("Student ID",value: $studentId, formatter: NumberFormatter())
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(5.0)
@@ -85,8 +85,6 @@ struct Register: View {
                         print("Signup with entityToInsert \(entityToInsert)")
                         
                         manager.signup(user: entityToInsert, collection: "students")
-                        
-                        
                         self.showHomeScreen = true
                         
                         UserDefaults.standard.set(true, forKey: "Token")

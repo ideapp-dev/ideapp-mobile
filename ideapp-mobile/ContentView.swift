@@ -34,8 +34,8 @@ var studentExam: [SingleExam] = []
 
 var studentLessons: [SingleLesson] = []
 var studentLessonNames: [String] = []
-var dayNumber: Int = 6
-var hourNumber: Int = 2
+var dayNumber: Int = 1
+var hourNumber: Int = 1
 
 var lessonIdName: [String:String] = [:]
 var allLessonIdNames: [String:String] = [:]
@@ -100,7 +100,7 @@ struct ContentView: View {
     }
     
     func checkEvents(){
-        //checkTime()
+        checkTime()
         manager.retrieveEvents()
         
         if manager.retrieveEventDone {
@@ -152,12 +152,12 @@ struct ContentView: View {
         // test1@etu.edu.tr
         // yiğittest@etu.edu.tr
         
-
+        
+        
         UserDefaults.standard.set(true, forKey: "Token")
         UserDefaults.standard.set(1, forKey: "Type")
-        UserDefaults.standard.set("yigittest@etu.edu.tr", forKey: "Email")
+        UserDefaults.standard.set("cenkgokturk06@gmail.com", forKey: "Email")
         
-    
         
         var isAuthorized: Bool = UserDefaults.standard.bool(forKey: "Token")
         type = UserDefaults.standard.integer(forKey: "Type")

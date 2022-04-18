@@ -76,21 +76,24 @@ struct Events: View {
             }
             
             
-            Button(action: {
-                self.showCreateEvent = true
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("Create")
-                                .foregroundColor(.white)
-                            Spacer()
-                        }.padding()
-                            .background(Color.blue)
-                            .cornerRadius(5.0)
-                    }
-            .sheet(isPresented: $showCreateEvent, content: {
-                        CreateEvent(showCreateEvent: $showCreateEvent, updated: $updated)
-            }).padding()
+            HStack{
+                Button(action: {
+                    self.showCreateEvent = true
+                        }) {
+                            HStack {
+                                Spacer()
+                                Text("Create")
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }.padding()
+                                .background(Color.blue)
+                                .cornerRadius(5.0)
+                        }
+                .sheet(isPresented: $showCreateEvent, content: {
+                            CreateEvent(showCreateEvent: $showCreateEvent, updated: $updated)
+                }).padding()
+            }
+
                         
 
             Spacer()

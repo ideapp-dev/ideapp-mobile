@@ -138,7 +138,7 @@ struct Lessons: View {
                 }).padding()
             }else{
                 Button(action: {
-                    self.showEnroll = true
+                    self.showCreateLesson = true
                         }) {
                             HStack {
                                 Spacer()

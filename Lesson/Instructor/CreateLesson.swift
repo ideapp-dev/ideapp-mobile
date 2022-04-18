@@ -784,6 +784,11 @@ struct CreateLesson: View {
                 }
                 
                 var entityToInsert: NSDictionary = ["name":name, "code": code, "credit": credit, "faculty": faculty, "semester": semester, "instructor":["$oid":userId] , "time":time]
+                
+                var dayTime: [Int: Int] = [:]
+                dayTime[3] = 3
+                studentLessons.append(SingleLesson(id: "", name: name, credit: credit, faculty: faculty, semester: semester, instructor: userId, time: dayTime))
+                
                 manager.createLesson(lesson: entityToInsert)
                 
                 

@@ -35,8 +35,14 @@ struct Enroll: View {
             ForEach(keys.indices) {index in
                 Button("\(values[index])") {
                     lesson = keys[index]
+                    var dayTime: [Int: Int] = [:]
+                    dayTime[3] = 2
+                    studentLessons.append(SingleLesson(id: "", name: values[index], credit: 3, faculty: "", semester: "", instructor: "", time: dayTime))
                     self.showEnroll = false
+                    updated = true
+                    
                     manager.enrollToLesson(lesson: lesson)
+                    
                 }
             }
             
